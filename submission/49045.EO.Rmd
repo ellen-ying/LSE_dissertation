@@ -1,19 +1,78 @@
+---
+output:
+  pdf_document:
+    number_sections: true
+    keep_tex: true
+geometry: margin=1.0in
+fontsize: 11pt
+header-includes:
+  - \newcommand{\bcenter}{\begin{center}}
+  - \newcommand{\ecenter}{\end{center}}
+  - \newcommand{\btitlepage}{\begin{titlepage}}
+  - \newcommand{\etitlepage}{\end{titlepage}}
+  - \usepackage{helvet}
+  - \renewcommand*\familydefault{\sfdefault}
+  - \usepackage{setspace}\onehalfspacing
+  - \usepackage{booktabs}
+  - \usepackage[font=small,labelfont=bf]{caption}
+---
+
+\btitlepage
+
+\bcenter
+
+\vspace*{30mm}
+
+Candidate number: 49045
+
+\vspace*{10mm}
+
+# TITLE HERE {-}
+
+\vspace*{10mm}
+
+Supervisor: Ekaterina (Katya) Oparina \
+
+Word count:
+
+\vspace*{30mm}
+
+Submitted as partial fulfilment for \
+
+MSc in Behavioural Science \
+
+Department of Psychological and Behavioural Science \
+
+The London School of Economics and Political Science
+
+\ecenter
+
+\etitlepage
+
+\newpage
+
+
 Total word limit: 10000
 
-# Abstract (100-150)
+## Abstract (100-150) {-}
+
+\newpage
 
 # Introduction (1000)
 
 Gender gap in labour force participation is a world-wide phenomenon which is particularly pronounced in developing countries. Globally, the rate of labour force participation is about 75% among men while only 50% among women **(International Labour Organization, 2021)**. In regions such as Middle East, North Africa, and South Asia, the gender gap is even greater, with around 75% of men and 20% of women participating in the labour force **(International Labour Organization, 2021)**. In the search of potential measures to narrow the gender gap, its causes have been extensively studied with a recent attention on the prominent role of social norms. Researchers speculate that interventions aiming at changing social norms may be the key to achieve greater gender equality in labour force participation **(Bursztyn et al., 2020; Codazzi et al., 2018; Jayachandran, 2021)**.
 
-A recent successful attempt in developing such social norm interventions was made by Bursztyn and colleagues **(2020)** in Saudi Arabia. In Saudi Arabia, gender norms exist that expect women to be absent from labour or segregated from men at workplace, and that women need approval from their male "guardian" (usually the husband or father) if they want to work outside the home **(Bursztyn et al., 2018)**. These allow us to make a reasonable speculation that the low female labour participation rate **(28% in 2022, International Labour Organization)** may be because men don't allow their wives to work outside the home (WWOH) due to the internalisation of the gender norms (i.e., personal beliefs aligning with the norm that women should not work outside the home). Interestingly, however, Bursztyn and colleagues **(2020)** found that the critical factor was rather Saudi men's misperception of the injunctive norms regarding WWOH. Their findings revealed that 80-85% of surveyed Saudi men who were married and aged 18-35 reported to agree with the statement that women should be allowed to work outside the home, while more than three quarters of them underestimated this percentage. 
+A recent successful attempt in developing such social norm interventions was made by Bursztyn and colleagues **(2020)** in Saudi Arabia. In Saudi Arabia, gender norms exist that expect women to be absent from labour or segregated from men at workplace, and that women need approval from their male "guardian" (usually the husband or father) if they want to work outside the home **(Bursztyn et al., 2018)**. These allow us to make a reasonable speculation that the low female labour participation rate **(28% in 2022, International Labour Organization)** may be because men don't allow their wives to work outside the home (WWOH) due to the internalisation of the gender norms (i.e., personal beliefs aligning with the norm that women should not work outside the home). Interestingly, however, Bursztyn and colleagues **(2020)** found that the critical factor was rather Saudi men's misperception of the injunctive norms regarding WWOH. Their findings revealed that 80-85% of surveyed Saudi men who were married and aged 18-35 reported to agree with the statement that women should be allowed to work outside the home, while more than three quarters of them underestimated this percentage.
 
-Based on this result, Bursztyn and colleagues **(2020)** designed an intervention to correct men's misperception regarding WWOH found evidence supporting evidence for its effectiveness in changing their labour supply decisions. They found that men who received correct information of the true percentage of supporting men (vs. those who did not receive the information) were significantly more likely to sign up for job matching service for their wives immediately after the intervention. Their wives were also more likely to have applied and interviewed for a job three to five months after the intervention. The researchers also tested the effect of a similar intervention on Saudi women in a field setting, finding that women who received the information on the percentage of men supporting WWOH (vs. those who did not received the information) were more likely to take up a part-time job outside the home, the alternative of which is a job that can be done at home.
+Based on this result, Bursztyn and colleagues **(2020)** designed an intervention to correct men's misperception regarding WWOH found evidence supporting evidence for its effectiveness in changing their labour supply decisions. They found that men who received correct information of the true percentage of supporting men (vs. those who did not receive the information) were significantly more likely to sign up for job matching service for their wives immediately after the intervention. Their wives were also more likely to have applied and interviewed for a job three to five months after the intervention. The researchers also tested the effect of a similar intervention on Saudi women in a field setting, finding that women who received the information on the percentage of men supporting WWOH (vs. those who did not received the information) were more likely to take up a part-time job outside the home instead of a position to work at home.
 
-The present study is inspired by this promising intervention method of correcting the misperception of social norm.
+The present research takes correcting norm misperception as a promising type of social norm intervention and seeks to explore its effectiveness when scaled up. Since large-scale policy intervention can usually be costly to implement and test, the present research aims to study, prior to implementation, the intervention strategy that is theoretically the most effective under appropriate assumptions via agent-based modelling (ABM). The reason for choosing ABM as the method of modelling the system of WWOH action is that the dynamic interaction among people's private belief and norm perception regarding WWOH, as well as their labour supply decision and action can be viewed as complex **(Johnson, 2009)**. One's labour supply decision and action can presumably influence their acquaintances' private belief and norm perception, and these influences in turn impact their acquaintances' labour supply decision and action as a function of private belief and norm perception, eventually creating a feedback loop among individuals. This nature of having agents interacting dynamically and irregularly over time makes the system of WWOH action irreducible to lower-level descriptions (e.g., mathematical equations) and qualifies it as a complex system **(Gustafsson & Sternad, 2010)**. ABMs are suitable for studying the dynamics and emergent properties of such systems, as well as simulate and explore the consequences of policy interventions to them **(Bailey et al., 2019; Madsen et al., 2019)**.
 
+**give space for specific research questions**
 
 # Literature Review (2000)
+
+ABMs are a type of computational model that simulates in a synthetic environment the actions and interactions of autonomous agents, whose behaviours determine the evolution of the entire system **(Bandini et al., 2009)**. ABMs have been deployed in research in a wide range of fields including climate science **(Simmonds et al., 2019)**, ecology **(McLane et al., 2011)**, epidemiology **(de Mooij et al., 2022)**, economics **(Grazzini & Richiardi, 2015)**, finance **(Bonabeau, 2022; Chen et al., 2017,)**, and social sciences **(Epstein & Axtell, 1996; Schelling, 2006)**. Recently, findings from psychological and cognitive science have also been integrated in building more psychologically realistic agent-based models to study political opinion dynamics **(Duaggins, 2017)**, the formation of echo chamber **(Fränken & Pilditch, 2021; Madsen et al., 2018)**, and interventions to the spread of misinformation **(Pilditch et al., 2022)**. These recent developments exemplify the ability of ABMs in modelling a system where multiple individual-level processes, such as interpersonal influence, social conformity, and commitment to previous beliefs, together influence the emergent properties of the system. Since the system of WWOH actions is presumably such a system, ABM is able to model it (???).
 
 # Methodology (2000-3000)
 
