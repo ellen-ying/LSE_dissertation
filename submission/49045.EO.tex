@@ -115,8 +115,8 @@ The London School of Economics and Political Science
 Total word limit: 10000
 
 \hypertarget{abstract-100-150}{%
-\subsection*{Abstract (100-150)}\label{abstract-100-150}}
-\addcontentsline{toc}{subsection}{Abstract (100-150)}
+\section*{Abstract (100-150)}\label{abstract-100-150}}
+\addcontentsline{toc}{section}{Abstract (100-150)}
 
 \newpage
 
@@ -170,14 +170,159 @@ researchers also tested the effect of a similar intervention on Saudi
 women in a field setting, finding that women who received the
 information on the percentage of men supporting WWOH (vs.~those who did
 not received the information) were more likely to take up a part-time
-job outside the home, the alternative of which is a job that can be done
-at home.
+job outside the home instead of a position to work at home.
 
-The present study is inspired by this promising intervention method of
-correcting the misperception of social norm.
+The present research takes correcting norm misperception as a promising
+type of social norm intervention and seeks to explore its effectiveness
+when scaled up. Since large-scale policy intervention can usually be
+costly to implement and test, the present research aims to study, prior
+to implementation, the intervention strategy that is theoretically the
+most effective under appropriate assumptions via agent-based modelling
+(ABM). The reason for choosing ABM as the method of modelling the system
+of WWOH action is that the dynamic interaction among people's private
+belief and norm perception regarding WWOH, as well as their labour
+supply decision and action can be viewed as complex \textbf{(Johnson,
+2009)}. One's labour supply decision and action can presumably influence
+their acquaintances' private belief and norm perception, and these
+influences in turn impact their acquaintances' labour supply decision
+and action as a function of private belief and norm perception,
+eventually creating a feedback loop among individuals. This nature of
+having agents interacting dynamically and irregularly over time makes
+the system of WWOH action irreducible to lower-level descriptions (e.g.,
+mathematical equations) and qualifies it as a complex system
+\textbf{(Gustafsson \& Sternad, 2010)}. ABMs are suitable for studying
+the dynamics and emergent properties of such systems, as well as
+simulate and explore the consequences of policy interventions to them
+\textbf{(Bailey et al., 2019; Madsen et al., 2019)}.
+
+\textbf{give space for specific research questions}
 
 \hypertarget{literature-review-2000}{%
 \section{Literature Review (2000)}\label{literature-review-2000}}
+
+\hypertarget{models-of-belief-and-actions-dynamics}{%
+\subsection{Models of Belief and Actions
+Dynamics}\label{models-of-belief-and-actions-dynamics}}
+
+Belief changes among a group of interconnected and mutually influencing
+agents have been studied widely through mathematical and computational
+models. These models assume that agents hold beliefs regarding certain
+issues. At each time step, these beliefs are modified based on their
+neighbours' beliefs according to some rule. The dynamics of belief
+distribution in a population over time is studied.
+
+Under this shared scheme, different models of belief change model
+agents' beliefs and the ways in which they are affected by those of
+other agents differently \textbf{(Hassani et al., 2022)}. The most
+simplistic models represent agents' beliefs using binary variables, the
+classic ones of which include the Ising model \textbf{(Li et al.,
+2019)}, the voter model \textbf{(Holley \& Liggett, 1975)}, and the
+Sznajd model \textbf{(Sznajd-Weron \& Sznajd, 2000)}. Although these
+models and their variations adopt different rules to update agents'
+beliefs, the updating usually results in the agents being memoryless
+about their previous beliefs. For example, in the voter model, an agent
+\(i\) is randomly chosen at each time step, together with one of its
+neighbour \(j\), and the agent \(i\) then abandons its previous belief
+takes the opinion of its neighbour \(j\).
+
+Other simple models represent agents' beliefs as continuous variables
+that take the value of a real number. These are exemplified by the
+classic Degroot model \textbf{(Berger, 1981)} and the bounded confidence
+model \textbf{(Rainer \& Krause, 2002)}. The models of this type usually
+updates agents' beliefs using a weighted average of each individual's
+belief and those of their neighbour(s). For example, in the bounded
+confidence model, an agent \(i\) is randomly chosen at each time step
+\(t\), together with one of its neighbour \(j\), who hold the beliefs
+\(\sigma_i(t)\) and \(\sigma_j(t)\), respectively. When the condition
+\(|\sigma_i(t) - \sigma_j(t)| < \epsilon\) is met, the agent \(i\)
+updates its belief according to
+\(\sigma_i(t+1) = (1 - \alpha)\sigma_i(t) + \alpha\sigma_j(t)\), and the
+agent \(j\) according to
+\(\sigma_j(t+1) = (1 - \alpha)\sigma_j(t) + \alpha\sigma_i(t)\). In
+other words, when the selected agents hold similar enough beliefs
+according to a threshold \(\epsilon\), they update their beliefs as the
+weighted average of their neighbour's and their own previous beliefs
+based on a convergence parameter \(\alpha\).
+
+More sophisticated models recognise the distinction between agents'
+private beliefs and public actions, modelling the former as a continuous
+variable and the latter a discrete one. The Continuous Opinions and
+Discrete Actions (CODA) model \textbf{(Martins, 2013)} and the more
+recent social network opinions and actions evolutions (SNOAEs) model
+\textbf{(Zhan et al., 2022)} are examples of this category. To take the
+CODA model as an example, it models private beliefs as
+\(P(A) \in [0,1]\), the probability of the \(A\) being the best
+alternative, which is also the probability of an agent publicly
+displaying the action \(A\). Agents have no access to other agents'
+private beliefs but only their public actions, which is used to update
+one's own private beliefs via the Bayes' theorem. For example, upon
+observing a neighbour \(j\) displaying the action \(A\) at the time step
+\(t\), an agent update its private beliefs according to the rule
+\(P_{t+1}(A) = P(A | a_j = +1) \propto P_t(A) P(a_j = +1 | A)\), where
+\(P(A | a_j = +1)\) denotes the probability of \(A\) being the best
+action conditioned on the neighbour \(j\) displaying \(A\), and
+\(P(a_j = +1 | A)\) the probability of the neighbour \(j\) displaying
+\(A\) conditioned on \(A\) being the best action (which is modelled as a
+constant).
+
+It is important to notice that there is a recent trend to build
+psychologically realistic models to represent belief and behaviour
+dynamics among a group of agents \textbf{(Duggins, 2017; Gavrilets,
+2021; Tverskoi et al., 2023)}. Still assuming each agent's beliefs and
+actions are affected by their neighbours, these model further consider
+the influence of social norm perception, the psychological tendency to
+conform to peers, external authorities, as well as material cost-benefit
+considerations \textbf{(Gavrilets, 2021)}. To incorporate these
+psychological and social complexities, a recent unifying modelling
+framework \textbf{(Gavrilets, 2021)} not only considers the distinction
+between agents' private beliefs and public actions, but also model
+agents' perception of others' private beliefs and public actions as two
+separate variables. This allows the representation of various
+psychological factors in updating beliefs and actions, including
+cognitive dissonance in taking a private belief (i.e., the tendency to
+align one's belief and action), social projection in perceiving others'
+private beliefs (i.e., the tendency to project one's own private belief
+onto others), and compliance with authority.
+
+\hypertarget{social-norms-on-behaviours}{%
+\subsection{Social norms on
+behaviours}\label{social-norms-on-behaviours}}
+
+Focus on how individuals' actions are impacted by social norms
+
+Or can discuss group-level social norms
+
+\hypertarget{existing-intervention-strategy}{%
+\subsection{Existing intervention
+strategy}\label{existing-intervention-strategy}}
+
+Discuss existing social norm intervention that corrects misperception
+
+\hypertarget{current-research}{%
+\subsection{Current Research}\label{current-research}}
+
+what's new here
+
+ABMs are a type of computational model that simulates in a synthetic
+environment the actions and interactions of autonomous agents, whose
+behaviours determine the evolution of the entire system \textbf{(Bandini
+et al., 2009)}. ABMs have been deployed in research in a wide range of
+fields including climate science \textbf{(Simmonds et al., 2019)},
+ecology \textbf{(McLane et al., 2011)}, epidemiology \textbf{(de Mooij
+et al., 2022)}, economics \textbf{(Grazzini \& Richiardi, 2015)},
+finance \textbf{(Bonabeau, 2022; Chen et al., 2017,)}, and social
+sciences \textbf{(Epstein \& Axtell, 1996; Schelling, 2006)}. Recently,
+findings from psychological and cognitive science have also been
+integrated in building more psychologically realistic agent-based models
+to study political opinion dynamics \textbf{(Duaggins, 2017)}, the
+formation of echo chamber \textbf{(Fränken \& Pilditch, 2021; Madsen et
+al., 2018)}, and interventions to the spread of misinformation
+\textbf{(Pilditch et al., 2022)}. These recent developments exemplify
+the ability of ABMs in modelling a system where multiple
+individual-level processes, such as interpersonal influence, social
+conformity, and commitment to previous beliefs, together influence the
+emergent properties of the system. Since the system of WWOH actions is
+presumably such a system, ABM is able to model it (???).
 
 \hypertarget{methodology-2000-3000}{%
 \section{Methodology (2000-3000)}\label{methodology-2000-3000}}
