@@ -200,30 +200,38 @@ simulate and explore the consequences of policy interventions to them
 \hypertarget{literature-review-2000}{%
 \section{Literature Review (2000)}\label{literature-review-2000}}
 
-\hypertarget{models-of-belief-and-actions-dynamics}{%
-\subsection{Models of Belief and Actions
-Dynamics}\label{models-of-belief-and-actions-dynamics}}
+\hypertarget{models-of-belief-and-action-dynamics}{%
+\subsection{Models of Belief and Action
+Dynamics}\label{models-of-belief-and-action-dynamics}}
 
-Belief changes among a group of interconnected and mutually influencing
-agents have been studied widely through mathematical and computational
-models. These models assume that agents hold beliefs regarding certain
-issues. At each time step, these beliefs are modified based on their
-neighbours' beliefs according to some rule. The dynamics of belief
-distribution in a population over time is studied.
+Belief and action changes among a group of interconnected and mutually
+influencing agents have been studied widely through mathematical and
+computational models. These models assume that agents hold beliefs
+regarding certain issues. At each time step, these beliefs are modified
+based on their neighbours' beliefs according to some rule. The dynamics
+of belief distribution in a population over time is studied. This
+section will first review various methods to formally model agents'
+beliefs and actions and the ways in which agents influence one another.
+Then, the topics that these models are usually applied to studied are
+introduced.
 
-Under this shared scheme, different models of belief change model
-agents' beliefs and the ways in which they are affected by those of
-other agents differently \textbf{(Hassani et al., 2022)}. The most
-simplistic models represent agents' beliefs using binary variables, the
-classic ones of which include the Ising model \textbf{(Li et al.,
-2019)}, the voter model \textbf{(Holley \& Liggett, 1975)}, and the
-Sznajd model \textbf{(Sznajd-Weron \& Sznajd, 2000)}. Although these
-models and their variations adopt different rules to update agents'
-beliefs, the updating usually results in the agents being memoryless
-about their previous beliefs. For example, in the voter model, an agent
-\(i\) is randomly chosen at each time step, together with one of its
-neighbour \(j\), and the agent \(i\) then abandons its previous belief
-takes the opinion of its neighbour \(j\).
+\hypertarget{formal-representation-of-beliefs-and-actions}{%
+\subsubsection{Formal Representation of Beliefs and
+Actions}\label{formal-representation-of-beliefs-and-actions}}
+
+Different models of belief and action dynamics model agents' beliefs and
+actions and the ways in which they are affected by those of other agents
+differently \textbf{(Hassani et al., 2022)}. The most simplistic models
+represent agents' beliefs using binary variables, the classic ones of
+which include the Ising model \textbf{(Li et al., 2019)}, the voter
+model \textbf{(Holley \& Liggett, 1975)}, and the Sznajd model
+\textbf{(Sznajd-Weron \& Sznajd, 2000)}. Although these models and their
+variations adopt different rules to update agents' beliefs, the updating
+usually results in the agents being memoryless about their previous
+beliefs. For example, in the voter model, an agent \(i\) is randomly
+chosen at each time step, together with one of its neighbour \(j\), and
+the agent \(i\) then abandons its previous belief takes the opinion of
+its neighbour \(j\).
 
 Other simple models represent agents' beliefs as continuous variables
 that take the value of a real number. These are exemplified by the
@@ -279,18 +287,108 @@ between agents' private beliefs and public actions, but also model
 agents' perception of others' private beliefs and public actions as two
 separate variables. This allows the representation of various
 psychological factors in updating beliefs and actions, including
-cognitive dissonance in taking a private belief (i.e., the tendency to
-align one's belief and action), social projection in perceiving others'
-private beliefs (i.e., the tendency to project one's own private belief
-onto others), and compliance with authority.
+cognitive dissonance in taking a private belief (i.e., the aversion
+towards misaligned belief and action), social projection in perceiving
+others' private beliefs (i.e., the tendency to project one's own private
+belief onto others), and compliance with authority.
 
-\hypertarget{social-norms-on-behaviours}{%
-\subsection{Social norms on
-behaviours}\label{social-norms-on-behaviours}}
+\hypertarget{model-applications}{%
+\subsubsection{Model Applications}\label{model-applications}}
 
-Focus on how individuals' actions are impacted by social norms
+Models of belief and action dynamics have been applied to studying
+multiple themes associated with opinion change in a population. These
+include but are not limited to consensus reaching and polarisation
+\textbf{(Acemoglu \& Ozdaglar, 2010; Hassani et al., 2022; Jager \&
+Amblard, 2004; Duggins, 2017)}, the spread of (mis)information
+\textbf{(Watts, 2002; Watts \& Dodds, 2007; Pilditch et al., 2022)}, and
+echo chamber formation \textbf{(Madsen et al., 2018; Fränken \&
+Pilditch, 2021)}. Applying mathematical or computational models,
+researchers are mostly interested in the assumptions and conditions
+under which certain phenomena can arise.
 
-Or can discuss group-level social norms
+For instance, a study reviews a series of mathematical models to answer
+the question about consensus reaching, information aggregation, and the
+spread of misinformation. \textbf{\emph{More specifically, it answers
+the question about under what conditions 1) agents can hold beliefs in
+an agreement even when they start with different views, 2) information
+can be aggregated in the population so that agents holding incorrect
+beliefs can end up with correct beliefs, and 3) prominent agents can
+spread misinformation. The study considers both Bayesian (i.e., agents
+update their beliefs via the Bayes' theorem) and non-Bayesian models
+(i.e., agents update their beliefs via other rules) (consider remove)}}
+and concludes that in both types of models there is a tendency towards
+reaching consensus, but agents' beliefs are not effectively corrected
+through information aggregation. Misinformation spreads with limited
+extent in both types of models, which is due to the limited influence of
+misinformation on Bayesian agents in Bayesian models, and the lack of
+persistent disagreements in the population in non-Bayesian models.
+
+In addition to belief updating mechanisms, other research has also
+studied how network structures can influence the emergence of phenomena
+related to opinion change. \textbf{\emph{Focusing on information
+cascade, a phenomenon where a group of individuals make the same
+decision sequentially,}} a simulation study finds that the distribution
+of the size of cascades depends on the connectivity of the network, so
+does the type of agents who can easily trigger a cascade \textbf{(Watts,
+2002)}. A subsequent simulation study further points out that
+influential individuals, i.e., those who have the highest number of
+connections to others, are not sufficient for triggering cascades, but
+the existence of a group of other individuals who are easily influenced
+by the influential ones is critical \textbf{(Watts \& Dodds, 2007)}.
+
+\hypertarget{agent-based-models-of-pluralistic-ignorance}{%
+\subsection{Agent-Based Models of Pluralistic
+Ignorance}\label{agent-based-models-of-pluralistic-ignorance}}
+
+There has been a growing interest in using ABMs to study the conditions
+under which the phenomenon called pluralistic ignorance (PI) can arise.
+This line of research usually defines PI as the situation where the
+majority of people in a population express opinions different from their
+private beliefs \textbf{(e.g., Seeme et al., 2016; Wang et al., 2014; Ye
+et al., 2019)}. The earliest work primarily focuses on the effects of
+the properties of the network on holding inconsistent private beliefs
+and expressed opinions \textbf{(Centola et al., 2005)}. The research
+inserts, as an initial condition, a few agents who hold a private belief
+held by few individuals in the population (referred to as ``true
+believers'') and enforce other agents to adopt the same belief. It
+reveals that holding inconsistent private beliefs and expressed opinions
+(which is equivalent to enforcing the belief on other agents in the
+context of this research) cannot spread widely in the population if the
+population is fully connected, if the true believers are scattered in
+the population rather than clustered, or if ties in the network are
+randomly rewired, breaking the ties that originally exist between local
+neighbours.
+
+Recent studies start to include in their models psychological processes
+that have been theorised by research in social psychology. Two processes
+that have been mostly attended to are social conformity and cognitive
+dissonance \textbf{(e.g., Wang et al., 2014; Seeme, 2019)}. For
+instance, a research models the change in agents' expressed opinions as
+a result of the influence from the opinions in the groups formed among
+the neighbours, representing people's psychological tendency to conform
+to the group \textbf{(Wang et al., 2014)}. Following the cognitive
+dissonance theory, the model asks the agents change their private
+attitudes only when the group influence is moderate. When the group
+influence is strong, the model represents the situation where people are
+aware of the groups influence and doesn't ask agents to change their
+private beliefs. Under these assumptions, the research finds that there
+is a widespread inconsistency between agents' private beliefs and
+expressed opinions, that is, pluralistic ignorance exists by definition.
+
+Another example is a study that considers social conformity and
+cognitive dissonance assuming the rationality of agents \textbf{(Seeme,
+2019)}. It models the agents as having a utility function that is
+proportional to the rewards from high conformity with its opinion group
+(expressing similar opinions with the mean opinion of the group) and the
+rewards from low cognitive dissonance (holding similar private beliefs
+and expressed opinions). Agents update their private beliefs and
+expressed opinions by maximising the value of the utility function. The
+study finds that different degrees of pluralistic ignorance arise under
+different conditions. When all agents make the update simultaneously,
+the more opinion groups in the population, the more agents hold
+inconsistent private beliefs and expressed opinions; when the updating
+happens sequentially (i.e., agents update one by one), all agents end up
+holding inconsistent private beliefs and expressed opinions.
 
 \hypertarget{existing-intervention-strategy}{%
 \subsection{Existing intervention
