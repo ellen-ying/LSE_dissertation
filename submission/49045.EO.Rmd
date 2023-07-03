@@ -12,7 +12,7 @@ header-includes:
   - \newcommand{\etitlepage}{\end{titlepage}}
   - \usepackage{helvet}
   - \renewcommand*\familydefault{\sfdefault}
-  - \usepackage{setspace}\onehalfspacing
+  - \usepackage{setspace}\doublespacing
   - \usepackage{booktabs}
   - \usepackage[font=small,labelfont=bf]{caption}
 ---
@@ -84,7 +84,7 @@ Other simple models represent agents' beliefs as continuous variables that take 
 
 More sophisticated models recognise the distinction between agents' private beliefs and public actions, modelling the former as a continuous variable and the latter a discrete one. The Continuous Opinions and Discrete Actions (CODA) model **(Martins, 2013)** and the more recent social network opinions and actions evolutions (SNOAEs) model **(Zhan et al., 2022)** are examples of this category. To take the CODA model as an example, it models private beliefs as $P(A) \in [0,1]$, the probability of the $A$ being the best alternative, which is also the probability of an agent publicly displaying the action $A$. Agents have no access to other agents' private beliefs but only their public actions, which is used to update one's own private beliefs via the Bayes' theorem. For example, upon observing a neighbour $j$ displaying the action $A$ at the time step $t$, an agent update its private beliefs according to the rule $P_{t+1}(A) = P(A | a_j = +1) \propto P_t(A) P(a_j = +1 | A)$, where $P(A | a_j = +1)$ denotes the probability of $A$ being the best action conditioned on the neighbour $j$ displaying $A$, and $P(a_j = +1 | A)$ the probability of the neighbour $j$ displaying $A$ conditioned on $A$ being the best action (which is modelled as a constant).
 
-It is important to notice that there is a recent trend to build psychologically realistic models to represent belief and behaviour dynamics among a group of agents **(Duggins, 2017; Gavrilets, 2021; Tverskoi et al., 2023)**. Still assuming each agent's beliefs and actions are affected by their neighbours, these model further consider the influence of social norm perception, the psychological tendency to conform to peers, external authorities, as well as material cost-benefit considerations **(Gavrilets, 2021)**. To incorporate these psychological and social complexities, a recent unifying modelling framework **(Gavrilets, 2021)** not only considers the distinction between agents' private beliefs and public actions, but also model agents' perception of others' private beliefs and public actions as two separate variables. This allows the representation of various psychological factors in updating beliefs and actions, including cognitive dissonance in taking a private belief (i.e., the aversion towards misaligned belief and action), social projection in perceiving others' private beliefs (i.e., the tendency to project one's own private belief onto others), and compliance with authority.
+It is important to notice that there is a recent trend to build psychologically realistic models to represent belief and behaviour dynamics among a group of agents **(Duggins, 2017; Gavrilets, 2021; Tverskoi et al., 2023)**. Still assuming each agent's beliefs and actions are affected by their neighbours, these model further consider the influence of social norm, the psychological tendency to conform to peers, external authorities, as well as material cost-benefit considerations **(Gavrilets, 2021)**. To incorporate these psychological and social complexities, a recent unifying modelling framework **(Gavrilets, 2021)** not only considers the distinction between agents' private beliefs and public actions, but also model agents' perception of others' private beliefs and public actions as two separate variables. This allows the representation of various psychological factors in updating beliefs and actions, including cognitive dissonance in taking a private belief (i.e., the aversion towards misaligned belief and action), social projection in perceiving others' private beliefs (i.e., the tendency to project one's own private belief onto others), and compliance with authority.
 
 ### Model Applications
 
@@ -96,9 +96,9 @@ In addition to belief updating mechanisms, other research has also studied how n
 
 ## Agent-Based Models of Pluralistic Ignorance
 
-There has been a growing interest in using ABMs to study the conditions under which the phenomenon called pluralistic ignorance (PI) can arise. This line of research usually defines PI as the situation where the majority of people in a population express opinions different from their private beliefs **(e.g., Seeme et al., 2016; Wang et al., 2014; Ye et al., 2019)**. The seminal work on this topic focuses on the effects of the properties of the network on holding inconsistent private beliefs and expressed opinions **(Centola et al., 2005)**. The research inserts, as an initial condition, a few agents who hold a private belief held by few individuals in the population (referred to as "true believers") and enforce other agents to adopt the same belief. It reveals that holding inconsistent private beliefs and expressed opinions (which is equivalent to enforcing the belief on other agents in the context of this research) cannot spread widely in the population if the population is fully connected, if the true believers are scattered in the population rather than clustered, or if ties in the network are randomly rewired, breaking the those that originally exist between local neighbours.
+There has been a growing interest in using ABMs to study the conditions under which the phenomenon called pluralistic ignorance (PI) can arise. This line of research usually defines PI as the situation where the majority of people in a population express opinions different from their private beliefs **(e.g., Seeme et al., 2016; Wang et al., 2014; Ye et al., 2019)**. The seminal work on this topic focuses on the effects of the properties of the network on holding inconsistent private beliefs and expressed opinions **(Centola et al., 2005)**. The research inserts, as an initial condition, a few agents who hold a private belief held by few individuals in the population (referred to as "true believers") and enforce other agents to adopt the same belief. It reveals that holding inconsistent private beliefs and expressed opinions (which is equivalent to enforcing the belief on other agents in the context of this research) cannot spread widely in the population if the population is fully connected, if the true believers are scattered in the population rather than clustered, or if ties in the network are randomly rewired, breaking those that originally exist between local neighbours.
 
-Recent studies start to include in their models psychological processes that have been theorised by research in social psychology. Two processes that have been mostly attended to are social conformity and cognitive dissonance **(e.g., Wang et al., 2014; Seeme, 2019)**. For instance, a research models the change in agents' expressed opinions as a result of the influence from the opinions in the groups formed among the neighbours, representing people's psychological tendency to conform to the group **(Wang et al., 2014)**. Following the cognitive dissonance theory, the model asks the agents change their private attitudes only when the group influence is moderate. When the group influence is strong, the model represents the situation where people are aware of the groups influence and doesn't ask agents to change their private beliefs. Under these assumptions, the research finds that there is a widespread inconsistency between agents' private beliefs and expressed opinions, that is, pluralistic ignorance exists by definition.
+Recent studies start to include in their models psychological processes that have been theorised by research in social psychology. Two processes that have been mostly attended to are social conformity and cognitive dissonance **(e.g., Wang et al., 2014; Seeme, 2019)**. For instance, a research models the change in agents' expressed opinions as a result of the influence from the opinions in the groups formed among the neighbours, representing people's psychological tendency to conform to the group **(Wang et al., 2014)**. Following the cognitive dissonance theory, the model asks the agents change their private attitudes when the group influence is moderate. When the group influence is strong, the model represents the situation where people are aware of the groups influence and doesn't ask agents to change their private beliefs. Under these assumptions, the research finds that there is a widespread inconsistency between agents' private beliefs and expressed opinions, that is, pluralistic ignorance exists by definition.
 
 Another example is a study that considers social conformity and cognitive dissonance assuming the rationality of agents **(Seeme, 2019)**. It models the agents as having a utility function that is proportional to the rewards from high conformity with its opinion group (expressing similar opinions with the mean opinion of the group) and the rewards from low cognitive dissonance (holding similar private beliefs and expressed opinions). Agents update their private beliefs and expressed opinions by maximising the value of the utility function. The study finds that different degrees of pluralistic ignorance arise under different conditions. When all agents make the update simultaneously, the more opinion groups in the population, the more agents demonstrate inconsistency between private beliefs and expressed opinions; when the updating happens sequentially (i.e., agents update one by one), all agents end up demonstrating inconsistency between private beliefs and expressed opinions.
 
@@ -110,18 +110,143 @@ The interventions that distribute summary information about peers usually take t
 
 The interventions that directly exposes people to the expressed opinions or actions of peers to change their norm perception can take various forms. The most prominent one in the literature is integrated interventions combining features of group discussions, workshops, and interactive educational activities **(Gidycz et al., 2011; Prince et al., 2015)**. For example, a sexual assault prevention program included a norm correction component in a group discussion and workshop setting, which were found to increase male students' perception of peers' positive attitudes towards bystander intervention and decrease their sexual aggressive behaviours **(Gidycz et al., 2011)**. Another intervention technique that is increasingly being explored is to change the public actions of salient individuals so that changes of larger scales will happen in the population **(Paluck et al., 2012; Paluck et al., 2016)**. These individuals are identified through social network analyses and were administered training sessions before leading public demonstrations of beliefs and actions that are (perceived to be) unpopular. This method is shown to be effective in reducing harassment and conflict behaviours in schools by inducing the norm perception that these behaviours are unacceptable and the discussions about them are encouraged **(Paluck et al., 2012; Paluck et al., 2016)**.
 
-## Current Research
+## The Current Research
 
-what's new here
+To my best knowledge, few models of belief and action dynamics or models of pluralistic ignorance have conceptualised norm perception as an independent belief that can be revised based on observations of other people **(see exceptions Gavrilets, 2021; Tverskoi et al., 2023)**. The models of belief and action dynamics primarily focus on the change in beliefs about a certain issue itself rather than those about the norm **(e.g., Rainer & Krause, 2002; Martins, 2013)**, while models of pluralistic ignorance usually model the influence of norm as a result of direct observations of others **(e.g., Wang et al., 2014; Seeme, 2019)**. However, perception of social norm is a good candidate to be modelled by models of probabilistic inference. This is because it has the structure of a piece of abstract knowledge that is inferred from limited observational data, as we can state what we believe to be most others' beliefs while we are only able to observe (at most) the beliefs and actions of our acquaintances. Cognitive scientists have used various probabilistic models to understand this type of belief **(Tenenbaum et al., 2011; Chater et al., 2006)**. The current research adopts the Bayesian inference model to model norm perception, which is widely adopted in research of human perception and memory and has been shown adequate in modelling inference about everyday events **(Griffiths and Tenenbaum, 2006; Tavoni et al., 2022)**.
+
+although studies that combine opinion dynamics and normative influence start to exist, few have applied those in understand real-world phenomenon. aim to study whether the current states of PI will persist under model assumptions. getting ideas form empirical research, will further see if pluralistic ignorance can be reduced by different interventions.
 
 ABMs are a type of computational model that simulates in a synthetic environment the actions and interactions of autonomous agents, whose behaviours determine the evolution of the entire system **(Bandini et al., 2009)**. ABMs have been deployed in research in a wide range of fields including climate science **(Simmonds et al., 2019)**, ecology **(McLane et al., 2011)**, epidemiology **(de Mooij et al., 2022)**, economics **(Grazzini & Richiardi, 2015)**, finance **(Bonabeau, 2022; Chen et al., 2017,)**, and social sciences **(Epstein & Axtell, 1996; Schelling, 2006)**. Recently, findings from psychological and cognitive science have also been integrated in building more psychologically realistic agent-based models to study political opinion dynamics **(Duaggins, 2017)**, the formation of echo chamber **(Fränken & Pilditch, 2021; Madsen et al., 2018)**, and interventions to the spread of misinformation **(Pilditch et al., 2022)**. These recent developments exemplify the ability of ABMs in modelling a system where multiple individual-level processes, such as interpersonal influence, social conformity, and commitment to previous beliefs, together influence the emergent properties of the system. Since the system of WWOH actions is presumably such a system, ABM is able to model it (???).
 
 # Methodology (2000-3000)
 
+## Model Setup
+
+The current research builds an model populated by $n = 100$ agents who are connected by undirected ties and thus form a social network on a two-dimensional $61 \times 61$ lattice. The social network structure follows the small-world network model, which is characterised by being both highly clustered and having low average path lengths **(Watts & Strogatz, 1998)**. This network model is chosen because many real-world social networks, such as email messages, academic co-authorship, and Facebook following, resemble the small-world network, which makes this model a suitable baseline assumption for modelling an unknown network **(Newman, 2003; Ugander et al., 2011)**. The network is programmed by generating agents on a circle, wiring all agents with their closest two neighbours, and rewiring $p_r = 0.5$ of all ties **(Watts & Strogatz, 1998; Wilensky, 2015)**.
+
+### Initial Setup
+
+Agents are initialised with a belief regarding WWOH $B_i$ ($B_i \in [0, 1]$), a norm perception $N_i$ (a random variable with a normal distribution with the mean $\mu_{N_i}$ and standard deviation $\sigma_{N_i}$), and a WWOH action $A_i$ ($A_i \in \{0, 1\}$). The variable $B_i$ represents the private belief regarding to what extent women should be allowed to work outside the home. Agents with $B_i \in [0.5, 1]$ are regarded as WWOH supporters and the others are regarded as non-supporters. As the initial condition, $p_s = 0.8$ of all agents are generated as supporters, and the $B_i$ of these agents are drawn from the upper half of the normal distribution with $\mu_B = 0.5$, $\sigma_B = 0.2$. The other agents have a $B_i$ from the lower half of this distribution.
+
+The initial norm perception of each agent is determined by five samples drawn from a normal distribution with $\mu_{N_{prior}} = 0.5$, $\sigma_{N_{prior}} = 0.2$. The mean of the five sampled values provides the prior mean of the norm perception (i.e., $\mu_{N_i}$ of the distribution representing each agent's norm perception) and the standard deviation provides the initial uncertainty about the perception (i.e., $\sigma_{N_i}$).
+
+A certain proportion $p_A = 0.05$ of WWOH supporters demonstrate WWOH actions. The value of $p_s$ and $p_A$ are drawn from the empirical statistics about Saudi Arabian men's beliefs and actions regarding WWOH **(Bursztyn et al., 2020)**.
+
+### Updating Procedures
+
+At each time step, agents reach out to all linked neighbours and can communicate with each of them with a probability $p_c$. If an agent communicate with a neighbour, the agent updates both its belief and norm perception regarding WWOH based on the neighbour's belief; if the communication doesn't happen, the agent updates its norm perception using the inferred belief from the neighbour's action. Figure \ref{fig:1} gives the flow chart of the procedure. This approach follows the CODA model and its extensions in terms of modelling beliefs as a continuous variable and actions a binary one and updating beliefs depending on whether other agents' beliefs are accessible **(Martins, 2008; Zhan et al., 2022)**. This is aligned with the aim of the current study to model the WWOH action, which is a binary decision, while also capturing the possibly continuous nature of beliefs regarding WWOH.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\columnwidth]{./figures/diss_flow_chart.pdf}
+  \caption{\textbf{Main updating procedure.} The flow chart shows agents' behaviours at each time step.}
+  \label{fig:1}
+\end{figure}
+
+Agent $i$, upon communicating with and accessing the belief of neighbour $j$, updating its own belief with bounded confidence. The bounded confidence model is able to capture the ubiquitous psychological phenomenon of being more likely to be influenced by people like ourselves while keeps the computation simple **(Cialdini & Goldstein, 2004)**. Previous research has successfully nested the bounded confidence model of opinion dynamics in the framework of the CODA model in the context of a social network, which serves as a foundation for the current model **(Zhan et al., 2022)**. Specifically, agent $i$ updates its belief based on neighbour $j$'s belief using the following equation:
+
+\begin{equation}
+	B_i^{\prime} = \begin{cases}
+		B_i, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{if} \: |B_i - B_j| > \epsilon_i \\
+		B_i + \alpha (B_j - B_i), \; \text{if} \: |B_i - B_j| \le \epsilon_i
+	\end{cases}
+\end{equation}
+
+where $\alpha \in (0,0.5]$ is the convergence parameter and $\epsilon_i$ is the bounded confidence threshold of the agent $i$, which is a value drawn from an exponential distribution with the mean $\epsilon_{mean}$ and is a fixed value over time.
+
+Agents update their norm perception $N_i$ following the Bayesian inference model **(Krauß et al.,1999)**. Using Bayes' theorem, we can update the conditional probability of the agent $i$'s norm perception given evidence using the following equation:
+
+\begin{equation}
+\label{eq:2}
+f(N_i \mid E_i) = \frac{f(N_i) f(E_i \mid N_i)}{\int f(N_i) f(E_i \mid N_i) dN_i},
+\end{equation}
+
+where $f(N_i)$ denotes the prior probability of norm perception of agent $i$, $E_i$ the evidence (either agent $j$'s belief or inferred belief from its action), and $f(E_i \mid N_i)$ the conditional probability of the evidence given $N_i$. Assuming normal distributions for both $f(N_i)$ and $f(E_i \mid N_i)$, the following updating rules for the mean and standard deviation of agents' norm perception can be derived (see the appendices for the derivation):
+
+\begin{equation}
+\label{eq:3}
+\mu_{N_i}^{\prime} = \lambda \mu_{N_i} + (1 - \lambda) E_i,
+\end{equation}
+
+\begin{equation}
+\label{eq:4}
+\sigma_{N_i}^{\prime2} = \lambda \sigma_{N_i}^2,
+\end{equation}
+
+where $\lambda = \frac{c_i^2}{c_i^2 + \sigma_{N_i}^2}$. The variable $c_i$ is agent $i$'s confidence in its norm perception (i.e., the standard deviation of the conditional probability of the evidence, $f(E_i \mid N_i)$), which is drawn from an exponential distribution with the mean $c_{mean}$ and is a fixed value over time.
+
+Since agents may or may not communicate with neighbour $j$, the value of $E$ is given by the following equation:
+
+\begin{equation}
+  E_i = \begin{cases}
+    B_j, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{if agent} \; i \; \text{communicates with agent} \; j \\
+    P(B_j \mid A_j), \;\; \text{if agent} \; i \; \text{doesn't communicate with agent} \; j
+  \end{cases}
+\end{equation}
+
+$P(B_j \mid A_j = 1) = 0.9$ and $P(B_j \mid A_j = 0) = 0.1$ by stipulation in the simulations reported in the current research.
+
+After updating their belief and norm perception, agents update preference and action regarding WWOH based on these two values. The preference is determined by the equation
+
+\begin{equation}
+  P_i = r_i B_i + (1 - r_i) N_i,
+\end{equation}
+
+where $r_i$ represents each agent's resistance to social norm, which is drawn from an exponential distribution with the mean $r_{mean}$ and is a fixed value over time. The WWOH action is determined by the equation:
+
+\begin{equation}
+  A_i = \begin{cases}
+    0, \;\; \text{if} \; P_i \in [0, 0.5)\\
+    1, \;\; \text{if} \; P_i \in [0.5, 1]
+  \end{cases}
+\end{equation}
+
+## Simulations
+
 # Results (2000-2500)
 
 # Discussion and Conclusion (1000-1500)
 
-# Reference
+\newpage
 
-# Appendices
+# Reference {-}
+
+\newpage
+
+# Appendices {-}
+
+## The Derivation of Equation 3 and 4 {-}
+
+Since agents' norm perception $N_i$ is a random variable with a normal distribution with the mean $\mu_{N_i}$ and standard deviation $\sigma_{N_i}$, we have the probability density function (PDF) of $N_i$ as:
+
+\begin{equation*}
+f(N_i) \propto \text{exp}(-\frac{(N_i - \mu_{N_i})^2}{2\sigma_{N_i}^2}).
+\end{equation*}
+
+The conditional PDF of the evidence given agent $i$'s prior norm perception in Equation \ref{eq:2} is given by
+
+\begin{equation*}
+f(E_i \mid N_i) \propto \text{exp}(-\frac{(E_i - N_i)^2}{2c_i^2}).
+\end{equation*}
+
+Following the Equation \ref{eq:2}, we have the posterior PDF of agent $i$'s norm perception as
+
+\begin{equation*}
+  \begin{aligned}
+    f(N_i \mid E_i) &= C \cdot \text{exp}(-\frac{(N_i - \mu_{N_i})^2}{2\sigma_{N_i}^2}) \text{exp}(- \frac{(E_i - N_i)^2}{2c_i^2})\\
+      &= C \cdot \text{exp}(-\frac{(N_i - \mu_{N_i})^2}{2\sigma_{N_i}^2} - \frac{(E_i - N_i)^2}{2c_i^2})\\
+      &= C \cdot \text{exp}(- \frac{(N_i - \mu_{N_i}^{\prime})^2}{2\sigma_{N_i}^{\prime2}} - \frac{(E_i - \mu_{N_i})^2}{2(\sigma_{N_i}^2 + c_i^2)}),
+  \end{aligned}
+\end{equation*}
+
+where $C$ is a normalising constant. Since the second term in the exponent does not involve the random variable $N_i$, we can incorporate it into the constant and rewrite the expression as
+
+\begin{equation*}
+  f(N_i \mid E_i) \propto \text{exp}(- \frac{(N_i - \mu_{N_i}^{\prime})^2}{2\sigma_{N_i}^{\prime2}}),
+\end{equation*}
+
+where
+
+\begin{equation*}
+  \mu_{N_i}^{\prime} = \frac{E_i \sigma_{N_i}^2 + \mu_{N_i} c_i^2}{\sigma_{N_i}^2 + c_i^2} \;\; \text{and} \;\; \sigma_{N_i}^{\prime2} = \frac{\sigma_{N_i}^2 c_i^2}{\sigma_{N_i}^2 + c_i^2}.
+\end{equation*}
