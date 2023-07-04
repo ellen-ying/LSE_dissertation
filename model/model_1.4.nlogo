@@ -1,4 +1,4 @@
-;; Model V2.1: new conceptualisation of norm beleif, new updating method, updating of private belief added
+;; Model V1.4: private belief normal and remain constant, norm belief normal, complex function for preference, with only neighbour behaviours being accessible, small-world network type added
 
 globals [
   ;; network section
@@ -6,65 +6,33 @@ globals [
   number-rewired  ;; number of edges that have been rewired
   average-path-length-of-lattice  ;; average path length of the initial lattice
   average-path-length  ;; average path length in the current network
+
+  p-set ;; set of probability used to calculate total probability of evidence
 ]
 
 turtles-own [
   ;; network section
   distance-from-other-turtles ; list of distances of this node from other turtles
 
-  ;; storage section
+  ;; Bayesian section
   valuation-wwoh  ;; private beliefs about the WWOH behaviour, either 0 or 1
-  valuation-norm-mean  ;; mean of the estimate of the WWOH belief
-  valuation-norm-sd  ;; sd of the estimate
+  valuation-norm  ;; beliefs about how many other agents support WWOH behaviour, a real number between 0 and 1
   preference-wwoh   ;; preference about the WWOH behaviour, either 0 or 1
   behaviour-wwoh  ;; actual WWOH behaviour, either 0 or 1
 
-  neighbour-set ;; set of neighbours
-  n-neighbour ;; number of neighbours
-  belief-accessed? ;; a list indicating if beleifs of neighbours are accessed
-  accessed-info  ;; infomation for updating, either beliefs or behaviours
+  ;;neighbour-valuation ;; beliefs of accessed neighbours
+  neighbour-behaviour ;; behaviours of accessed neighbours
 
-  ;; norm perception Bayesian updating section
-  conf  ;; confidence in the estimate
   p-H ;; prior
-  p-E-H ;; conditional probability of the evidence given H
+  p-E-H ;; conditional probability of the evidence
+  p-E ;; total probability of the evidence
   p-H-E ;; posterior belief
-  a  ;; updating coefficient
 
-  ;; private belief updating section
-  bc-threshold ;; bounded confidence threshold
-
-  ;; preference udpating section
-  r ;; resistence to norm
 ]
 
 links-own [
   rewired? ; keeps track of whether the link has been rewired or not
 ]
-
-;#################################
-;####                         ####
-;####   Function Procedures   ####
-;####                         ####
-;#################################
-
-to-report calculate-updating-coef [ sig c ]  ;; calcualte updating coefficient
- report (c ^ 2) / (c ^ 2 + sig ^ 2)
-end
-
-to-report calculate-preference [ bel norm ]  ;; calcualte preference based on WWOH and norm belief
-  let preference 0
-  set preference r * bel + ( 1 - r ) * norm
-  report preference
-end
-
-to-report demonstrate-behaviour [ pref ]  ;; demonstrate behaviour based on preference
-  let beh 0
-  if pref >= 0.5 [ set beh 1 ]
-  if pref < 0.5 [ set beh 0 ]
-  report beh
-end
-
 
 ;##############################
 ;####                      ####
@@ -76,6 +44,10 @@ to setup
   clear-all
   setup-patches
   setup-turtles
+
+  ;; set the set p for calculating total probability
+  set p-set ( range 0 1 0.05 )
+  set p-set lput 1 p-set
 
   reset-ticks
 end
@@ -150,32 +122,27 @@ to set-turtle-characteristics
    while [ valuation-wwoh < 0 ] [ set valuation-wwoh 0.5 - ( abs ( random-normal 0 0.2 ) ) ]
   ]
 
-  ;; beliefs about the WWOH norm
-  ask turtles [
-    let prior-sample []
-    ;; draw five variables from the normal distribution
-    let i 0
-    while [ i < 5 ] [
-      set prior-sample lput (trunc-norm norm-prior-mean norm-prior-sd 0 1) prior-sample
-      set i i + 1
-    ]
-    ;; calculate the sample's mean and sd as priors
-    set valuation-norm-mean mean prior-sample
-    set valuation-norm-sd standard-deviation prior-sample
-
-    ;; set confidence in the estimate
-    set conf random-exponential conf-mean
-  ]
-
 
   ask turtles [
-    set preference-wwoh 0.5 ;; WWOH preference
-    set neighbour-set [ ]
-    set belief-accessed? [ ]
-    set accessed-info [ ]
-    set bc-threshold random-exponential bc-threshold-mean
-    set r random-exponential r-mean
+
+    ;; WWOH preference
+    set preference-wwoh 0.5
+
   ]
+
+  ;; beliefs about the WWOH norm from normal distributions
+  ask turtles [ set valuation-norm -1 ]
+  let n-underestimate round ( p-underestimate * n-agents )
+  let empirical-supporter mean [ valuation-wwoh] of turtles
+  ask n-of n-underestimate turtles [ ;; let underestimating agents have a value under the true value
+    set valuation-norm empirical-supporter - ( abs ( random-normal 0 0.2 ) )
+    while [ valuation-norm < 0 ] [ set valuation-norm empirical-supporter - ( abs ( random-normal 0 0.2 ) ) ]
+  ]
+  ask turtles with [ valuation-norm = -1 ] [ ;; rest of the agents above the true value
+   set valuation-norm  empirical-supporter + ( abs ( random-normal 0 0.2 ) )
+   while [ valuation-norm > 1 ] [ set valuation-norm empirical-supporter + ( abs ( random-normal 0 0.2 ) ) ]
+  ]
+
 
   ;; WWOH behaviour, only demonstrated by those surpporting WWOH
   ask turtles [ set behaviour-wwoh 0 ]
@@ -196,6 +163,16 @@ to set-link-characteristics
               set thickness 0.1 ]
 end
 
+to-report demonstrate-behaviour [ pref ]
+  let beh 0
+  if pref > 0.5 [ set beh 1 ]
+  if pref < 0.5 [ set beh 0 ]
+  if pref = 0.5 [
+    ifelse random-float 1.0 < 0.5 [ set beh 1 ] [ set beh 0 ]
+  ]
+  report beh
+end
+
 
 
 ;###########################
@@ -206,90 +183,69 @@ end
 
 to go
   ask turtles [
-    update-com-status
-    update-accessed-info
-    update-norm-belief
-    update-wwoh-belief
-    update-preference
-    update-action
+    update-wwoh-behaviour
 
   ]
+  if (max [valuation-norm] of turtles > 1) [ stop ] ;; for detecting anomoly in valuation-norm
   tick
 end
 
-to update-com-status ;; procedures recording neighbours and whether their private beleifs are accessed
-  ;; determine if beliefs of neighbours are accessed
-  set neighbour-set sort [ who ] of [ link-neighbors ] of self
-  set n-neighbour length neighbour-set
-  let i 0
-  set belief-accessed? [ ]
-  while [ i < n-neighbour ] [ ;; loop through each neighbour
-    let w item i neighbour-set  ;; get the ith who number from the set of neighbours
-    ;; determine if the beleifs are accessed
-    ifelse ( random-float 1.0 < p-com ) [
-      set belief-accessed? lput 1 belief-accessed? ] [ set belief-accessed? lput 0 belief-accessed? ]
-    set i i + 1
-  ]
 
-end
+to update-wwoh-behaviour
+  ;; get access to the beliefs and behaviours of certian number of neighbours
+  ;;let n-com-neighbour round ( p-com * [ count link-neighbors ] of self )
+  let n-obs-neighbour round ( p-obs * [ count link-neighbors ] of self )
+  ;;set neighbour-valuation [ valuation-wwoh ] of n-of n-com-neighbour link-neighbors
+  set neighbour-behaviour [ behaviour-wwoh ] of n-of n-obs-neighbour link-neighbors
 
-to update-accessed-info ;; update accessed information from neighbours
-  let i 0
-  set accessed-info [ ]
-  while [ i < n-neighbour ] [
-    let w item i neighbour-set  ;; get the ith who number from the set of neighbours
-    ifelse ( item i belief-accessed? = 0 ) [  ;; access beliefs or actions
-      let beh [ behaviour-wwoh ] of turtle w
-        ifelse ( beh = 1 ) [  ;; actions are turned into a continuous var
-        set accessed-info lput p-B-A accessed-info
-      ] [ set accessed-info lput p-B-nA accessed-info ]
-    ] [
-      set accessed-info lput ( [ valuation-wwoh ] of turtle w ) accessed-info
-    ]
-    set i i + 1
-  ]
+  ;; update agents' belief about the norm
+  ;; only neighbours' behaviours are accessible
+  let x sum neighbour-behaviour
+  set p-H valuation-norm
+  set p-E-H binomial p-H n-obs-neighbour x  ;; conditional probs of evidence
+  set p-E calculate-p-E n-obs-neighbour x  ;; total probability of evidence
+  set p-H-E p-H * p-E-H / p-E  ;; update based on Bayes' rule
+  ;; limit the range of p-H to [0, 1]
+  ;;if ( p-H-E > 1 ) [ set p-H-E 1 ]
 
-end
+  ;; combine communicated beliefs and observed behaviours
+  set valuation-norm p-H-E
 
+  ;; update agents' wwoh preference based on the belief about the norm
+  set preference-wwoh calculate-preference valuation-wwoh valuation-norm
 
-to update-norm-belief ;; update norm perception based on info from neighbours
-  ;; agents learnt the norm and update their belief
-  let i 0
-  while [ i < n-neighbour ] [
-    let evi item i accessed-info
-    set a calculate-updating-coef valuation-norm-sd conf
-    ;; update the mean and sd of the estimate
-    set valuation-norm-mean (a * valuation-norm-mean + (1 - a) * evi)
-    set valuation-norm-sd sqrt( a * valuation-norm-sd ^ 2 )
-    set i i + 1
-  ]
-end
-
-to update-wwoh-belief ;; update agents' wwoh beliefs based on belief of neighbours if accessed
-  let i 0
-  while [ i < n-neighbour ] [
-    ;; update private beliefs if neighbours' private beliefs are accessed
-    ;; and if their beliefs are close enough to mine
-    if ( item i belief-accessed? = 1 ) [
-      let target-belief item i accessed-info
-      if ( abs( target-belief - valuation-wwoh ) <= bc-threshold ) [
-        set valuation-wwoh valuation-wwoh + alpha * ( target-belief - valuation-wwoh )
-      ]
-    ]
-    set i i + 1
-  ]
-end
-
-to update-preference  ;; update agents' wwoh preference based on private belief and norm belief
-  set preference-wwoh calculate-preference valuation-wwoh valuation-norm-mean
-end
-
-to update-action  ;; update agents' behaviour based on their preference
+  ;; update agents' behaviour based on their decision
   set behaviour-wwoh demonstrate-behaviour preference-wwoh
   ifelse (behaviour-wwoh = 1) [ set color red ] [ set color grey ]
 end
 
+to-report binomial [ p n x ]
+  let prob ( choose n x ) * ( p ^ x ) * ( ( 1 - p ) ^ ( n - x ) )
+  report prob
+end
 
+to-report calculate-p-E [ n x ]
+  let p-set-size ( length p-set )
+  let i 0
+  let prob 0
+  while [ i < p-set-size - 1 ] [
+    let p item i p-set
+    set prob ( prob + p * ( binomial p n x ) )
+    set i ( i + 1 )
+  ]
+  report prob
+end
+
+to-report choose [ n x ]  ;; customized functional to calculate combinatorics
+  report ( stepwisefactorial2 n x ) / ( stepwisefactorial1 (n - x) )
+end
+
+to-report calculate-preference [ bel norm ]
+  let preference 0
+  ;;set preference r * bel + ( 1 - r ) * norm
+  set preference ( 1 / ( 1 + e ^ (- k * ( norm - r ) ) ) ) * ( 1 + b * ( 2 * bel - 1 ))
+  report preference
+end
 
 ;#################################################
 ;####                                         ####
@@ -381,17 +337,7 @@ to-report stepwisefactorial1 [d]
   report d * stepwisefactorial1 (d - 1)
 end
 
-;; 5. Pilditch Toby D., Roozenbeek Jon, Madsen Jens Koed and van der Linden Sander (2022). Psychological inoculation can reduce susceptibility to misinformation in large rational agent networksR. Soc. open sci.9211953211953
-
-to-report trunc-norm [mn sd lwr upr] ; Function for drawing a value from a truncated normal distribution
-  let output-num 0
-  ifelse sd < .001 ; exception call for no variance distributions
-  [report mn] ; just report back the mean
-  [loop [set output-num random-normal mn sd
-    if (output-num >= lwr) and (output-num <= upr) [report output-num]]]
-end
-
-;; 6. Wilensky, U. (2015). NetLogo Small Worlds model. http://ccl.northwestern.edu/netlogo/models/SmallWorlds. Center for Connected Learning and Computer-Based Modeling, Northwestern University, Evanston, IL.
+;; 5. Wilensky, U. (2015). NetLogo Small Worlds model. http://ccl.northwestern.edu/netlogo/models/SmallWorlds. Center for Connected Learning and Computer-Based Modeling, Northwestern University, Evanston, IL.
 
 ;==================
 ;  Edge Procedure
@@ -576,10 +522,10 @@ to find-path-lengths
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-1034
-93
-1408
-468
+872
+54
+1246
+429
 -1
 -1
 6.0
@@ -596,8 +542,8 @@ GRAPHICS-WINDOW
 30
 -30
 30
-1
-1
+0
+0
 1
 ticks
 30.0
@@ -614,66 +560,66 @@ NIL
 T
 OBSERVER
 NIL
-S
+NIL
 NIL
 NIL
 1
 
 SLIDER
-264
-38
-373
-71
+42
+104
+151
+137
 n-agents
 n-agents
 10
 200
-100.0
+200.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-47
-167
-197
-200
+153
+196
+291
+229
 density
 density
 0.01
 1
-0.2
+0.01
 0.01
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-212
-127
-316
-155
+43
+157
+147
+185
 type of network model
 9
 0.0
 1
 
 TEXTBOX
-212
-171
-362
-189
+43
+196
+193
+214
 ER network density
 9
 0.0
 1
 
 SLIDER
-47
-278
-197
-311
+659
+58
+801
+91
 p-supporter
 p-supporter
 0
@@ -685,20 +631,45 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-212
-278
-317
-306
+549
+58
+654
+86
 probabiliy supporting WWOH
 9
 0.0
 1
 
 SLIDER
-47
-310
-197
-343
+659
+91
+801
+124
+p-underestimate
+p-underestimate
+0
+1
+0.8
+0.01
+1
+NIL
+HORIZONTAL
+
+TEXTBOX
+548
+91
+662
+126
+probability underestimating supporters
+9
+0.0
+1
+
+SLIDER
+659
+124
+801
+157
 p-wwoh
 p-wwoh
 0
@@ -710,20 +681,20 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-212
-321
-315
-341
+548
+137
+729
+165
 probability of WWOH 
 9
 0.0
 1
 
 PLOT
+43
+417
 243
-556
-443
-706
+567
 valuation-wwoh
 NIL
 NIL
@@ -738,11 +709,11 @@ PENS
 "default" 0.01 1 -16777216 true "" "histogram [ valuation-wwoh ] of turtles"
 
 PLOT
+242
+417
 442
-556
-642
-706
-valuation-norm-mean
+567
+valuation-norm
 NIL
 NIL
 0.0
@@ -751,15 +722,15 @@ NIL
 10.0
 true
 false
-"" ""
+"" "histogram [ valuation-norm ] of turtles"
 PENS
-"default" 0.01 1 -16777216 true "" "histogram [ valuation-norm-mean ] of turtles"
+"default" 0.01 1 -16777216 true "" "histogram [ valuation-norm ] of turtles"
 
 PLOT
-689
-361
-889
-511
+442
+417
+642
+567
 behaviour-wwoh
 NIL
 NIL
@@ -774,10 +745,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count turtles with [ behaviour-wwoh = 1] / n-agents"
 
 MONITOR
-148
-510
-238
-555
+95
+569
+185
+614
 p-supporter
 (count turtles with [ valuation-wwoh > 0.5 ]) / n-agents
 3
@@ -785,21 +756,21 @@ p-supporter
 11
 
 MONITOR
-535
-508
-652
-553
+292
+569
+409
+614
 p-underestimate
-(count turtles with [ valuation-norm-mean <  mean [ valuation-wwoh ] of turtles ]) / n-agents
+(count turtles with [ valuation-norm <  mean [ valuation-wwoh] of turtles ]) / n-agents
 3
 1
 11
 
 MONITOR
-768
-512
-831
-557
+521
+568
+584
+613
 p-wwoh
 (count turtles with [behaviour-wwoh = 1]) / n-agents
 3
@@ -807,34 +778,59 @@ p-wwoh
 11
 
 SLIDER
-343
-125
-493
-158
-p-com
-p-com
+660
+182
+801
+215
+p-obs
+p-obs
 0.01
 1
-0.1
+0.5
 0.01
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-508
-127
-658
-149
+528
+181
+678
+209
+prop. of neighbours being accessed behaviours
+9
+0.0
+1
+
+SLIDER
+660
+215
+801
+248
+p-com
+p-com
+0.01
+1
+0.5
+0.01
+1
+NIL
+HORIZONTAL
+
+TEXTBOX
+528
+220
+678
+242
 prop. of neighbours being accessed beliefs
 9
 0.0
 1
 
 BUTTON
-113
+124
 38
-194
+205
 71
 go once
 go
@@ -849,35 +845,35 @@ NIL
 1
 
 TEXTBOX
-854
-244
-1004
-277
-mean of the exponential distribution from which  resistance to norm is drawn
+530
+272
+680
+290
+resistance to norm
 9
 0.0
 1
 
 SLIDER
-699
-244
-840
-277
-r-mean
-r-mean
+659
+264
+800
+297
+r
+r
 0
 1
-0.1
+0.5
 0.01
 1
 NIL
 HORIZONTAL
 
 BUTTON
-197
-38
-260
-71
+219
+40
+282
+73
 go
 go
 T
@@ -885,36 +881,86 @@ T
 T
 OBSERVER
 NIL
-G
+NIL
 NIL
 NIL
 1
 
-CHOOSER
-47
-123
-197
-168
-network-type
-network-type
-"erdos-renyi" "scale-free" "small-world"
-2
-
 TEXTBOX
-211
-203
-329
-243
-probability of rewiring in the small-world model
+529
+301
+647
+326
+sensitivity of preference to norm
 9
 0.0
 1
 
 SLIDER
-47
-200
-197
-233
+659
+297
+800
+330
+k
+k
+1
+20
+10.0
+1
+1
+NIL
+HORIZONTAL
+
+TEXTBOX
+529
+343
+662
+371
+impacts of beliefs about wwoh on preference
+9
+0.0
+1
+
+SLIDER
+659
+329
+800
+362
+b
+b
+0
+1
+0.5
+0.01
+1
+NIL
+HORIZONTAL
+
+CHOOSER
+153
+151
+291
+196
+network-type
+network-type
+"erdos-renyi" "scale-free" "small-world"
+1
+
+TEXTBOX
+43
+228
+146
+268
+prob. of rewiring in the small-world model
+9
+0.0
+1
+
+SLIDER
+153
+229
+291
+262
 p-rewire
 p-rewire
 0
@@ -924,304 +970,6 @@ p-rewire
 1
 NIL
 HORIZONTAL
-
-TEXTBOX
-51
-96
-201
-114
-Network setup
-11
-0.0
-1
-
-SLIDER
-343
-158
-493
-191
-norm-prior-mean
-norm-prior-mean
-0.01
-1
-0.5
-0.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-343
-191
-493
-224
-norm-prior-sd
-norm-prior-sd
-0.01
-1
-0.2
-0.01
-1
-NIL
-HORIZONTAL
-
-TEXTBOX
-509
-164
-659
-220
-mean and standard deviation of the normal distribution from which prior beliefs are drawn
-9
-0.0
-1
-
-SLIDER
-343
-223
-493
-256
-conf-mean
-conf-mean
-0.1
-1
-0.5
-0.1
-1
-NIL
-HORIZONTAL
-
-TEXTBOX
-508
-226
-679
-259
-mean of the exponential distribution from with confiendence is drawn
-9
-0.0
-1
-
-TEXTBOX
-349
-100
-499
-118
-Learning of norm section
-11
-0.0
-1
-
-SLIDER
-343
-255
-493
-288
-p-B-A
-p-B-A
-0.5
-1
-0.9
-0.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-343
-287
-493
-320
-p-B-nA
-p-B-nA
-0.01
-0.49
-0.1
-0.01
-1
-NIL
-HORIZONTAL
-
-TEXTBOX
-507
-259
-657
-281
-estimate of the WWOH belief given the action
-9
-0.0
-1
-
-TEXTBOX
-508
-290
-658
-312
-estimate of the WWOH given no action
-9
-0.0
-1
-
-PLOT
-642
-556
-842
-706
-valuation-norm-sd
-NIL
-NIL
-0.0
-1.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 0.01 1 -16777216 true "" "histogram [valuation-norm-sd] of turtles"
-
-TEXTBOX
-51
-252
-201
-270
-Agent setup
-11
-0.0
-1
-
-SLIDER
-698
-128
-848
-161
-bc-threshold-mean
-bc-threshold-mean
-0.1
-1
-0.5
-0.1
-1
-NIL
-HORIZONTAL
-
-TEXTBOX
-866
-127
-1016
-171
-mean of the exponential distribution from which bounded confidence threshold is drawn
-9
-0.0
-1
-
-SLIDER
-698
-160
-848
-193
-alpha
-alpha
-0.01
-0.5
-0.1
-0.01
-1
-NIL
-HORIZONTAL
-
-TEXTBOX
-866
-173
-1016
-191
-convergence parameter
-9
-0.0
-1
-
-TEXTBOX
-697
-99
-865
-127
-Private belief updating section
-11
-0.0
-1
-
-TEXTBOX
-699
-217
-874
-245
-Preference formation section
-11
-0.0
-1
-
-MONITOR
-318
-511
-468
-556
-mean-valuation-norm
-mean [ valuation-norm-mean ] of turtles
-3
-1
-11
-
-PLOT
-92
-360
-292
-510
-p-supporter
-NIL
-NIL
-0.0
-2.0
-0.0
-1.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "plot (count turtles with [ valuation-wwoh > 0.5 ]) / n-agents"
-
-PLOT
-291
-360
-491
-510
-meann-valuatio-norm
-NIL
-NIL
-0.0
-1.0
-0.0
-2.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "plot mean [ valuation-norm-mean ] of turtles"
-
-PLOT
-489
-360
-689
-510
-p-underestimate
-NIL
-NIL
-0.0
-2.0
-0.0
-1.1
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "plot (count turtles with [ valuation-norm-mean <  mean [ valuation-wwoh ] of turtles ]) / n-agents"
 
 @#$#@#$#@
 ## WHAT IS IT?
