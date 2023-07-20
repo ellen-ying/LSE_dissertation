@@ -1,4 +1,4 @@
-;; Model V3.1: new conceptualisation of norm beleif, new updating method, updating of private belief added; two interventions added; new models for parameters
+;; Model V3.2: new conceptualisation of norm beleif, new updating method, updating of private belief added; two interventions added; new models for parameters
 
 globals [
   ;; network section
@@ -186,22 +186,13 @@ to set-turtle-characteristics
     set belief-accessed? [ ]
     set accessed-info [ ]
     ;; set bounded confidence threshold
-    set bc-threshold random-normal bc-threshold-mean bc-threshold-sd
-    while [bc-threshold < 0 or bc-threshold-mean > 1] [
-      set bc-threshold random-normal bc-threshold-mean bc-threshold-sd
-    ]
+    set bc-threshold trunc-norm bc-threshold-mean bc-threshold-sd 0 1
 
     ;; set resistance to norm
-    set r random-normal r-mean r-sd
-    while [r < 0 or r > 1] [
-      set r random-normal r-mean r-sd
-    ]
+    set r trunc-norm r-mean r-sd 0 1
 
     ;; set agents' perception of source's credibility
-    set credibility-perception random-normal credibilty-mean credibility-sd
-    while [credibility-perception > 1 or credibility-perception < 0] [
-      set credibility-perception random-normal credibilty-mean credibility-sd
-    ]
+    set credibility-perception trunc-norm credibilty-mean credibility-sd 0 1
 
   ]
 
@@ -237,7 +228,7 @@ end
 to go
   ;; implement intervention at the designated tick
   ask turtles [
-    ifelse (intervention-type != "none" and (ticks = intervention-tick-1 or ticks = intervention-tick-2)) [
+    ifelse (intervention-type != "none" and (ticks = intervention-tick-1 or ticks = intervention-tick-2 or ticks = intervention-tick-3)) [
       implement-intervention
     ][
       update-com-status
@@ -265,7 +256,17 @@ to implement-intervention
   ]
 
   ;; twice
-  if (intervention-type = "sum-info-twice") [
+  if (intervention-type = "sum-info-two") [
+    if (ticks = intervention-tick-1 or ticks = intervention-tick-2) [
+     let true-p (count turtles with [ valuation-wwoh > 0.5 ]) / n-agents
+     if ( abs( true-p - valuation-norm-mean ) <= bc-threshold ) [
+       set valuation-norm-mean valuation-norm-mean + alpha * credibility-perception * ( true-p - valuation-norm-mean )
+     ]
+    ]
+  ]
+
+  ;; three times
+  if (intervention-type = "sum-info-three") [
      let true-p (count turtles with [ valuation-wwoh > 0.5 ]) / n-agents
      if ( abs( true-p - valuation-norm-mean ) <= bc-threshold ) [
        set valuation-norm-mean valuation-norm-mean + alpha * credibility-perception * ( true-p - valuation-norm-mean )
@@ -908,7 +909,7 @@ TEXTBOX
 330
 655
 374
-mean and standard deviation of the normal distribution from which  resistance to norm is drawn
+mean and standard deviation of the normal distribution from which resistance to norm is drawn
 9
 0.0
 1
@@ -1012,10 +1013,10 @@ SLIDER
 156
 norm-prior-sd
 norm-prior-sd
-0.1
+0.01
 0.5
 0.2
-0.1
+0.01
 1
 NIL
 HORIZONTAL
@@ -1144,60 +1145,60 @@ Agent setup
 1
 
 SLIDER
-703
-58
-853
-91
+704
+52
+854
+85
 bc-threshold-mean
 bc-threshold-mean
 0.1
 1
-0.8
+0.3
 0.1
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-869
-62
-1023
-106
+870
+56
+1024
+100
 mean and standard deviation of the normal distribution from which bounded confidence threshold is drawn
 9
 0.0
 1
 
 SLIDER
-703
-123
-853
-156
+704
+117
+854
+150
 alpha
 alpha
 0.01
 0.5
-0.2
+0.1
 0.01
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-868
-129
-1018
-147
+869
+123
+1019
+141
 convergence parameter
 9
 0.0
 1
 
 TEXTBOX
-706
-34
-874
-62
+707
+28
+875
+56
 Private belief updating section
 11
 0.0
@@ -1279,40 +1280,40 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot (count turtles with [ valuation-norm-mean <  mean [ valuation-wwoh ] of turtles ]) / n-agents"
 
 TEXTBOX
-705
-188
-855
-206
+706
+167
+856
+185
 Intervention section
 11
 0.0
 1
 
 CHOOSER
-703
-214
-853
-259
+704
+193
+854
+238
 intervention-type
 intervention-type
-"none" "sum-info" "sum-info-twice"
-0
+"none" "sum-info" "sum-info-two" "sum-info-three"
+1
 
 TEXTBOX
-870
-216
-1020
-238
+871
+195
+1021
+217
 the type of social norm intervention
 9
 0.0
 1
 
 SLIDER
-703
-259
-853
-292
+704
+238
+854
+271
 intervention-tick-1
 intervention-tick-1
 1
@@ -1324,10 +1325,10 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-869
-258
-1019
-280
+870
+237
+1020
+259
 the time at which the intervention is implemented
 9
 0.0
@@ -1335,9 +1336,9 @@ the time at which the intervention is implemented
 
 TEXTBOX
 869
-327
+339
 1019
-371
+383
 mean and standard deviation of the normal distribution from which credibility perception is drawn
 9
 0.0
@@ -1345,9 +1346,9 @@ mean and standard deviation of the normal distribution from which credibility pe
 
 SLIDER
 704
-323
-854
-356
+335
+855
+368
 credibilty-mean
 credibilty-mean
 0
@@ -1360,9 +1361,9 @@ HORIZONTAL
 
 SLIDER
 704
-356
-854
-389
+368
+855
+401
 credibility-sd
 credibility-sd
 0
@@ -1374,10 +1375,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-703
-291
-854
-324
+704
+270
+855
+303
 intervention-tick-2
 intervention-tick-2
 1
@@ -1397,7 +1398,7 @@ conf-sd
 conf-sd
 0.01
 0.5
-0.2
+0.1
 0.01
 1
 NIL
@@ -1412,23 +1413,38 @@ r-sd
 r-sd
 0.01
 0.5
-0.2
+0.1
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-703
-90
-853
-123
+704
+84
+854
+117
 bc-threshold-sd
 bc-threshold-sd
 0.01
 0.5
 0.1
 0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+704
+303
+855
+336
+intervention-tick-3
+intervention-tick-3
+1
+100
+50.0
+1
 1
 NIL
 HORIZONTAL

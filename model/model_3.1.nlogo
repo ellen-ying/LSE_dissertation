@@ -619,10 +619,10 @@ to find-path-lengths
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-1034
-93
-1408
-468
+1057
+94
+1431
+469
 -1
 -1
 6.0
@@ -763,10 +763,10 @@ probability of WWOH
 1
 
 PLOT
-83
-602
-283
-752
+43
+600
+243
+750
 valuation-wwoh
 NIL
 NIL
@@ -781,10 +781,10 @@ PENS
 "default" 0.01 1 -16777216 true "" "histogram [ valuation-wwoh ] of turtles"
 
 PLOT
-282
-602
-482
-752
+242
+600
+442
+750
 valuation-norm-mean
 NIL
 NIL
@@ -799,10 +799,10 @@ PENS
 "default" 0.01 1 -16777216 true "" "histogram [ valuation-norm-mean ] of turtles"
 
 PLOT
-679
-406
-879
-556
+639
+404
+839
+554
 behaviour-wwoh
 NIL
 NIL
@@ -817,32 +817,32 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count turtles with [ behaviour-wwoh = 1] / n-agents"
 
 MONITOR
-138
-555
-228
-600
+98
+553
+188
+598
 p-supporter
-(count turtles with [ valuation-wwoh > 0.5 ]) / n-agents
+(count turtles with [ valuation-wwoh >= 0.5 ]) / n-agents
 3
 1
 11
 
 MONITOR
-527
-554
-644
-599
+487
+552
+604
+597
 p-underestimate
-(count turtles with [ valuation-norm-mean <  mean [ valuation-wwoh ] of turtles ]) / n-agents
+(count turtles with [ valuation-norm-mean <  (count turtles with [ valuation-wwoh >= 0.5 ]) / n-agents]) / n-agents
 3
 1
 11
 
 MONITOR
-758
-556
-821
-601
+718
+554
+781
+599
 p-wwoh
 (count turtles with [behaviour-wwoh = 1]) / n-agents
 3
@@ -1104,10 +1104,10 @@ estimate of the WWOH given no action
 1
 
 PLOT
-482
-602
-682
-752
+442
+600
+642
+750
 valuation-norm-sd
 NIL
 NIL
@@ -1140,7 +1140,7 @@ bc-threshold-mean
 bc-threshold-mean
 0.1
 1
-0.8
+0.7
 0.1
 1
 NIL
@@ -1202,10 +1202,10 @@ Preference formation section
 1
 
 MONITOR
-309
-555
-459
-600
+269
+553
+419
+598
 mean-valuation-norm
 mean [ valuation-norm-mean ] of turtles
 3
@@ -1213,10 +1213,10 @@ mean [ valuation-norm-mean ] of turtles
 11
 
 PLOT
-82
-405
-282
-555
+42
+403
+242
+553
 p-supporter
 NIL
 NIL
@@ -1228,13 +1228,13 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot (count turtles with [ valuation-wwoh > 0.5 ]) / n-agents"
+"default" 1.0 0 -16777216 true "" "plot (count turtles with [ valuation-wwoh >= 0.5 ]) / n-agents"
 
 PLOT
-281
-405
-481
-555
+241
+403
+441
+553
 mean-valuation-norm
 NIL
 NIL
@@ -1249,10 +1249,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot mean [ valuation-norm-mean ] of turtles"
 
 PLOT
-479
-405
-679
-555
+439
+403
+639
+553
 p-underestimate
 NIL
 NIL
@@ -1264,7 +1264,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot (count turtles with [ valuation-norm-mean <  mean [ valuation-wwoh ] of turtles ]) / n-agents"
+"default" 1.0 0 -16777216 true "" "plot (count turtles with [ valuation-norm-mean <  (count turtles with [ valuation-wwoh >= 0.5 ]) / n-agents]) / n-agents"
 
 TEXTBOX
 707
@@ -1284,7 +1284,7 @@ CHOOSER
 intervention-type
 intervention-type
 "none" "sum-info" "sum-info-twice"
-2
+0
 
 TEXTBOX
 872
@@ -1340,7 +1340,7 @@ credibilty-mean
 credibilty-mean
 0
 1
-0.9
+0.7
 0.1
 1
 NIL
@@ -1375,6 +1375,35 @@ intervention-tick-2
 1
 NIL
 HORIZONTAL
+
+PLOT
+839
+403
+1039
+553
+p-inconsistent
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot count turtles with [ (valuation-wwoh >= 0.5 and behaviour-wwoh = 0) or (valuation-wwoh < 0.5 and behaviour-wwoh = 1)] / n-agents"
+
+MONITOR
+898
+553
+1002
+598
+p-inconsistent
+count turtles with [valuation-wwoh >= 0.5 and behaviour-wwoh = 0] / n-agents
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1722,6 +1751,78 @@ NetLogo 6.3.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="experiment" repetitions="50" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="150"/>
+    <metric>mean [valuation-wwoh] of turtles</metric>
+    <metric>(count turtles with [valuation-wwoh &gt;= 0.5]) / n-agents</metric>
+    <metric>mean [valuation-norm-mean] of turtles</metric>
+    <metric>(count turtles with [ valuation-norm-mean &lt;  (count turtles with [ valuation-wwoh &gt; 0.5 ]) / n-agents]) / n-agents</metric>
+    <metric>count turtles with [ behaviour-wwoh = 1] / n-agents</metric>
+    <enumeratedValueSet variable="intervention-type">
+      <value value="&quot;sum-info&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="credibility-sd">
+      <value value="0.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="density">
+      <value value="0.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="alpha">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-com">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="credibilty-mean">
+      <value value="0.7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-agents">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="network-type">
+      <value value="&quot;small-world&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="intervention-tick-1">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="bc-threshold-mean">
+      <value value="0.7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-wwoh">
+      <value value="0.05"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="intervention-tick-2">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-rewire">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="conf-mean">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-B-nA">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="norm-prior-sd">
+      <value value="0.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="norm-prior-mean">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-B-A">
+      <value value="0.9"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="r-mean">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-supporter">
+      <value value="0.8"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
