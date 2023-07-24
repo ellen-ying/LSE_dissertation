@@ -186,10 +186,7 @@ to set-turtle-characteristics
     set r random-exponential r-mean
 
     ;; set agents' perception of source's credibility
-    set credibility-perception random-normal credibilty-mean credibility-sd
-    while [credibility-perception > 1 or credibility-perception < 0] [
-      set credibility-perception random-normal credibilty-mean credibility-sd
-    ]
+    set credibility-perception trunc-norm credibility-mean credibility-sd 0 1
 
   ]
 
@@ -225,7 +222,7 @@ end
 to go
   ;; implement intervention at the designated tick
   ask turtles [
-    ifelse (intervention-type != "none" and (ticks = intervention-tick-1 or ticks = intervention-tick-2)) [
+    ifelse (intervention-type != "none" and (ticks = intervention-tick-1 or ticks = intervention-tick-2 or ticks = intervention-tick-3)) [
       implement-intervention
     ][
       update-com-status
@@ -253,7 +250,17 @@ to implement-intervention
   ]
 
   ;; twice
-  if (intervention-type = "sum-info-twice") [
+  if (intervention-type = "sum-info-two") [
+    if (ticks = intervention-tick-1 or ticks = intervention-tick-2) [
+     let true-p (count turtles with [ valuation-wwoh > 0.5 ]) / n-agents
+     if ( abs( true-p - valuation-norm-mean ) <= bc-threshold ) [
+       set valuation-norm-mean valuation-norm-mean + alpha * credibility-perception * ( true-p - valuation-norm-mean )
+     ]
+    ]
+  ]
+
+  ;; three times
+  if (intervention-type = "sum-info-three") [
      let true-p (count turtles with [ valuation-wwoh > 0.5 ]) / n-agents
      if ( abs( true-p - valuation-norm-mean ) <= bc-threshold ) [
        set valuation-norm-mean valuation-norm-mean + alpha * credibility-perception * ( true-p - valuation-norm-mean )
@@ -261,6 +268,7 @@ to implement-intervention
   ]
 
 end
+
 
 to update-com-status ;; procedures recording neighbours and whether their private beleifs are accessed
   ;; determine if beliefs of neighbours are accessed
@@ -858,7 +866,7 @@ p-com
 p-com
 0.01
 1
-0.1
+0.5
 0.01
 1
 NIL
@@ -910,7 +918,7 @@ r-mean
 r-mean
 0
 1
-0.1
+0.5
 0.01
 1
 NIL
@@ -962,7 +970,7 @@ p-rewire
 p-rewire
 0
 1
-0.5
+0.7
 0.01
 1
 NIL
@@ -1283,8 +1291,8 @@ CHOOSER
 190
 intervention-type
 intervention-type
-"none" "sum-info" "sum-info-twice"
-0
+"none" "sum-info" "sum-info-two" "sum-info-three"
+3
 
 TEXTBOX
 872
@@ -1322,22 +1330,22 @@ the time at which the intervention is implemented
 1
 
 TEXTBOX
-871
-258
-1021
-302
+869
+291
+1019
+335
 mean and standard deviation of the normal distribution from which credibility perception is drawn
 9
 0.0
 1
 
 SLIDER
-706
-254
-856
+704
 287
-credibilty-mean
-credibilty-mean
+856
+320
+credibility-mean
+credibility-mean
 0
 1
 0.7
@@ -1347,10 +1355,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-706
-287
-856
+704
 320
+856
+353
 credibility-sd
 credibility-sd
 0
@@ -1400,10 +1408,25 @@ MONITOR
 1002
 598
 p-inconsistent
-count turtles with [valuation-wwoh >= 0.5 and behaviour-wwoh = 0] / n-agents
+count turtles with [(valuation-wwoh >= 0.5 and behaviour-wwoh = 0) or (valuation-wwoh < 0.5 and behaviour-wwoh = 1)] / n-agents
 17
 1
 11
+
+SLIDER
+704
+255
+856
+288
+intervention-tick-3
+intervention-tick-3
+1
+100
+50.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1752,32 +1775,20 @@ NetLogo 6.3.0
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="experiment" repetitions="50" runMetricsEveryStep="true">
+  <experiment name="experiment 1" repetitions="25" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <timeLimit steps="150"/>
-    <metric>mean [valuation-wwoh] of turtles</metric>
-    <metric>(count turtles with [valuation-wwoh &gt;= 0.5]) / n-agents</metric>
-    <metric>mean [valuation-norm-mean] of turtles</metric>
-    <metric>(count turtles with [ valuation-norm-mean &lt;  (count turtles with [ valuation-wwoh &gt; 0.5 ]) / n-agents]) / n-agents</metric>
-    <metric>count turtles with [ behaviour-wwoh = 1] / n-agents</metric>
+    <metric>(count turtles with [ valuation-norm-mean &lt;  (count turtles with [ valuation-wwoh &gt;= 0.5 ]) / n-agents]) / n-agents</metric>
+    <metric>count turtles with [(valuation-wwoh &gt;= 0.5 and behaviour-wwoh = 0) or (valuation-wwoh &lt; 0.5 and behaviour-wwoh = 1)] / n-agents</metric>
+    <metric>(count turtles with [behaviour-wwoh = 1]) / n-agents</metric>
+    <metric>mean [ valuation-wwoh ] of turtles</metric>
+    <metric>(count turtles with [ valuation-wwoh &gt;= 0.5 ]) / n-agents</metric>
+    <metric>mean [ valuation-norm-mean ] of turtles</metric>
+    <metric>mean [ valuation-norm-sd ] of turtles</metric>
     <enumeratedValueSet variable="intervention-type">
+      <value value="&quot;none&quot;"/>
       <value value="&quot;sum-info&quot;"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="credibility-sd">
-      <value value="0.2"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="density">
-      <value value="0.2"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="alpha">
-      <value value="0.5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-com">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="credibilty-mean">
-      <value value="0.7"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="n-agents">
       <value value="100"/>
@@ -1785,41 +1796,169 @@ NetLogo 6.3.0
     <enumeratedValueSet variable="network-type">
       <value value="&quot;small-world&quot;"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="intervention-tick-1">
-      <value value="30"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="bc-threshold-mean">
+    <enumeratedValueSet variable="p-rewire">
+      <value value="0.3"/>
+      <value value="0.5"/>
       <value value="0.7"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="p-wwoh">
-      <value value="0.05"/>
+    <enumeratedValueSet variable="p-supporter">
+      <value value="0.8"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="intervention-tick-2">
-      <value value="40"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-rewire">
+    <enumeratedValueSet variable="norm-prior-mean">
       <value value="0.5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="conf-mean">
-      <value value="0.5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="p-B-nA">
-      <value value="0.1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="norm-prior-sd">
       <value value="0.2"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="norm-prior-mean">
+    <enumeratedValueSet variable="credibility-sd">
+      <value value="0.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-wwoh">
+      <value value="0.05"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-com">
+      <value value="0.1"/>
+      <value value="0.3"/>
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="bc-threshold-mean">
+      <value value="0.3"/>
+      <value value="0.5"/>
+      <value value="0.7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="alpha">
+      <value value="0.1"/>
+      <value value="0.3"/>
       <value value="0.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="p-B-A">
       <value value="0.9"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="p-B-nA">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="conf-mean">
+      <value value="0.1"/>
+      <value value="0.3"/>
+      <value value="0.5"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="r-mean">
       <value value="0.1"/>
+      <value value="0.3"/>
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="intervention-tick-1">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="intervention-tick-2">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="intervention-tick-3">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="credibility-mean">
+      <value value="0.3"/>
+      <value value="0.5"/>
+      <value value="0.7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="credibility-sd">
+      <value value="0.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="density">
+      <value value="0.2"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="experiment 2" repetitions="25" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="150"/>
+    <metric>(count turtles with [ valuation-norm-mean &lt;  (count turtles with [ valuation-wwoh &gt;= 0.5 ]) / n-agents]) / n-agents</metric>
+    <metric>count turtles with [(valuation-wwoh &gt;= 0.5 and behaviour-wwoh = 0) or (valuation-wwoh &lt; 0.5 and behaviour-wwoh = 1)] / n-agents</metric>
+    <metric>(count turtles with [behaviour-wwoh = 1]) / n-agents</metric>
+    <metric>mean [ valuation-wwoh ] of turtles</metric>
+    <metric>(count turtles with [ valuation-wwoh &gt;= 0.5 ]) / n-agents</metric>
+    <metric>mean [ valuation-norm-mean ] of turtles</metric>
+    <metric>mean [ valuation-norm-sd ] of turtles</metric>
+    <enumeratedValueSet variable="intervention-type">
+      <value value="&quot;sum-info-two&quot;"/>
+      <value value="&quot;sum-info-three&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="n-agents">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="network-type">
+      <value value="&quot;small-world&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-rewire">
+      <value value="0.3"/>
+      <value value="0.5"/>
+      <value value="0.7"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="p-supporter">
       <value value="0.8"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="norm-prior-mean">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="norm-prior-sd">
+      <value value="0.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="credibility-sd">
+      <value value="0.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-wwoh">
+      <value value="0.05"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-com">
+      <value value="0.1"/>
+      <value value="0.3"/>
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="bc-threshold-mean">
+      <value value="0.3"/>
+      <value value="0.5"/>
+      <value value="0.7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="alpha">
+      <value value="0.1"/>
+      <value value="0.3"/>
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-B-A">
+      <value value="0.9"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-B-nA">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="conf-mean">
+      <value value="0.1"/>
+      <value value="0.3"/>
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="r-mean">
+      <value value="0.1"/>
+      <value value="0.3"/>
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="intervention-tick-1">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="intervention-tick-2">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="intervention-tick-3">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="credibility-mean">
+      <value value="0.3"/>
+      <value value="0.5"/>
+      <value value="0.7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="credibility-sd">
+      <value value="0.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="density">
+      <value value="0.2"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
