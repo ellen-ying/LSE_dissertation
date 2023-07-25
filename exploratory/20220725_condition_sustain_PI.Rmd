@@ -1,0 +1,176 @@
+---
+title: "Analysis of conditions sustaining PI"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse);library(here)
+
+# get the row number for data at time 150
+step_1 <- 
+  here("data/processed/step_1.csv") %>% 
+  read_delim(delim = ",") 
+
+id_tri <- step_1 %>% filter(step == 150) %>% select(id)
+
+var_name <- c('intervention', 'p_rewire', 'p_com', 'bc_threshold_mean', 
+              'alpha', 'conf_mean', 'r_mean', 'credibility_mean',
+              "p_underestimate", "p_inconsistent", "p_wwoh", 
+              "mean_belief", "p_supporter", "mean_norm_mu", "mean_norm_sd")
+
+file_path <- paste0("data/processed/", var_name, "_1.csv")
+
+joint_dat <- id_tri
+for (i in 1:length(file_path)) {
+  joint_dat <- 
+    here(file_path[i]) %>% 
+    read_delim(delim = ",") %>% 
+    left_join(joint_dat, ., by = "id")
+}
+
+joint_dat <- select(joint_dat, -id)
+# joint_dat <- 
+#   here("data/processed/joint_dat_1_time_150.csv") %>% 
+#   read_delim(delim = ",") 
+
+# joint_dat <- 
+#   here("data/processed/p_underestimate_1.csv") %>% 
+#   read_delim(delim = ",") %>% 
+#   left_join(id_tri, ., by = "id")
+# 
+# joint_dat <- 
+#   here("data/processed/p_inconsistent_1.csv") %>% 
+#   read_delim(delim = ",") %>% 
+#   left_join(joint_dat, ., by = "id")
+# 
+# joint_dat <- 
+#   here("data/processed/p_wwoh_1.csv") %>% 
+#   read_delim(delim = ",") %>% 
+#   left_join(joint_dat, ., by = "id")
+```
+
+## Testing a hypothesis in the original paper
+
+```{r}
+joint_dat %>% 
+  filter(intervention == "none", p_rewire == 0.5, conf_mean == 0.3) %>% 
+  mutate(r_mean = factor(r_mean, levels = c(0.1, 0.3, 0.5))) %>% 
+  ggplot(aes(x = p_com, y = p_underestimate, color = r_mean)) +
+  geom_point(alpha = 0.1, show.legend = FALSE,
+             position = position_jitterdodge(jitter.width = 0.1, dodge.width = 0.15)) +
+  geom_line(stat = "summary", fun = "mean", position = position_dodge(width = 0.15),
+            show.legend = FALSE) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), show.legend = TRUE,
+              geom = "pointrange", position = position_dodge(width = 0.15)) +
+  scale_x_continuous(breaks = c(0.1, 0.3, 0.5), labels = c(0.1, 0.3, 0.5)) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
+  #facet_wrap(~ r_mean)
+  facet_grid(bc_threshold_mean ~ alpha) +
+  labs(y = "Proportion of agents understamating the norm",
+       x = "Probability of communicating with each neighbour") +
+  theme_bw()
+  
+```
+
+There is a general trend that increased probability of communicating with neighbours leads to fewer agents underestimating the proportion of supporters. However, the decrease may not be statistically significant since the error bars overlap to a great extent. This holds under different combinations of bounded confidence threshold, convergent parameter, and resistance to norm.
+
+For other values of `p_rewire` and `conf_mean`
+
+```{r}
+joint_dat %>% 
+  filter(intervention == "none", p_rewire == 0.3, conf_mean == 0.1) %>% 
+  mutate(r_mean = factor(r_mean, levels = c(0.1, 0.3, 0.5))) %>% 
+  ggplot(aes(x = p_com, y = p_underestimate, color = r_mean)) +
+  geom_point(alpha = 0.1, show.legend = FALSE,
+             position = position_jitterdodge(jitter.width = 0.1, dodge.width = 0.15)) +
+  geom_line(stat = "summary", fun = "mean", position = position_dodge(width = 0.15),
+            show.legend = FALSE) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), show.legend = TRUE,
+              geom = "pointrange", position = position_dodge(width = 0.15)) +
+  scale_x_continuous(breaks = c(0.1, 0.3, 0.5), labels = c(0.1, 0.3, 0.5)) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
+  #facet_wrap(~ r_mean)
+  facet_grid(bc_threshold_mean ~ alpha) +
+  labs(y = "Proportion of agents understamating the norm",
+       x = "Probability of communicating with each neighbour") +
+  theme_bw()
+```
+
+
+## Conditions that sustaining the PI at the original level
+
+```{r}
+outcome_des <- 
+  joint_dat %>% 
+  filter(intervention == "none") %>% 
+  group_by(p_rewire, p_com, bc_threshold_mean, alpha, conf_mean, r_mean) %>% 
+  summarise(across(c(p_underestimate, p_wwoh), list(mean = mean, sd = sd),
+                   .names = "{.col}.{.fn}"), .groups = "keep") 
+```
+
+```{r}
+library(broom)
+t_test_underestimate <- 
+  joint_dat %>% 
+  filter(intervention == "none") %>%
+  # get rid of conditions where the outcome is a constant
+  right_join(filter(outcome_des, p_underestimate.sd != 0),
+             by = c("p_rewire", "p_com", "bc_threshold_mean", "alpha", "conf_mean", "r_mean")) %>% 
+  select(intervention:r_mean, p_underestimate) %>% 
+  group_by(p_rewire, p_com, bc_threshold_mean, alpha, conf_mean, r_mean) %>% 
+  nest() %>% 
+  mutate(
+    t_test = map(data, ~ t.test(.x$p_underestimate, mu = 0.8)),
+    p_underestimate = map(t_test, tidy)
+  ) %>% 
+  unnest(p_underestimate, names_sep = ".") %>% 
+  select(-c(data, t_test))
+
+t_test_wwoh <- 
+  joint_dat %>% 
+  filter(intervention == "none") %>%
+  # get rid of conditions where the outcome is a constant
+  #right_join(filter(outcome_des, p_underestimate.sd != 0)) %>% 
+  select(intervention:r_mean, p_wwoh) %>% 
+  group_by(p_rewire, p_com, bc_threshold_mean, alpha, conf_mean, r_mean) %>% 
+  nest() %>% 
+  mutate(
+    t_test = map(data, ~ t.test(.x$p_wwoh, mu = 0.8)),
+    p_wwoh = map(t_test, tidy)
+  ) %>% 
+  unnest(p_wwoh, names_sep = ".") %>% 
+  select(-c(data, t_test))
+  
+# get the parameter combinations that match the empirical results
+inner_join(
+  filter(t_test_underestimate, 
+         p_underestimate.conf.low <= 0.8 & p_underestimate.conf.high >= 0.8),
+  filter(t_test_wwoh, p_wwoh.conf.low <= 0.05 & p_wwoh.conf.high >= 0.05),
+  by = c("p_rewire", "p_com", "bc_threshold_mean", "alpha", "conf_mean", "r_mean")
+)
+
+```
+
+No parameter combinations satisfy both conditions on `p_underestimate` and `p_wwoh`
+
+```{r}
+inner_join(
+  outcome_des,
+  filter(t_test_wwoh, p_wwoh.conf.low <= 0.05 & p_wwoh.conf.high >= 0.05),
+  by = c("p_rewire", "p_com", "bc_threshold_mean", "alpha", "conf_mean", "r_mean")
+)
+
+inner_join(
+  outcome_des,
+  filter(t_test_underestimate, 
+         p_underestimate.conf.low <= 0.8 & p_underestimate.conf.high >= 0.8),
+  by = c("p_rewire", "p_com", "bc_threshold_mean", "alpha", "conf_mean", "r_mean")
+)
+```
+ Parameter combinations that satisfy conditions on `p_wwoh` look fine, while those satisfying conditions on `p_underestimate` obviously don't satisfying the condition on `p_wwoh`. We will choose the former for later analysis.
+ 
+ 
