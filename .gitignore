@@ -2,3 +2,4 @@ source/
 .DS_Store
 .Rproj.user
 data/raw/
+data/processed/
