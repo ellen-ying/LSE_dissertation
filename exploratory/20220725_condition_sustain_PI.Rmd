@@ -51,6 +51,10 @@ joint_dat <- select(joint_dat, -id)
 #   here("data/processed/p_wwoh_1.csv") %>% 
 #   read_delim(delim = ",") %>% 
 #   left_join(joint_dat, ., by = "id")
+
+joint_dat <- 
+  here("data/processed/joint_dat_1_time_150.csv") %>% 
+  read_csv()
 ```
 
 ## Testing a hypothesis in the original paper
@@ -77,6 +81,51 @@ joint_dat %>%
 ```
 
 There is a general trend that increased probability of communicating with neighbours leads to fewer agents underestimating the proportion of supporters. However, the decrease may not be statistically significant since the error bars overlap to a great extent. This holds under different combinations of bounded confidence threshold, convergent parameter, and resistance to norm.
+
+```{r}
+joint_dat %>% 
+  filter(intervention == "none", p_rewire == 0.5, conf_mean == 0.3) %>% 
+  mutate(r_mean = factor(r_mean, levels = c(0.1, 0.3, 0.5))) %>% 
+  ggplot(aes(x = p_com, y = p_inconsistent, color = r_mean)) +
+  geom_point(alpha = 0.1, show.legend = FALSE,
+             position = position_jitterdodge(jitter.width = 0.1, dodge.width = 0.15)) +
+  geom_line(stat = "summary", fun = "mean", position = position_dodge(width = 0.15),
+            show.legend = FALSE) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), show.legend = TRUE,
+              geom = "pointrange", position = position_dodge(width = 0.15)) +
+  scale_x_continuous(breaks = c(0.1, 0.3, 0.5), labels = c(0.1, 0.3, 0.5)) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
+  #facet_wrap(~ r_mean)
+  facet_grid(bc_threshold_mean ~ alpha) +
+  labs(y = "Proportion of agents with inconsistent beliefs and behaviours",
+       x = "Probability of communicating with each neighbour") +
+  theme_bw()
+  
+```
+
+When resistance to norm is low, increased communication significantly decreases the proportion of agents with inconsistent beliefs and actions. When resistance to norm is high, the decrease tends to be small as there are few agents with such an inconsistency even though they don't communciate much with their neighbours. This pattern is similar across different values of bounded confidence threshold and convergence parameter.
+
+
+```{r}
+joint_dat %>% 
+  filter(intervention == "none", p_rewire == 0.5, conf_mean == 0.3) %>% 
+  mutate(r_mean = factor(r_mean, levels = c(0.1, 0.3, 0.5))) %>% 
+  ggplot(aes(x = p_com, y = p_wwoh, color = r_mean)) +
+  geom_point(alpha = 0.1, show.legend = FALSE,
+             position = position_jitterdodge(jitter.width = 0.1, dodge.width = 0.15)) +
+  geom_line(stat = "summary", fun = "mean", position = position_dodge(width = 0.15),
+            show.legend = FALSE) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), show.legend = TRUE,
+              geom = "pointrange", position = position_dodge(width = 0.15)) +
+  scale_x_continuous(breaks = c(0.1, 0.3, 0.5), labels = c(0.1, 0.3, 0.5)) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
+  #facet_wrap(~ r_mean)
+  facet_grid(bc_threshold_mean ~ alpha) +
+  labs(y = "Proportion of agents demonstrating WWOH actions",
+       x = "Probability of communicating with each neighbour") +
+  theme_bw()
+```
+Similar (but reversed) patterns for proportion of agents demonstration WWOH actions.
 
 For other values of `p_rewire` and `conf_mean`
 
@@ -163,7 +212,9 @@ inner_join(
   filter(t_test_wwoh, p_wwoh.conf.low <= 0.05 & p_wwoh.conf.high >= 0.05),
   by = c("p_rewire", "p_com", "bc_threshold_mean", "alpha", "conf_mean", "r_mean")
 )
+```
 
+```{r}
 inner_join(
   outcome_des,
   filter(t_test_underestimate, 
@@ -171,6 +222,6 @@ inner_join(
   by = c("p_rewire", "p_com", "bc_threshold_mean", "alpha", "conf_mean", "r_mean")
 )
 ```
- Parameter combinations that satisfy conditions on `p_wwoh` look fine, while those satisfying conditions on `p_underestimate` obviously don't satisfying the condition on `p_wwoh`. We will choose the former for later analysis.
+Parameter combinations that satisfy conditions on `p_wwoh` look fine, while those satisfying conditions on `p_underestimate` obviously don't satisfying the condition on `p_wwoh`. We will choose the former for later analysis.
  
  
