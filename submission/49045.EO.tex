@@ -727,24 +727,27 @@ only through the summary information. Other procedures remain unchanged.
 The model will be run using the parameter values listed in Table
 \ref{tab:parameters}. For each set of parameter combination, 25
 simulations will be run and each simulation will run for 150 time steps.
-The model is written in NetLogo 6.3 \textbf{(Wilensky, 1999)} and the
-simulations are run in RNetLogo package \textbf{xx.xx} in R
-\textbf{xx.xx} \textbf{(Thiele 2014; citation needed)}.
+The model is written and the simulations are run in NetLogo 6.3
+\textbf{(Wilensky, 1999)}. The model and data are available in the
+online repository (OSF: \textbf{(insert link here)}).
 
 The following main outcomes are measured at each time step of the
-simulations: 1) \(P_u = P(\mu_{N_i} < P_s)\), proportion of agents who
-underestimate the proportion of WWOH supporters, 2)
+simulations: 1) \(P_U = P(\mu_{N_i} < P_s)\), proportion of agents who
+underestimate the proportion of WWOH supporters (also referred to as the
+rate of underestimation), 2)
 \(P_I = P((B_i \ge 0.5 \wedge A_i = 0) \vee (B_i < 0.5 \wedge A_i = 1))\),
 the proportion of agents with inconsistent beliefs and actions regarding
-WWOH, and 3) \(P_A = P(A_i = 1)\), proportion of agents who demonstrate
-WWOH actions. Outcome 1) and 2) are the key measures for PI regarding
-WWOH, despite assuming different definitions of PI. Outcome 1) follows
-the empirical study about Saudi Arabia and defines PI as the phenomenon
-that exists if and only if more than half of all agents underestimate
-the true proportion of agents who support WWOH \textbf{(Bursztyn et al.,
-2020)}. Outcome 2) follows previous models of PI and defines PI as the
-situation where more than half of all agents act differently from their
-beliefs \textbf{(e.g., Ye et al., 2019)}.
+WWOH (also referred to as the rate of inconsistency), and 3)
+\(P_A = P(A_i = 1)\), proportion of agents who demonstrate WWOH actions
+(also referred to the rate of WWOH actions). Outcome 1) and 2) are the
+key measures for PI regarding WWOH, despite assuming different
+definitions of PI. Outcome 1) follows the empirical study about Saudi
+Arabia and defines PI as the phenomenon that exists if and only if more
+than half of all agents underestimate the true proportion of agents who
+support WWOH \textbf{(Bursztyn et al., 2020)}. Outcome 2) follows
+previous models of PI and defines PI as the phenomenon that exists if
+and only if more than half of all agents act differently from their
+private beliefs \textbf{(e.g., Ye et al., 2019)}.
 
 For exploratory and potentially explanatory purpose, four extra outcomes
 are also measured at each time step: 1) \(\overline{B_i}\), average
@@ -780,7 +783,7 @@ norm perception among all agents.
     $\sigma_{N_{prior}}$ & \multicolumn{1}{l}{Standard deviation of the above distribution} & 0.2 \\
     $p_A$ & \multicolumn{1}{l}{Proportion of agents who demonstrate WWOH action at the beginning of simulations} & 0.05 \\
     \multicolumn{3}{l}{\textit{Updating Procedures}} \\
-    $p_c$ & \multicolumn{1}{l}{Probability of communicating with each neighbour} & 0.1, 0.3, 0.5 \\
+    $p_c$ & \multicolumn{1}{l}{Probability of communication with each neighbour} & 0.1, 0.3, 0.5 \\
     $\epsilon_{mean}$ & \multicolumn{1}{l}{Mean of the exponential distribution from which the bounded confidence threshold is drawn} & 0.3, 0.5, 0.7 \\
     $\alpha$ & \multicolumn{1}{l}{Convergence parameter} & 0.1, 0.3, 0.5 \\
     $c_{mean}$ & \multicolumn{1}{l}{Mean of the exponential distribution from which the agents' degree of lack of confidence in norm perception is drawn} & 0.1, 0.3, 0.5 \\
@@ -801,6 +804,77 @@ norm perception among all agents.
 
 \hypertarget{results-2000-2500}{%
 \section{Results (2000-2500)}\label{results-2000-2500}}
+
+Given the large number of varying parameters and resulting parameter
+combinations, not all results are reported in the main text for the sake
+of brevity. The results that support the claims in this section but
+nevertheless can't be reported here due to the limitation of space are
+reported in online supplementary materials (available at \textbf{(insert
+link here)}).
+
+\hypertarget{factors-associated-with-persistent-pluralistic-ignorance}{%
+\subsection{Factors Associated With Persistent Pluralistic
+Ignorance}\label{factors-associated-with-persistent-pluralistic-ignorance}}
+
+To determine the factors associated with the persistent level of
+pluralistic ignorance regarding WWOH that was found in the empirical
+study, the present study investigates the three outcome variables when
+no intervention is implemented. As Figure \ref{fig:2} shows, both the
+probability of communication with neighbours (\(p_c\)) and mean
+resistance to norm (\(r_{mean}\)) seem to influence the change of
+outcome variables overtime. Particularly, resistance to norm being
+equal, higher probability of communication decreases the rate of
+underestimation and the rate of inconsistency while increasing the rate
+of WWOH actions. Higher resistance to norm has similar effects on the
+three outcome variables when the probability of communication is held
+equal.
+
+When the resistance to norm is low (\(r_{mean} = 0.1\), facet row one),
+low (\(p_c = 0.1\)) and medium probability of communication
+(\(p_c = 0.3\)) keep the rate of underestimation and the rate of
+inconsistency above \(0.5\), and the rate of WWOH actions low.
+Pluralistic ignorance exists by either one of the two definitions
+(\(P_U > 0.5\) or \(P_I > 0.5\)). When the resistance to norm is low and
+the probability of communication is high (\(p_c = 0.5\)), the rate of
+underestimation slightly decreases but still remains above \(0.5\),
+while the rate of inconsistency drops under \(0.5\) and the rate of WWOH
+increases drastically to a high level.
+
+Under the condition of medium resistance to norm (\(r_{mean} = 0.3\),
+facet row 2) and low probability of communication (\(p_c = 0.1\)), the
+rate of underestimation remains virtually constant around \(1\). The
+rate of inconsistency decreases moderately but still remains above
+\(0.5\), and the rate of WWOH actions increases moderately. Pluralistic
+ignorance also exists by either one of the two definitions. In all other
+conditions, although the rate of underestimation remains high, the rate
+of inconsistency drops under \(0.5\) and the rate of WWOH increases
+quickly at the very beginning of the simulations.
+
+Sensitivity analyses were conducted on other combinations of rewiring
+probability (\(p_r\)), bounded confidence threshold
+(\(\epsilon_{mean}\)), convergence parameter (\(\alpha\)), and mean lack
+of confidence (\(c_{mean}\)), and no qualitative difference in the
+results is found (see online supplementary materials).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/factor_for_pi.pdf}
+  \caption{\textbf{Pluralistic ignorance and WWOH action over time when no intervention is implemented.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. Central lines are average values of simulations with the same parameter setting, and shaded areas are the 95\% confidence intervals. Probability of communication with neighbours $p_c$ is shown on facet columns, and the mean resistance to norm $r_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following values: $p_r = 0.5$, $\epsilon_{mean} = 0.5$, $\alpha = 0.3$, $c_{mean} = 0.3$.}
+  \label{fig:2}
+\end{figure}
+
+Suplementary materials: x-axis - communication rate; facetting - bc
+threshold, alpha; coloring - resistance to norm; each figure for one
+combination of p-rewire and lack of confidence in norm perception
+
+\hypertarget{parameter-combinations-sustaining-pluralistic-ignorance-at-the-empirical-level}{%
+\subsection{Parameter Combinations Sustaining Pluralistic Ignorance at
+the Empirical
+Level}\label{parameter-combinations-sustaining-pluralistic-ignorance-at-the-empirical-level}}
+
+\hypertarget{intervention-effects-on-pluralistic-ignorance}{%
+\subsection{Intervention Effects on Pluralistic
+Ignorance}\label{intervention-effects-on-pluralistic-ignorance}}
 
 \hypertarget{discussion-and-conclusion-1000-1500}{%
 \section{Discussion and Conclusion
@@ -863,5 +937,8 @@ where
 \begin{equation*}
   \mu_{N_i}^{\prime} = \frac{E_i \sigma_{N_i}^2 + \mu_{N_i} c_i^2}{\sigma_{N_i}^2 + c_i^2} \;\; \text{and} \;\; \sigma_{N_i}^{\prime2} = \frac{\sigma_{N_i}^2 c_i^2}{\sigma_{N_i}^2 + c_i^2}.
 \end{equation*}
+
+Substituting \(\frac{c_i^2}{c_i^2 + \sigma_{N_i}^2}\) with \(\lambda\)
+gives the euqaitons in the main text.
 
 \end{document}
