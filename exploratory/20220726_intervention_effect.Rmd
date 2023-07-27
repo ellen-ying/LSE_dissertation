@@ -1,0 +1,196 @@
+---
+title: "Analysis of the intervention effects"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r}
+library(tidyverse);library(here)
+
+# get the row number for data at time 150
+step_2 <- 
+  here("data/processed/step_2.csv") %>% 
+  read_delim(delim = ",") 
+
+id_tri <- step_2 %>% filter(step == 150) %>% select(id)
+
+var_name <- c('intervention', 'p_rewire', 'p_com', 'bc_threshold_mean', 
+              'alpha', 'conf_mean', 'r_mean', 'credibility_mean',
+              "p_underestimate", "p_inconsistent", "p_wwoh", 
+              "mean_belief", "p_supporter", "mean_norm_mu", "mean_norm_sd")
+
+file_path <- paste0("data/processed/", var_name, "_2.csv")
+
+joint_dat <- id_tri
+for (i in 1:length(file_path)) {
+  joint_dat <- 
+    here(file_path[i]) %>% 
+    read_delim(delim = ",") %>% 
+    left_join(joint_dat, ., by = "id")
+}
+
+joint_dat <- select(joint_dat, -id)i
+
+joint_dat <- 
+  here("data/processed/joint_dat_2_time_150.csv") %>% 
+  read_delim(delim = ",")
+
+# attach the data for intervention 1
+joint_dat <- 
+  here("data/processed/joint_dat_1_time_150.csv") %>% 
+  read_delim(delim = ",") %>% 
+  bind_rows(., joint_dat)
+```
+
+```{r}
+# get the parameter combination
+outcome_des <- 
+  joint_dat %>% 
+  filter(intervention == "none") %>% 
+  group_by(p_rewire, p_com, bc_threshold_mean, alpha, conf_mean, r_mean) %>% 
+  summarise(across(c(p_underestimate, p_wwoh), list(mean = mean, sd = sd),
+                   .names = "{.col}.{.fn}"), .groups = "keep") 
+
+t_test_wwoh <- 
+  joint_dat %>% 
+  filter(intervention == "none") %>%
+  # get rid of conditions where the outcome is a constant
+  #right_join(filter(outcome_des, p_underestimate.sd != 0)) %>% 
+  select(intervention:r_mean, p_wwoh) %>% 
+  group_by(p_rewire, p_com, bc_threshold_mean, alpha, conf_mean, r_mean) %>% 
+  nest() %>% 
+  mutate(
+    t_test = map(data, ~ t.test(.x$p_wwoh, mu = 0.8)),
+    p_wwoh = map(t_test, tidy)
+  ) %>% 
+  unnest(p_wwoh, names_sep = ".") %>% 
+  select(-c(data, t_test))
+
+par_comb <- 
+  inner_join(
+    outcome_des,
+    filter(t_test_wwoh, p_wwoh.conf.low <= 0.05 & p_wwoh.conf.high >= 0.05),
+    by = c("p_rewire", "p_com", "bc_threshold_mean", "alpha", "conf_mean", "r_mean")
+  ) %>% 
+    select(p_rewire:r_mean)
+par_comb
+```
+
+```{r}
+# obtain data for analysis of the intervention effects
+dat_intervention <- 
+  left_join(par_comb, joint_dat, 
+             by = c("p_rewire", "p_com", "bc_threshold_mean", "alpha", "conf_mean", "r_mean"))
+dat_intervention
+```
+
+```{r}
+dat_intervention %>% 
+  mutate(
+    intervention = factor(intervention, levels = c("none", "sum-info", "sum-info-two", "sum-info-three")),
+    credibility_mean = factor(credibility_mean, levels = c(0.3, 0.5, 0.7))) %>% 
+  ggplot(aes(x = intervention, y = p_underestimate, color = credibility_mean)) +
+  geom_point(alpha = 0.05, show.legend = FALSE,
+             position = position_jitterdodge(jitter.width = 0.5, dodge.width = 0.75)) +
+  geom_line(stat = "summary", fun = "mean", position = position_dodge(width = 0.75),
+            show.legend = FALSE, aes(group = credibility_mean)) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), show.legend = TRUE,
+              geom = "pointrange", position = position_dodge(width = 0.75)) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
+  #facet_wrap(~ bc_threshold_mean) +
+  #facet_grid(bc_threshold_mean ~ alpha) +
+  labs(y = "Proportion of agents understamating the norm",
+       x = "Intervention type") +
+  theme_bw()
+```
+Interventions don't have significant effects on proportions of agents underestimating the norm.
+
+```{r}
+dat_intervention %>% 
+  mutate(
+    intervention = factor(intervention, levels = c("none", "sum-info", "sum-info-two", "sum-info-three")),
+    credibility_mean = factor(credibility_mean, levels = c(0.3, 0.5, 0.7))) %>% 
+  ggplot(aes(x = intervention, y = p_inconsistent, color = credibility_mean)) +
+  geom_point(alpha = 0.05, show.legend = FALSE,
+             position = position_jitterdodge(jitter.width = 0.5, dodge.width = 0.75)) +
+  geom_line(stat = "summary", fun = "mean", position = position_dodge(width = 0.75),
+            show.legend = FALSE, aes(group = credibility_mean)) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), show.legend = TRUE,
+              geom = "pointrange", position = position_dodge(width = 0.75)) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
+  #facet_wrap(~ bc_threshold_mean) +
+  #facet_grid(bc_threshold_mean ~ alpha) +
+  labs(y = "Proportion of agents with inconsistent beliefs and actions",
+       x = "Intervention type") +
+  theme_bw()
+```
+Interventions decrease the proportion of agents with inconsistent beliefs and actions. The effects get greater when interventions are implemented multiple times and the credibility of the information source is perceived high. But the decrease is not significant due to the great overlap among error bars.
+
+```{r}
+dat_intervention %>% 
+  mutate(
+    intervention = factor(intervention, levels = c("none", "sum-info", "sum-info-two", "sum-info-three")),
+    credibility_mean = factor(credibility_mean, levels = c(0.3, 0.5, 0.7))) %>% 
+  ggplot(aes(x = intervention, y = p_wwoh, color = credibility_mean)) +
+  geom_point(alpha = 0.05, show.legend = FALSE,
+             position = position_jitterdodge(jitter.width = 0.5, dodge.width = 0.75)) +
+  geom_line(stat = "summary", fun = "mean", position = position_dodge(width = 0.75),
+            show.legend = FALSE, aes(group = credibility_mean)) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), show.legend = TRUE,
+              geom = "pointrange", position = position_dodge(width = 0.75)) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
+  #facet_wrap(~ bc_threshold_mean) +
+  #facet_grid(bc_threshold_mean ~ alpha) +
+  labs(y = "Proportion of agents with WWOH actions",
+       x = "Intervention type") +
+  theme_bw()
+```
+
+Similar (but reverse) pattern applies to WWOH actions.
+
+## Separate by conditions
+
+```{r}
+dat_intervention %>% 
+  filter(p_com == 0.3) %>% 
+  mutate(
+    intervention = factor(intervention, levels = c("none", "sum-info", "sum-info-two", "sum-info-three")),
+    credibility_mean = factor(credibility_mean, levels = c(0.3, 0.5, 0.7))) %>% 
+  ggplot(aes(x = intervention, y = p_inconsistent, color = credibility_mean)) +
+  geom_point(alpha = 0.05, show.legend = FALSE,
+             position = position_jitterdodge(jitter.width = 0.5, dodge.width = 0.75)) +
+  geom_line(stat = "summary", fun = "mean", position = position_dodge(width = 0.75),
+            show.legend = FALSE, aes(group = credibility_mean)) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), show.legend = TRUE,
+              geom = "pointrange", position = position_dodge(width = 0.75)) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
+  #facet_wrap(~ bc_threshold_mean) +
+  facet_grid(bc_threshold_mean ~ alpha) +
+  labs(y = "Proportion of agents with inconsistent beliefs and actions",
+       x = "Intervention type") +
+  theme_bw()
+```
+The interventions seem to achieve the greatest effects when both bounded confidence threshold and convergence parameters are big.
+
+```{r}
+dat_intervention %>% 
+  filter(p_com == 0.3) %>% 
+  mutate(
+    intervention = factor(intervention, levels = c("none", "sum-info", "sum-info-two", "sum-info-three")),
+    credibility_mean = factor(credibility_mean, levels = c(0.3, 0.5, 0.7))) %>% 
+  ggplot(aes(x = intervention, y = p_wwoh, color = credibility_mean)) +
+  geom_point(alpha = 0.05, show.legend = FALSE,
+             position = position_jitterdodge(jitter.width = 0.5, dodge.width = 0.75)) +
+  geom_line(stat = "summary", fun = "mean", position = position_dodge(width = 0.75),
+            show.legend = FALSE, aes(group = credibility_mean)) +
+  stat_summary(fun.data = mean_sdl, fun.args = list(mult = 1), show.legend = TRUE,
+              geom = "pointrange", position = position_dodge(width = 0.75)) +
+  scale_y_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
+  #facet_wrap(~ bc_threshold_mean) +
+  facet_grid(bc_threshold_mean ~ alpha) +
+  labs(y = "Proportion of agents with WWOH actions",
+       x = "Intervention type") +
+  theme_bw()
+```
+
