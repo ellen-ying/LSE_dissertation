@@ -467,41 +467,52 @@ drinking compared to when it was perceived as having low credibility
 \subsection{The Present Research}\label{the-present-research}}
 
 To briefly outline the model built by the present study, agents are
-generated being interconnected via a social network. Their belief
-regarding WWOH (i.e., whether women should be allowed to work outside
-the home) and norm perception (i.e., how many other men believe that
-women should be allowed to work outside the home) are treated as two
-independent beliefs that can be revised by external information. The
-belief is influenced by other agents' beliefs (if accessible) and the
-norm perception is influenced by either others' beliefs (if accessible)
-or actions. The belief regarding WWOH and norm perception together
-determine agents' preference for WWOH, which in turn determines their
-actual WWOH actions. The summary information given by the intervention
-affects agents' norm perception, the degree of which is influenced by
-perceived credibility of the information.
+generated being interconnected via a social network. The initial
+condition is set to align with the empirical findings in Saudi Arabia
+such that pluralistic ignorance exists in the population and a small
+proportion of agents demonstrate WWOH actions \textbf{(Bursztyn et al.,
+2020)}. Agents' belief regarding WWOH (i.e., whether women should be
+allowed to work outside the home) and norm perception (i.e., how many
+other men believe that women should be allowed to work outside the home)
+are treated as two independent beliefs that can be updated by external
+information. The belief regarding WWOH and norm perception together
+update agents' preference for WWOH, which in turn determines their
+actual WWOH actions. A social norm intervention via summary information
+can be implemented once, twice, or three times. The intervention, if
+any, updates agents' norm perception, the degree of which is influenced
+by perceived credibility of the information.
 
 The present study makes contributions to the existing literature in the
 following aspects. First of all, it treats norm perception as an
 independent belief which can be revised over time based on observations
-of other people (See the Methodology section for a discussion on the
-theoretical basis of this treatment). This is to adapt the novel
-conceptualisation made by recent work on mathematical models of belief
-and action dynamics to the context of computer simulations
-\textbf{(Gavrilets, 2021; Tverskoi et al., 2023)}. This approach has not
-been extensively used yet as most models of belief and action dynamics
-primarily focus on the change in beliefs about a certain issue itself
-rather than those about the norm \textbf{(e.g., Rainer \& Krause, 2002;
-Martins, 2013)}, while models of PI usually model the influence of norm
-as a direct result of observations of others \textbf{(e.g., Wang et al.,
-2014; Seeme, 2019)}. Second, rooted in a real-world phenomenon, the
-model explores both the conditions for PI to be sustained and
-effectiveness of its interventions. This adds to the existing models'
-primary focus on the conditions for the emergence of PI \textbf{(Seeme,
-2019)}. Finally, the present study applies ABMs to social norm
-interventions. Due to the empirical focus of the existing social norm
-intervention studies \textbf{(Yamin et al., 2019)}, this is an area of
-policy interventions that have been rarely explored by simulation
-studies despite its widespread application in other policy contexts.
+of other people. This is to adapt the cutting-edge conceptualisation
+made by recent works on mathematical models of belief and action
+dynamics to the context of computer simulations \textbf{(Gavrilets,
+2021; Tverskoi et al., 2023)}. This approach has not been extensively
+used yet as most models of belief and action dynamics primarily focus on
+the change in beliefs about a certain issue itself rather than those
+about the norm \textbf{(e.g., Rainer \& Krause, 2002; Martins, 2013)},
+while models of PI usually model the influence of norm as a direct
+result of observations of others \textbf{(e.g., Wang et al., 2014;
+Seeme, 2019)}. Second, rooted in a real-world phenomenon, the model
+explores both the conditions for PI to be sustained and effectiveness of
+its interventions. This adds to the existing computational models of PI
+which primarily focus on the conditions for the emergence of PI
+\textbf{(Seeme, 2019)}. Finally, the present study applies ABMs to
+simulating social norm interventions. Due to the empirical focus of the
+existing social norm intervention studies \textbf{(Yamin et al., 2019)},
+this is an area of policy interventions have been rarely explored by
+simulation studies despite its widespread application in other policy
+contexts.
+
+The present study investigates the conditions under which PI regarding
+WWOH in Saudi Arabia are sustained and those under which social norm
+interventions can reduce PI and encourage WWOH behaviours. No explicit
+hypotheses are formed concerning the first question because it is
+exploratory in nature. Regarding the second question, I expect that more
+times the intervention is implemented and higher perceived credibility
+of the information source will lead to reduced PI and more WWOH
+behaviours.
 
 \hypertarget{methodology-2000-3000}{%
 \section{Methodology (2000-3000)}\label{methodology-2000-3000}}
@@ -816,18 +827,59 @@ link here)}).
 \subsection{Factors Associated With Persistent Pluralistic
 Ignorance}\label{factors-associated-with-persistent-pluralistic-ignorance}}
 
-To determine the factors associated with the persistent level of
+To explore the factors associated with the persistent level of
 pluralistic ignorance regarding WWOH that was found in the empirical
 study, the present study investigates the three outcome variables when
-no intervention is implemented. As Figure \ref{fig:2} shows, both the
+no intervention is implemented. Table \ref{tab:2} shows the effects of
+each varied parameter at the final time step on the rate of
+underestimation, the rate of inconsistency, and the rate of WWOH actions
+when controlled for other parameters. All else equal, no parameters have
+statistically significant effects on the rate of underestimation. The
 probability of communication with neighbours (\(p_c\)) and mean
-resistance to norm (\(r_{mean}\)) seem to influence the change of
-outcome variables overtime. Particularly, resistance to norm being
-equal, higher probability of communication decreases the rate of
-underestimation and the rate of inconsistency while increasing the rate
-of WWOH actions. Higher resistance to norm has similar effects on the
-three outcome variables when the probability of communication is held
-equal.
+resistance to norm (\(r_{mean}\)) have negative effects on the rate of
+inconsistency and positive effects on the rate of WWOH actions.
+
+To revealed the process of the two parameters influencing the outcomes,
+full processes of the simulations are plotted. As Figure \ref{fig:2}
+shows, both the probability of communication and mean resistance to norm
+influence the change of outcome variables over time. Particularly,
+resistance to norm being equal, higher probability of communication
+decreases the rate of underestimation and the rate of inconsistency
+while increasing the rate of WWOH actions. Higher resistance to norm has
+similar effects on the three outcome variables when the probability of
+communication is held equal.
+
+\begingroup
+\renewcommand{\arraystretch}{1.5}
+
+\begin{table}
+\caption{\textbf{Effects of parameters on pluralistic ignorance and WWOH action at the final time step when no intervention is implemented.}}
+\centering
+\begin{threeparttable}
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{1in}cccccccccccc}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{4}{c}{$P_U$} & \multicolumn{4}{c}{$P_I$} & \multicolumn{4}{c}{$P_A$} \\
+\cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9} \cmidrule(l{3pt}r{3pt}){10-13}
+\multicolumn{1}{c}{\em{ }} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{se}} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{se}} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{se}} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}}\\
+\midrule
+$p_r$ & 0.03 & 0.32 & 0.10 & .919 & 0.21 & 0.27 & 0.76 & .447 & –0.23 & 0.27 & –0.84 & .402\\
+$p_c$ & 0.34 & 0.49 & 0.69 & 0.492 & \textbf{–1.65} & 0.42 & –3.97 & <.001 & \textbf{1.93} & 0.42 & 4.59 & <.001\\
+$\epsilon_{mean}$ & 0.16 & 0.32 & 0.50 & 0.616 & 0.31 & 0.27 & 1.13 & .259 & –0.13 & 0.27 & –0.47 & .638\\
+$\alpha$ & 0.30 & 0.49 & 0.60 & 0.546 & 0.28 & 0.42 & 0.68 & .495 & –0.13 & 0.42 & –0.32 & .749\\
+$c_{mean}$ & 0.09 & 0.49 & 0.17 & 0.861 & –0.23 & 0.42 & –0.54 & .588 & 0.32 & 0.42 & 0.77 & .441\\
+$r_{mean}$ & –0.17 & 0.49 & –0.34 & 0.736 & \textbf{–1.58} & 0.42 & –3.80 & <.001 & \textbf{1.88} & 0.42 & 4.48 & <.001\\
+\bottomrule
+\end{tabular}}
+\begin{tablenotes}
+\small
+\item \textit{Note.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH \\actions, respectively. Linear regressions are run with full interaction. Intercepts and interaction terms \\are omitted for brevity (see the Appendices for the full table). Statistically significant coefficients are in \\ bold.
+\end{tablenotes}
+\end{threeparttable}
+\label{tab:2}
+\end{table}
+
+\endgroup
 
 When the resistance to norm is low (\(r_{mean} = 0.1\), facet row one),
 low (\(p_c = 0.1\)) and medium probability of communication
@@ -839,6 +891,13 @@ the probability of communication is high (\(p_c = 0.5\)), the rate of
 underestimation slightly decreases but still remains above \(0.5\),
 while the rate of inconsistency drops under \(0.5\) and the rate of WWOH
 increases drastically to a high level.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/factor_for_pi.pdf}
+  \caption{\textbf{Pluralistic ignorance and WWOH action over time when no intervention is implemented.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. Central lines are average values of simulations with the same parameter setting, and shaded areas are the 95\% confidence intervals. Probability of communication with neighbours $p_c$ is shown on facet columns, and the mean resistance to norm $r_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following values: $p_r = 0.5$, $\epsilon_{mean} = 0.5$, $\alpha = 0.3$, $c_{mean} = 0.3$.}
+  \label{fig:2}
+\end{figure}
 
 Under the condition of medium resistance to norm (\(r_{mean} = 0.3\),
 facet row 2) and low probability of communication (\(p_c = 0.1\)), the
@@ -855,17 +914,6 @@ probability (\(p_r\)), bounded confidence threshold
 (\(\epsilon_{mean}\)), convergence parameter (\(\alpha\)), and mean lack
 of confidence (\(c_{mean}\)), and no qualitative difference in the
 results is found (see online supplementary materials).
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\columnwidth]{./figures/factor_for_pi.pdf}
-  \caption{\textbf{Pluralistic ignorance and WWOH action over time when no intervention is implemented.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. Central lines are average values of simulations with the same parameter setting, and shaded areas are the 95\% confidence intervals. Probability of communication with neighbours $p_c$ is shown on facet columns, and the mean resistance to norm $r_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following values: $p_r = 0.5$, $\epsilon_{mean} = 0.5$, $\alpha = 0.3$, $c_{mean} = 0.3$.}
-  \label{fig:2}
-\end{figure}
-
-Suplementary materials: x-axis - communication rate; facetting - bc
-threshold, alpha; coloring - resistance to norm; each figure for one
-combination of p-rewire and lack of confidence in norm perception
 
 \hypertarget{parameter-combinations-sustaining-pluralistic-ignorance-at-the-empirical-level}{%
 \subsection{Parameter Combinations Sustaining Pluralistic Ignorance at
@@ -939,6 +987,6 @@ where
 \end{equation*}
 
 Substituting \(\frac{c_i^2}{c_i^2 + \sigma_{N_i}^2}\) with \(\lambda\)
-gives the euqaitons in the main text.
+gives the equations in the main text.
 
 \end{document}
