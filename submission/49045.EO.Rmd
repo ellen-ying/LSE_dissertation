@@ -304,7 +304,7 @@ For exploratory and potentially explanatory purpose, four extra outcomes are als
 
 # Results (2000-2500)
 
-Given the large number of varying parameters and resulting parameter combinations, not all results are reported in the main text for the sake of brevity. The results that support the claims in this section but nevertheless can't be reported here due to the limitation of space are reported in online supplementary materials (available at **(insert link here)**). 
+Given the large number of varying parameters and resulting parameter combinations, not all results are reported in the main text for the sake of brevity. The results that support the claims in this section but can't be reported here due to space limitation are reported in the Appendices. 
 
 ## Factors Associated With Persistent Pluralistic Ignorance
 
@@ -340,11 +340,11 @@ coef %>%
 \renewcommand{\arraystretch}{1.5}
 
 \begin{table}
-\caption{\textbf{Effects of parameters on pluralistic ignorance and WWOH action at the final time step when no intervention is implemented.}}
+\caption{\textbf{Effects of parameters on pluralistic ignorance and WWOH action at the final time step when no intervention is implemented}}
 \centering
 \begin{threeparttable}
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{1in}cccccccccccc}
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{0.5in}cccccccccccc}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{4}{c}{$P_U$} & \multicolumn{4}{c}{$P_I$} & \multicolumn{4}{c}{$P_A$} \\
 \cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9} \cmidrule(l{3pt}r{3pt}){10-13}
@@ -371,7 +371,6 @@ $r_{mean}$ & –0.17 & 0.49 & –0.34 & 0.736 & \textbf{–1.58} & 0.42 & –3.8
 When the resistance to norm is low ($r_{mean} = 0.1$, facet row one), low ($p_c = 0.1$) and medium probability of communication ($p_c = 0.3$) keep the rate of underestimation and the rate of inconsistency above $0.5$, and the rate of WWOH actions low. Pluralistic ignorance exists by either one of the two definitions ($P_U > 0.5$ or $P_I > 0.5$). When the resistance to norm is low and the probability of communication is high ($p_c = 0.5$), the rate of underestimation slightly decreases but still remains above $0.5$, while the rate of inconsistency drops under $0.5$ and the rate of WWOH increases drastically to a high level.
 
 
-
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\columnwidth]{./figures/factor_for_pi.pdf}
@@ -382,12 +381,14 @@ When the resistance to norm is low ($r_{mean} = 0.1$, facet row one), low ($p_c 
 
 Under the condition of medium resistance to norm ($r_{mean} = 0.3$, facet row 2) and low probability of communication ($p_c = 0.1$), the rate of underestimation remains virtually constant around $1$. The rate of inconsistency decreases moderately but still remains above $0.5$, and the rate of WWOH actions increases moderately. Pluralistic ignorance also exists by either one of the two definitions. In all other conditions, although the rate of underestimation remains high, the rate of inconsistency drops under $0.5$ and the rate of WWOH increases quickly at the very beginning of the simulations.
 
-Sensitivity analyses were conducted on other combinations of rewiring probability ($p_r$), bounded confidence threshold ($\epsilon_{mean}$), convergence parameter ($\alpha$), and mean lack of confidence ($c_{mean}$), and no qualitative difference in the results is found (see online supplementary materials).
+Sensitivity analyses were conducted on other combinations of rewiring probability ($p_r$), bounded confidence threshold ($\epsilon_{mean}$), convergence parameter ($\alpha$), and mean lack of confidence ($c_{mean}$), and no qualitative difference in the results is found (see the Appendices).
 
-
-## Parameter Combinations Sustaining Pluralistic Ignorance at the Empirical Level
 
 ## Intervention Effects on Pluralistic Ignorance
+
+To investigate the the effects of interventions on PI regarding WWOH, parameter combinations that sustain PI at the level reported in the empirical study are first identified. The empirical rate of underestimation of WWOH norm among Saudi men is around $P_U = 0.8$ and the rate of WWOH actions is around $P_A = 0.05$ **(Bursztyn et al., 2020)**. One-sample *t*-tests on the outcome variables reveal that some parameter combinations produce $P_U$ and $P_A$ close to these values (i.e., the empirical rate falls within the 95% confidence intervals of $P_U$ and $P_A$ in the model) at the final time step. Some parameter combinations do give rise to $P_U$ close to 0.8, but the rates of WWOH actions are significantly different from 0.05 (most are over 0.5). Some parameter combinations give rise to $P_A$ close to 0.05. Although the rates of underestimation under these conditions are also significantly different from 0.8, most of them lie within a reasonable proximity to the empirical level (see Appendix Table C1). Therefore, the parameter combinations that give rise to $P_A$ close to 0.05 are used for further analyses.
+
+
 
 # Discussion and Conclusion (1000-1500)
 
@@ -399,7 +400,7 @@ Sensitivity analyses were conducted on other combinations of rewiring probabilit
 
 # Appendices {-}
 
-## The Derivation of Equation 3 and 4 {-}
+## Appendix A: The Derivation of Equation 3 and 4 {-}
 
 Since agents' norm perception $N_i$ is a random variable with a normal distribution with the mean $\mu_{N_i}$ and standard deviation $\sigma_{N_i}$, we have the probability density function (PDF) of $N_i$ as:
 
@@ -436,3 +437,277 @@ where
 \end{equation*}
 
 Substituting $\frac{c_i^2}{c_i^2 + \sigma_{N_i}^2}$ with $\lambda$ gives the equations in the main text.
+
+## Appendix B: Supplementary Results on the Factors Associated with Persistent PI
+
+**table: full regression model**
+
+**sensitivity analysis on the effect of p_com and r_mean**
+
+\blandscape
+
+## Appendix C: Parameter Combinations That Sustain PI at the Empirical Level
+
+```{r, echo=FALSE}
+p_underestimate_t <- 
+  here("data/processed/p_underestimate_against_empirical.csv") %>% 
+  read_csv()
+
+p_underestimate_t %>%
+  mutate(
+    p_underestimate.conf = paste0("[", round(p_underestimate.conf.low, 2), ", ", round(p_underestimate.conf.high, 2), "]"),
+    p_wwoh.conf = paste0("[", round(p_wwoh.conf.low, 2), ", ", round(p_wwoh.conf.high, 2), "]")    
+  ) %>% 
+  select(p_rewire, p_com, bc_threshold_mean, alpha, conf_mean, r_mean,
+         p_underestimate.mean, p_underestimate.sd, p_underestimate.conf, p_underestimate.p.adjust,
+         p_wwoh.mean, p_wwoh.sd, p_wwoh.conf, p_wwoh.p.adjust
+         ) %>% 
+  mutate(across(contains("p."), ~format(.x, digits = 2, nsmall = 3))) %>%
+  mutate(across(contains("p."), ~ ifelse(!str_detect(.x, "e"), str_remove(.x, "^0"), "<.001"))) %>% 
+  mutate(across(where(is.numeric), inline_hook)) %>%
+  kable(
+    digits = 3, format = "latex", booktabs = TRUE, longtable = TRUE,
+    caption = "\\textbf{Parameter combinations that sustain PI at the empirical level.}",
+    row.names = FALSE, 
+    col.names = c("p_r", "p_c", "bc_threshold", "alpha", "conf_mean", "r_mean",
+                  rep(c("M", "SD", "95CI", "p"), 2))
+    ) %>%
+  row_spec(0, italic = TRUE, align = "c") %>%
+  add_header_above(
+    c(" " = 6, "p_underestimate" = 4, "p_wwoh" = 4)
+    ) %>%
+  #column_spec(1, width = "2in") %>%
+  footnote(
+    general = "\\\\textit{Note.} The values of $P_U$ are tested against the null hypothesis $P_U = 0.8$, and the values of $P_A$ are tested against the null hypothesis $P_A = 0.05$. The adjusted p values are calculated using the methods of Benjamini, Hochberg, and Yekutieli.",
+    general_title = "", escape = FALSE,
+    threeparttable = TRUE, fixed_small_size = TRUE) %>% 
+  kable_styling(latex_options = "repeat_header")
+
+# Benjamini, Y., and Hochberg, Y. (1995). Controlling the false discovery rate: a practical and powerful approach to multiple testing. Journal of the Royal Statistical Society Series B, 57, 289–300. doi: 10.1111/j.2517-6161.1995.tb02031.x. https://www.jstor.org/stable/2346101.
+# 
+# Benjamini, Y., and Yekutieli, D. (2001). The control of the false discovery rate in multiple testing under dependency. Annals of Statistics, 29, 1165–1188. doi: 10.1214/aos/1013699998.
+```
+
+```{r, echo = FALSE}
+p_wwoh_t <- 
+  here("data/processed/p_wwoh_against_empirical.csv") %>% 
+  read_csv()
+
+p_wwoh_t %>% 
+  mutate(
+    p_underestimate.conf = paste0("[", round(p_underestimate.conf.low, 2), ", ", round(p_underestimate.conf.high, 2), "]"),
+    p_wwoh.conf = paste0("[", round(p_wwoh.conf.low, 2), ", ", round(p_wwoh.conf.high, 2), "]")    
+  ) %>% 
+  select(p_rewire, p_com, bc_threshold_mean, alpha, conf_mean, r_mean,
+         p_underestimate.mean, p_underestimate.sd, p_underestimate.conf, p_underestimate.p.adjust,
+         p_wwoh.mean, p_wwoh.sd, p_wwoh.conf, p_wwoh.p.adjust
+         ) %>% 
+  mutate(across(contains("p."), ~format(.x, digits = 2, nsmall = 3))) %>%
+  mutate(across(contains("p."), ~ ifelse(!str_detect(.x, "e"), str_remove(.x, "^0"), "<.001"))) %>% 
+  mutate(across(where(is.numeric), inline_hook)) %>%
+  kable(
+    digits = 3, format = "latex", booktabs = TRUE, longtable = TRUE,
+    caption = "\\textbf{Parameter combinations that sustain PI at the empirical level.}",
+    row.names = FALSE, 
+    col.names = c("p_r", "p_c", "bc_threshold", "alpha", "conf_mean", "r_mean",
+                  rep(c("M", "SD", "95CI", "p"), 2))
+    ) %>%
+  row_spec(0, italic = TRUE, align = "c") %>%
+  add_header_above(
+    c(" " = 6, "p_underestimate" = 4, "p_wwoh" = 4)
+    ) %>%
+  #column_spec(1, width = "2in") %>%
+  footnote(
+    general = "\\\\textit{Note.} The values of $P_U$ are tested against the null hypothesis $P_U = 0.8$, and the values of $P_A$ are tested against the null hypothesis $P_A = 0.05$. The adjusted p values are calculated using the methods of Benjamini, Hochberg, and Yekutieli.",
+    general_title = "", escape = FALSE,
+    threeparttable = TRUE, fixed_small_size = TRUE) %>% 
+  kable_styling(latex_options = c("repeat_header"))
+```
+
+\renewcommand{\thetable}{C1}
+
+\begin{ThreePartTable}
+\begin{TableNotes}
+\small
+\item \textit{Note.} $P_U$ and $P_A$ denote the rate of underestimation and the rate of WWOH actions, respectively. The values of $P_U$ are tested against the null hypothesis $P_U = 0.8$, and the values of $P_A$ are tested against the null hypothesis $P_A = 0.05$. The \textit{p} values are adjusted for multiple comparison using the methods of Benjamini, Hochberg, and Yekutieli.
+\end{TableNotes}
+\begin{longtable}[t]{cccccccccccccc}
+\caption{\textbf{Parameter combinations that sustain PI at the empirical level}}\\
+\toprule
+\multicolumn{6}{c}{ } & \multicolumn{4}{c}{$P_U$} & \multicolumn{4}{c}{$P_A$} \\
+\cmidrule(l{3pt}r{3pt}){7-10} \cmidrule(l{3pt}r{3pt}){11-14}
+\multicolumn{1}{c}{$p_r$} & \multicolumn{1}{c}{$p_c$} & \multicolumn{1}{c}{$\epsilon_{mean}$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c}{$c_{mean}$} & \multicolumn{1}{c}{$r_{mean}$} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{95\%CI [LL, UL]} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{95\%CI [LL, UL]} & \multicolumn{1}{c}{\em{p}}\\
+\midrule
+\endfirsthead
+\caption[]{\textbf{Parameter combinations that sustain PI at the empirical level} \textit{(continued)}}\\
+\toprule
+\multicolumn{6}{c}{ } & \multicolumn{4}{c}{$P_U$} & \multicolumn{4}{c}{$P_A$} \\
+\cmidrule(l{3pt}r{3pt}){7-10} \cmidrule(l{3pt}r{3pt}){11-14}
+\multicolumn{1}{c}{$p_r$} & \multicolumn{1}{c}{$p_c$} & \multicolumn{1}{c}{$\epsilon_{mean}$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c}{$c_{mean}$} & \multicolumn{1}{c}{$r_{mean}$} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{95\%CI [LL, UL]} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{95\%CI [LL, UL]} & \multicolumn{1}{c}{\em{p}}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\insertTableNotes
+\endlastfoot
+\multicolumn{14}{l}{\textit{The 95\% confidence intervals of $P_U$ contain 0.8}} \\
+0.30 & 0.30 & 0.70 & 0.50 & 0.30 & 0.30 & 0.87 & 0.30 & {}[0.8, 0.94] & .321 & 0.71 & 0.21 & {}[0.66, 0.76] & <.001\\
+0.30 & 0.30 & 0.70 & 0.50 & 0.50 & 0.30 & 0.86 & 0.31 & {}[0.79, 0.94] & .321 & 0.83 & 0.15 & {}[0.79, 0.86] & <.001\\
+0.30 & 0.30 & 0.70 & 0.50 & 0.50 & 0.50 & 0.87 & 0.33 & {}[0.79, 0.94] & .321 & 0.88 & 0.14 & {}[0.85, 0.91] & <.001\\
+0.30 & 0.50 & 0.30 & 0.50 & 0.10 & 0.10 & 0.84 & 0.36 & {}[0.76, 0.93] & .465 & 0.68 & 0.22 & {}[0.63, 0.73] & <.001\\
+0.30 & 0.50 & 0.30 & 0.50 & 0.10 & 0.30 & 0.87 & 0.32 & {}[0.8, 0.94] & .321 & 0.92 & 0.11 & {}[0.89, 0.94] & <.001\\
+\addlinespace
+0.30 & 0.50 & 0.30 & 0.50 & 0.30 & 0.30 & 0.85 & 0.35 & {}[0.77, 0.93] & .402 & 0.90 & 0.13 & {}[0.87, 0.93] & <.001\\
+0.30 & 0.50 & 0.50 & 0.30 & 0.10 & 0.30 & 0.82 & 0.37 & {}[0.74, 0.91] & .706 & 0.90 & 0.12 & {}[0.87, 0.92] & <.001\\
+0.30 & 0.50 & 0.50 & 0.30 & 0.10 & 0.50 & 0.86 & 0.34 & {}[0.78, 0.94] & .338 & 0.90 & 0.09 & {}[0.88, 0.92] & <.001\\
+0.30 & 0.50 & 0.50 & 0.50 & 0.10 & 0.10 & 0.85 & 0.35 & {}[0.77, 0.93] & .403 & 0.70 & 0.27 & {}[0.64, 0.76] & <.001\\
+0.30 & 0.50 & 0.50 & 0.50 & 0.10 & 0.30 & 0.84 & 0.35 & {}[0.76, 0.92] & .547 & 0.89 & 0.16 & {}[0.85, 0.92] & <.001\\
+\addlinespace
+0.30 & 0.50 & 0.50 & 0.50 & 0.10 & 0.50 & 0.87 & 0.33 & {}[0.79, 0.95] & .321 & 0.88 & 0.15 & {}[0.85, 0.92] & <.001\\
+0.30 & 0.50 & 0.50 & 0.50 & 0.30 & 0.10 & 0.81 & 0.39 & {}[0.72, 0.9] & .963 & 0.79 & 0.20 & {}[0.74, 0.83] & <.001\\
+0.30 & 0.50 & 0.50 & 0.50 & 0.30 & 0.30 & 0.87 & 0.33 & {}[0.79, 0.94] & .321 & 0.94 & 0.10 & {}[0.92, 0.96] & <.001\\
+0.30 & 0.50 & 0.50 & 0.50 & 0.50 & 0.10 & 0.80 & 0.39 & {}[0.71, 0.89] & .982 & 0.84 & 0.19 & {}[0.79, 0.88] & <.001\\
+0.30 & 0.50 & 0.50 & 0.50 & 0.50 & 0.30 & 0.87 & 0.32 & {}[0.8, 0.95] & .321 & 0.95 & 0.07 & {}[0.93, 0.96] & <.001\\
+\addlinespace
+0.30 & 0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.85 & 0.34 & {}[0.77, 0.93] & .383 & 0.88 & 0.14 & {}[0.85, 0.92] & <.001\\
+0.30 & 0.50 & 0.70 & 0.30 & 0.10 & 0.10 & 0.85 & 0.35 & {}[0.77, 0.93] & .383 & 0.71 & 0.22 & {}[0.66, 0.76] & <.001\\
+0.30 & 0.50 & 0.70 & 0.30 & 0.10 & 0.30 & 0.79 & 0.39 & {}[0.7, 0.88] & .913 & 0.90 & 0.11 & {}[0.88, 0.93] & <.001\\
+0.30 & 0.50 & 0.70 & 0.30 & 0.30 & 0.30 & 0.85 & 0.34 & {}[0.77, 0.93] & .383 & 0.92 & 0.11 & {}[0.9, 0.94] & <.001\\
+0.30 & 0.50 & 0.70 & 0.30 & 0.50 & 0.10 & 0.86 & 0.33 & {}[0.78, 0.93] & .343 & 0.86 & 0.16 & {}[0.82, 0.9] & <.001\\
+\addlinespace
+0.30 & 0.50 & 0.70 & 0.30 & 0.50 & 0.30 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.94 & 0.08 & {}[0.92, 0.95] & <.001\\
+0.30 & 0.50 & 0.70 & 0.30 & 0.50 & 0.50 & 0.84 & 0.36 & {}[0.76, 0.93] & .469 & 0.89 & 0.13 & {}[0.86, 0.92] & <.001\\
+0.30 & 0.50 & 0.70 & 0.50 & 0.10 & 0.30 & 0.87 & 0.32 & {}[0.8, 0.95] & .321 & 0.92 & 0.11 & {}[0.9, 0.95] & <.001\\
+0.30 & 0.50 & 0.70 & 0.50 & 0.10 & 0.50 & 0.84 & 0.36 & {}[0.76, 0.93] & .459 & 0.90 & 0.15 & {}[0.86, 0.93] & <.001\\
+0.30 & 0.50 & 0.70 & 0.50 & 0.30 & 0.30 & 0.81 & 0.38 & {}[0.72, 0.9] & .908 & 0.89 & 0.13 & {}[0.86, 0.92] & <.001\\
+\addlinespace
+0.30 & 0.50 & 0.70 & 0.50 & 0.30 & 0.50 & 0.77 & 0.42 & {}[0.68, 0.87] & .710 & 0.89 & 0.16 & {}[0.85, 0.92] & <.001\\
+0.30 & 0.50 & 0.70 & 0.50 & 0.50 & 0.10 & 0.86 & 0.33 & {}[0.78, 0.93] & .343 & 0.86 & 0.18 & {}[0.82, 0.9] & <.001\\
+0.30 & 0.50 & 0.70 & 0.50 & 0.50 & 0.50 & 0.86 & 0.34 & {}[0.78, 0.94] & .350 & 0.89 & 0.14 & {}[0.86, 0.93] & <.001\\
+0.50 & 0.30 & 0.50 & 0.30 & 0.30 & 0.50 & 0.87 & 0.32 & {}[0.79, 0.94] & .321 & 0.87 & 0.12 & {}[0.84, 0.9] & <.001\\
+0.50 & 0.30 & 0.50 & 0.50 & 0.30 & 0.50 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.87 & 0.15 & {}[0.83, 0.9] & <.001\\
+\addlinespace
+0.50 & 0.30 & 0.70 & 0.30 & 0.50 & 0.30 & 0.84 & 0.34 & {}[0.76, 0.92] & .459 & 0.84 & 0.16 & {}[0.8, 0.88] & <.001\\
+0.50 & 0.30 & 0.70 & 0.30 & 0.50 & 0.50 & 0.87 & 0.31 & {}[0.8, 0.94] & .321 & 0.88 & 0.10 & {}[0.86, 0.91] & <.001\\
+0.50 & 0.30 & 0.70 & 0.50 & 0.10 & 0.50 & 0.86 & 0.34 & {}[0.78, 0.94] & .344 & 0.86 & 0.18 & {}[0.81, 0.9] & <.001\\
+0.50 & 0.30 & 0.70 & 0.50 & 0.50 & 0.10 & 0.87 & 0.33 & {}[0.79, 0.94] & .321 & 0.30 & 0.20 & {}[0.25, 0.34] & <.001\\
+0.50 & 0.30 & 0.70 & 0.50 & 0.50 & 0.30 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.85 & 0.19 & {}[0.81, 0.89] & <.001\\
+\addlinespace
+0.50 & 0.30 & 0.70 & 0.50 & 0.50 & 0.50 & 0.85 & 0.35 & {}[0.77, 0.93] & .396 & 0.87 & 0.16 & {}[0.83, 0.91] & <.001\\
+0.50 & 0.50 & 0.30 & 0.50 & 0.30 & 0.30 & 0.85 & 0.35 & {}[0.77, 0.93] & .393 & 0.95 & 0.08 & {}[0.93, 0.97] & <.001\\
+0.50 & 0.50 & 0.30 & 0.50 & 0.50 & 0.30 & 0.86 & 0.34 & {}[0.78, 0.94] & .355 & 0.94 & 0.08 & {}[0.92, 0.96] & <.001\\
+0.50 & 0.50 & 0.50 & 0.30 & 0.10 & 0.30 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.93 & 0.12 & {}[0.91, 0.96] & <.001\\
+0.50 & 0.50 & 0.50 & 0.30 & 0.30 & 0.30 & 0.80 & 0.39 & {}[0.71, 0.89] & .995 & 0.92 & 0.14 & {}[0.89, 0.95] & <.001\\
+\addlinespace
+0.50 & 0.50 & 0.50 & 0.50 & 0.10 & 0.10 & 0.87 & 0.34 & {}[0.79, 0.94] & .321 & 0.77 & 0.27 & {}[0.7, 0.83] & <.001\\
+0.50 & 0.50 & 0.50 & 0.50 & 0.10 & 0.50 & 0.85 & 0.36 & {}[0.76, 0.93] & .447 & 0.91 & 0.11 & {}[0.89, 0.94] & <.001\\
+0.50 & 0.50 & 0.50 & 0.50 & 0.30 & 0.30 & 0.85 & 0.36 & {}[0.76, 0.93] & .447 & 0.94 & 0.10 & {}[0.92, 0.96] & <.001\\
+0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.10 & 0.87 & 0.33 & {}[0.8, 0.95] & .321 & 0.88 & 0.16 & {}[0.84, 0.92] & <.001\\
+0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.30 & 0.87 & 0.32 & {}[0.8, 0.94] & .321 & 0.94 & 0.13 & {}[0.91, 0.97] & <.001\\
+\addlinespace
+0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.83 & 0.35 & {}[0.75, 0.91] & .582 & 0.91 & 0.12 & {}[0.88, 0.93] & <.001\\
+0.50 & 0.50 & 0.70 & 0.30 & 0.10 & 0.10 & 0.81 & 0.39 & {}[0.72, 0.9] & .875 & 0.74 & 0.29 & {}[0.67, 0.8] & <.001\\
+0.50 & 0.50 & 0.70 & 0.30 & 0.10 & 0.30 & 0.79 & 0.40 & {}[0.7, 0.89] & .963 & 0.92 & 0.10 & {}[0.9, 0.95] & <.001\\
+0.50 & 0.50 & 0.70 & 0.30 & 0.10 & 0.50 & 0.84 & 0.36 & {}[0.76, 0.92] & .513 & 0.89 & 0.11 & {}[0.87, 0.92] & <.001\\
+0.50 & 0.50 & 0.70 & 0.30 & 0.30 & 0.30 & 0.87 & 0.33 & {}[0.8, 0.95] & .321 & 0.94 & 0.11 & {}[0.91, 0.96] & <.001\\
+\addlinespace
+0.50 & 0.50 & 0.70 & 0.30 & 0.30 & 0.50 & 0.84 & 0.36 & {}[0.76, 0.93] & .459 & 0.90 & 0.13 & {}[0.87, 0.93] & <.001\\
+0.50 & 0.50 & 0.70 & 0.30 & 0.50 & 0.10 & 0.80 & 0.37 & {}[0.72, 0.88] & .995 & 0.84 & 0.19 & {}[0.8, 0.89] & <.001\\
+0.50 & 0.50 & 0.70 & 0.30 & 0.50 & 0.30 & 0.82 & 0.37 & {}[0.74, 0.91] & .715 & 0.94 & 0.10 & {}[0.92, 0.96] & <.001\\
+0.50 & 0.50 & 0.70 & 0.30 & 0.50 & 0.50 & 0.87 & 0.32 & {}[0.79, 0.94] & .321 & 0.90 & 0.12 & {}[0.88, 0.93] & <.001\\
+0.50 & 0.50 & 0.70 & 0.50 & 0.10 & 0.10 & 0.82 & 0.37 & {}[0.74, 0.91] & .710 & 0.70 & 0.28 & {}[0.63, 0.76] & <.001\\
+\addlinespace
+0.50 & 0.50 & 0.70 & 0.50 & 0.10 & 0.30 & 0.81 & 0.39 & {}[0.72, 0.89] & .963 & 0.91 & 0.19 & {}[0.86, 0.95] & <.001\\
+0.50 & 0.50 & 0.70 & 0.50 & 0.10 & 0.50 & 0.79 & 0.40 & {}[0.7, 0.89] & .963 & 0.88 & 0.16 & {}[0.84, 0.92] & <.001\\
+0.50 & 0.50 & 0.70 & 0.50 & 0.30 & 0.10 & 0.83 & 0.37 & {}[0.74, 0.91] & .703 & 0.79 & 0.26 & {}[0.73, 0.85] & <.001\\
+0.50 & 0.50 & 0.70 & 0.50 & 0.30 & 0.50 & 0.78 & 0.41 & {}[0.68, 0.87] & .782 & 0.89 & 0.15 & {}[0.86, 0.93] & <.001\\
+0.50 & 0.50 & 0.70 & 0.50 & 0.50 & 0.10 & 0.83 & 0.37 & {}[0.74, 0.91] & .706 & 0.89 & 0.17 & {}[0.85, 0.93] & <.001\\
+\addlinespace
+0.50 & 0.50 & 0.70 & 0.50 & 0.50 & 0.30 & 0.81 & 0.39 & {}[0.72, 0.9] & .875 & 0.96 & 0.09 & {}[0.94, 0.98] & <.001\\
+0.50 & 0.50 & 0.70 & 0.50 & 0.50 & 0.50 & 0.77 & 0.42 & {}[0.68, 0.87] & .706 & 0.88 & 0.17 & {}[0.84, 0.92] & <.001\\
+0.70 & 0.30 & 0.30 & 0.50 & 0.50 & 0.50 & 0.86 & 0.32 & {}[0.79, 0.93] & .321 & 0.89 & 0.11 & {}[0.87, 0.92] & <.001\\
+0.70 & 0.30 & 0.50 & 0.50 & 0.30 & 0.30 & 0.85 & 0.34 & {}[0.78, 0.93] & .383 & 0.79 & 0.22 & {}[0.74, 0.84] & <.001\\
+0.70 & 0.30 & 0.50 & 0.50 & 0.30 & 0.50 & 0.86 & 0.33 & {}[0.78, 0.93] & .355 & 0.91 & 0.11 & {}[0.88, 0.93] & <.001\\
+\addlinespace
+0.70 & 0.30 & 0.50 & 0.50 & 0.50 & 0.30 & 0.86 & 0.34 & {}[0.78, 0.93] & .366 & 0.87 & 0.17 & {}[0.83, 0.91] & <.001\\
+0.70 & 0.30 & 0.70 & 0.30 & 0.30 & 0.30 & 0.85 & 0.33 & {}[0.78, 0.93] & .383 & 0.78 & 0.21 & {}[0.73, 0.83] & <.001\\
+0.70 & 0.30 & 0.70 & 0.30 & 0.30 & 0.50 & 0.86 & 0.33 & {}[0.79, 0.94] & .332 & 0.87 & 0.15 & {}[0.84, 0.91] & <.001\\
+0.70 & 0.30 & 0.70 & 0.50 & 0.30 & 0.30 & 0.87 & 0.33 & {}[0.79, 0.95] & .321 & 0.78 & 0.26 & {}[0.72, 0.84] & <.001\\
+0.70 & 0.30 & 0.70 & 0.50 & 0.30 & 0.50 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.89 & 0.12 & {}[0.87, 0.92] & <.001\\
+\addlinespace
+0.70 & 0.30 & 0.70 & 0.50 & 0.50 & 0.30 & 0.84 & 0.36 & {}[0.75, 0.92] & .554 & 0.87 & 0.16 & {}[0.83, 0.91] & <.001\\
+0.70 & 0.30 & 0.70 & 0.50 & 0.50 & 0.50 & 0.87 & 0.34 & {}[0.79, 0.95] & .321 & 0.90 & 0.15 & {}[0.87, 0.94] & <.001\\
+0.70 & 0.50 & 0.30 & 0.30 & 0.10 & 0.30 & 0.87 & 0.32 & {}[0.79, 0.94] & .321 & 0.94 & 0.08 & {}[0.92, 0.96] & <.001\\
+0.70 & 0.50 & 0.30 & 0.50 & 0.10 & 0.10 & 0.87 & 0.33 & {}[0.79, 0.94] & .321 & 0.73 & 0.27 & {}[0.67, 0.79] & <.001\\
+0.70 & 0.50 & 0.50 & 0.30 & 0.10 & 0.30 & 0.80 & 0.40 & {}[0.71, 0.89] & .982 & 0.93 & 0.09 & {}[0.91, 0.95] & <.001\\
+\addlinespace
+0.70 & 0.50 & 0.50 & 0.30 & 0.30 & 0.50 & 0.87 & 0.33 & {}[0.79, 0.95] & .321 & 0.91 & 0.08 & {}[0.89, 0.93] & <.001\\
+0.70 & 0.50 & 0.50 & 0.30 & 0.50 & 0.10 & 0.86 & 0.33 & {}[0.78, 0.94] & .338 & 0.85 & 0.20 & {}[0.81, 0.9] & <.001\\
+0.70 & 0.50 & 0.50 & 0.50 & 0.10 & 0.10 & 0.87 & 0.34 & {}[0.79, 0.94] & .321 & 0.73 & 0.28 & {}[0.66, 0.79] & <.001\\
+0.70 & 0.50 & 0.50 & 0.50 & 0.10 & 0.30 & 0.87 & 0.33 & {}[0.8, 0.95] & .321 & 0.92 & 0.14 & {}[0.89, 0.95] & <.001\\
+0.70 & 0.50 & 0.50 & 0.50 & 0.10 & 0.50 & 0.83 & 0.37 & {}[0.74, 0.91] & .706 & 0.90 & 0.13 & {}[0.87, 0.93] & <.001\\
+\addlinespace
+0.70 & 0.50 & 0.50 & 0.50 & 0.30 & 0.30 & 0.85 & 0.36 & {}[0.77, 0.93] & .383 & 0.96 & 0.08 & {}[0.94, 0.98] & <.001\\
+0.70 & 0.50 & 0.50 & 0.50 & 0.30 & 0.50 & 0.83 & 0.37 & {}[0.75, 0.92] & .604 & 0.90 & 0.15 & {}[0.86, 0.93] & <.001\\
+0.70 & 0.50 & 0.50 & 0.50 & 0.50 & 0.30 & 0.84 & 0.36 & {}[0.75, 0.92] & .553 & 0.95 & 0.08 & {}[0.94, 0.97] & <.001\\
+0.70 & 0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.85 & 0.36 & {}[0.77, 0.94] & .383 & 0.89 & 0.16 & {}[0.85, 0.92] & <.001\\
+0.70 & 0.50 & 0.70 & 0.30 & 0.10 & 0.50 & 0.85 & 0.34 & {}[0.77, 0.92] & .439 & 0.90 & 0.12 & {}[0.88, 0.93] & <.001\\
+\addlinespace
+0.70 & 0.50 & 0.70 & 0.30 & 0.30 & 0.10 & 0.86 & 0.35 & {}[0.78, 0.94] & .383 & 0.84 & 0.20 & {}[0.79, 0.88] & <.001\\
+0.70 & 0.50 & 0.70 & 0.30 & 0.30 & 0.50 & 0.87 & 0.33 & {}[0.8, 0.95] & .321 & 0.92 & 0.09 & {}[0.9, 0.94] & <.001\\
+0.70 & 0.50 & 0.70 & 0.30 & 0.50 & 0.10 & 0.80 & 0.39 & {}[0.71, 0.89] & .982 & 0.90 & 0.17 & {}[0.86, 0.94] & <.001\\
+0.70 & 0.50 & 0.70 & 0.30 & 0.50 & 0.30 & 0.87 & 0.34 & {}[0.79, 0.95] & .321 & 0.95 & 0.12 & {}[0.92, 0.98] & <.001\\
+0.70 & 0.50 & 0.70 & 0.30 & 0.50 & 0.50 & 0.86 & 0.34 & {}[0.78, 0.94] & .343 & 0.91 & 0.09 & {}[0.89, 0.93] & <.001\\
+\addlinespace
+0.70 & 0.50 & 0.70 & 0.50 & 0.10 & 0.10 & 0.80 & 0.39 & {}[0.71, 0.89] & .982 & 0.69 & 0.33 & {}[0.61, 0.76] & <.001\\
+0.70 & 0.50 & 0.70 & 0.50 & 0.10 & 0.30 & 0.76 & 0.42 & {}[0.66, 0.86] & .554 & 0.92 & 0.12 & {}[0.89, 0.95] & <.001\\
+0.70 & 0.50 & 0.70 & 0.50 & 0.10 & 0.50 & 0.86 & 0.35 & {}[0.77, 0.94] & .383 & 0.91 & 0.15 & {}[0.87, 0.94] & <.001\\
+0.70 & 0.50 & 0.70 & 0.50 & 0.30 & 0.30 & 0.85 & 0.35 & {}[0.77, 0.94] & .383 & 0.95 & 0.11 & {}[0.92, 0.97] & <.001\\
+0.70 & 0.50 & 0.70 & 0.50 & 0.50 & 0.10 & 0.82 & 0.37 & {}[0.73, 0.91] & .756 & 0.88 & 0.20 & {}[0.83, 0.92] & <.001\\
+\addlinespace
+0.70 & 0.50 & 0.70 & 0.50 & 0.50 & 0.30 & 0.75 & 0.44 & {}[0.65, 0.85] & .459 & 0.92 & 0.15 & {}[0.89, 0.96] & <.001\\
+0.70 & 0.50 & 0.70 & 0.50 & 0.50 & 0.50 & 0.83 & 0.38 & {}[0.74, 0.92] & .696 & 0.90 & 0.15 & {}[0.87, 0.94] & <.001\\
+\multicolumn{14}{l}{\textit{The 95\% confidence intervals of $P_A$ contain 0.05}} \\
+0.30 & 0.30 & 0.50 & 0.10 & 0.10 & 0.10 & 1.00 & 0.010 & {}[1, 1] & <.001 & 0.06 & 0.07 & {}[0.05, 0.08] & <.001\\
+0.30 & 0.30 & 0.50 & 0.30 & 0.10 & 0.10 & 0.96 & 0.184 & {}[0.92, 1] & <.001 & 0.05 & 0.06 & {}[0.04, 0.06] & <.001\\
+0.30 & 0.30 & 0.70 & 0.10 & 0.10 & 0.10 & 1.00 & 0.005 & {}[1, 1] & <.001 & 0.06 & 0.06 & {}[0.04, 0.07] & <.001\\
+0.30 & 0.30 & 0.70 & 0.30 & 0.10 & 0.10 & 0.97 & 0.163 & {}[0.93, 1.01] & <.001 & 0.06 & 0.07 & {}[0.04, 0.08] & <.001\\
+0.30 & 0.30 & 0.70 & 0.50 & 0.10 & 0.10 & 0.89 & 0.307 & {}[0.82, 0.96] & <.001 & 0.07 & 0.08 & {}[0.05, 0.08] & <.001\\
+\addlinespace
+0.50 & 0.10 & 0.30 & 0.10 & 0.50 & 0.10 & 1.00 & 0.009 & {}[1, 1] & <.001 & 0.06 & 0.07 & {}[0.05, 0.08] & <.001\\
+0.50 & 0.10 & 0.30 & 0.30 & 0.50 & 0.10 & 1.00 & 0.003 & {}[1, 1] & <.001 & 0.05 & 0.06 & {}[0.03, 0.06] & <.001\\
+0.50 & 0.10 & 0.30 & 0.50 & 0.50 & 0.10 & 1.00 & 0.004 & {}[1, 1] & <.001 & 0.06 & 0.09 & {}[0.04, 0.08] & <.001\\
+0.50 & 0.10 & 0.50 & 0.10 & 0.50 & 0.10 & 1.00 & 0.003 & {}[1, 1] & <.001 & 0.05 & 0.07 & {}[0.04, 0.07] & <.001\\
+0.50 & 0.10 & 0.50 & 0.30 & 0.50 & 0.10 & 1 & 0.000 & {} – & – & 0.06 & 0.09 & {}[0.04, 0.08] & <.001\\
+\addlinespace
+0.50 & 0.10 & 0.50 & 0.50 & 0.50 & 0.10 & 1.00 & 0.006 & {}[1, 1] & <.001 & 0.05 & 0.06 & {}[0.03, 0.06] & <.001\\
+0.50 & 0.10 & 0.70 & 0.10 & 0.50 & 0.10 & 1.00 & 0.005 & {}[1, 1] & <.001 & 0.06 & 0.07 & {}[0.04, 0.08] & <.001\\
+0.50 & 0.10 & 0.70 & 0.50 & 0.50 & 0.10 & 0.97 & 0.162 & {}[0.93, 1.01] & <.001 & 0.05 & 0.07 & {}[0.03, 0.06] & <.001\\
+0.50 & 0.30 & 0.30 & 0.10 & 0.10 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.06 & {}[0.02, 0.05] & <.001\\
+0.50 & 0.30 & 0.30 & 0.30 & 0.10 & 0.10 & 1.00 & 0.003 & {}[1, 1] & <.001 & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
+\addlinespace
+0.50 & 0.30 & 0.30 & 0.50 & 0.10 & 0.10 & 1.00 & 0.005 & {}[1, 1] & <.001 & 0.04 & 0.07 & {}[0.03, 0.06] & <.001\\
+0.50 & 0.30 & 0.50 & 0.10 & 0.10 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
+0.50 & 0.30 & 0.50 & 0.30 & 0.10 & 0.10 & 0.95 & 0.225 & {}[0.89, 1] & <.001 & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
+0.50 & 0.30 & 0.50 & 0.50 & 0.10 & 0.10 & 0.94 & 0.226 & {}[0.89, 1] & <.001 & 0.04 & 0.07 & {}[0.03, 0.06] & <.001\\
+0.50 & 0.30 & 0.70 & 0.10 & 0.10 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
+\addlinespace
+0.50 & 0.30 & 0.70 & 0.30 & 0.10 & 0.10 & 0.97 & 0.164 & {}[0.93, 1.01] & <.001 & 0.04 & 0.06 & {}[0.03, 0.05] & <.001\\
+0.50 & 0.30 & 0.70 & 0.50 & 0.10 & 0.10 & 0.92 & 0.273 & {}[0.86, 0.98] & <.001 & 0.04 & 0.06 & {}[0.03, 0.05] & <.001\\
+0.70 & 0.10 & 0.30 & 0.10 & 0.50 & 0.10 & 1.00 & 0.004 & {}[1, 1] & <.001 & 0.04 & 0.05 & {}[0.03, 0.05] & <.001\\
+0.70 & 0.10 & 0.30 & 0.50 & 0.50 & 0.10 & 1.00 & 0.002 & {}[1, 1] & <.001 & 0.06 & 0.08 & {}[0.04, 0.07] & <.001\\
+0.70 & 0.10 & 0.50 & 0.10 & 0.50 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.07 & {}[0.03, 0.06] & <.001\\
+\addlinespace
+0.70 & 0.10 & 0.70 & 0.10 & 0.50 & 0.10 & 1.00 & 0.001 & {}[1, 1] & <.001 & 0.05 & 0.08 & {}[0.03, 0.07] & <.001\\
+0.70 & 0.10 & 0.70 & 0.30 & 0.50 & 0.10 & 1.00 & 0.017 & {}[0.99, 1] & <.001 & 0.04 & 0.07 & {}[0.03, 0.06] & <.001\\
+0.70 & 0.10 & 0.70 & 0.50 & 0.50 & 0.10 & 1.00 & 0.001 & {}[1, 1] & <.001 & 0.06 & 0.08 & {}[0.04, 0.08] & <.001\\
+0.70 & 0.30 & 0.30 & 0.10 & 0.10 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
+0.70 & 0.30 & 0.30 & 0.30 & 0.10 & 0.10 & 0.97 & 0.162 & {}[0.93, 1.01] & <.001 & 0.04 & 0.06 & {}[0.02, 0.05] & <.001\\
+\addlinespace
+0.70 & 0.30 & 0.50 & 0.50 & 0.10 & 0.10 & 0.91 & 0.285 & {}[0.84, 0.97] & <.001 & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
+0.70 & 0.30 & 0.70 & 0.50 & 0.10 & 0.10 & 0.91 & 0.292 & {}[0.84, 0.97] & <.001 & 0.04 & 0.07 & {}[0.02, 0.05] & <.001\\*
+\end{longtable}
+\end{ThreePartTable}
+
+\elandscape
