@@ -33,7 +33,7 @@ names(p_wwoh_coef) <- c("term", "estimate_p_wwoh",
                         "p.value_p_wwoh")
 
 bind_cols(p_underestimate_coef, select(p_inconsistent_coef, -term), select(p_wwoh_coef, -term)) %>% 
-  write_csv(coef, "data/processed/factor_for_pi_coef.csv")
+  write_csv("data/processed/factor_for_pi_coef.csv")
 
 # in all combinations of the four parameters 
 # the final effects of p_com and r_mean are the same

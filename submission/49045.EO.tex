@@ -62,6 +62,7 @@
 \usepackage{booktabs}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{array}
+\usepackage{setspace}
 \newcommand{\blandscape}{\begin{landscape}}
 \newcommand{\elandscape}{\end{landscape}}
 \usepackage{booktabs}
@@ -829,14 +830,25 @@ Ignorance}\label{factors-associated-with-persistent-pluralistic-ignorance}}
 To explore the factors associated with the persistent level of
 pluralistic ignorance regarding WWOH that was found in the empirical
 study, the present study investigates the three outcome variables when
-no intervention is implemented. Table \ref{tab:2} shows the effects of
-each varied parameter at the final time step on the rate of
-underestimation, the rate of inconsistency, and the rate of WWOH actions
-when controlled for other parameters. All else equal, no parameters have
-statistically significant effects on the rate of underestimation. The
-probability of communication with neighbours (\(p_c\)) and mean
+no intervention is implemented. Linear regressions with full
+interactions are run including all varied parameters as predictors
+(except for \(s_{mean}\)). Table \ref{tab:2} shows the effects of each
+parameter at the final time step on the rate of underestimation, the
+rate of inconsistency, and the rate of WWOH actions when controlled for
+other parameters. All else equal, no parameters or interaction terms
+have statistically significant effects on the rate of underestimation.
+The probability of communication with neighbours (\(p_c\)) and mean
 resistance to norm (\(r_{mean}\)) have negative effects on the rate of
-inconsistency and positive effects on the rate of WWOH actions.
+inconsistency and positive effects on the rate of WWOH actions. No
+interaction term has a significant effect on either the rate of
+inconsistency or the rate of WWOH actions.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/factor_for_pi.pdf}
+  \caption{\textbf{Pluralistic ignorance and WWOH action over time when no intervention is implemented.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. Central lines are average values of simulations with the same parameter setting, and shaded areas are the 95\% confidence intervals. Probability of communication with neighbours $p_c$ is shown on facet columns, and the mean resistance to norm $r_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following values: $p_r = 0.5$, $\epsilon_{mean} = 0.5$, $\alpha = 0.3$, $c_{mean} = 0.3$.}
+  \label{fig:2}
+\end{figure}
 
 To revealed the process of the two parameters influencing the outcomes,
 full processes of the simulations are plotted. As Figure \ref{fig:2}
@@ -891,13 +903,6 @@ underestimation slightly decreases but still remains above \(0.5\),
 while the rate of inconsistency drops under \(0.5\) and the rate of WWOH
 increases drastically to a high level.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\columnwidth]{./figures/factor_for_pi.pdf}
-  \caption{\textbf{Pluralistic ignorance and WWOH action over time when no intervention is implemented.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. Central lines are average values of simulations with the same parameter setting, and shaded areas are the 95\% confidence intervals. Probability of communication with neighbours $p_c$ is shown on facet columns, and the mean resistance to norm $r_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following values: $p_r = 0.5$, $\epsilon_{mean} = 0.5$, $\alpha = 0.3$, $c_{mean} = 0.3$.}
-  \label{fig:2}
-\end{figure}
-
 Under the condition of medium resistance to norm (\(r_{mean} = 0.3\),
 facet row 2) and low probability of communication (\(p_c = 0.1\)), the
 rate of underestimation remains virtually constant around \(1\). The
@@ -914,27 +919,90 @@ probability (\(p_r\)), bounded confidence threshold
 of confidence (\(c_{mean}\)), and no qualitative difference in the
 results is found (see the Appendices).
 
-\hypertarget{intervention-effects-on-pluralistic-ignorance}{%
-\subsection{Intervention Effects on Pluralistic
-Ignorance}\label{intervention-effects-on-pluralistic-ignorance}}
+\hypertarget{intervention-effects-on-pluralistic-ignorance-and-wwoh-action}{%
+\subsection{Intervention Effects on Pluralistic Ignorance and WWOH
+Action}\label{intervention-effects-on-pluralistic-ignorance-and-wwoh-action}}
 
 To investigate the the effects of interventions on PI regarding WWOH,
-parameter combinations that sustain PI at the level reported in the
-empirical study are first identified. The empirical rate of
-underestimation of WWOH norm among Saudi men is around \(P_U = 0.8\) and
-the rate of WWOH actions is around \(P_A = 0.05\) \textbf{(Bursztyn et
-al., 2020)}. One-sample \emph{t}-tests on the outcome variables reveal
-that some parameter combinations produce \(P_U\) and \(P_A\) close to
-these values (i.e., the empirical rate falls within the 95\% confidence
-intervals of \(P_U\) and \(P_A\) in the model) at the final time step.
-Some parameter combinations do give rise to \(P_U\) close to 0.8, but
-the rates of WWOH actions are significantly different from 0.05 (most
-are over 0.5). Some parameter combinations give rise to \(P_A\) close to
-0.05. Although the rates of underestimation under these conditions are
-also significantly different from 0.8, most of them lie within a
-reasonable proximity to the empirical level (see Appendix Table C1).
-Therefore, the parameter combinations that give rise to \(P_A\) close to
-0.05 are used for further analyses.
+parameter combinations that sustain PI and WWOH action at the level
+reported in the empirical study are first identified. The empirical rate
+of underestimation of WWOH norm among Saudi men is around \(P_U = 0.8\)
+and the rate of WWOH actions is around \(P_A = 0.05\) \textbf{(Bursztyn
+et al., 2020)}. One-sample \emph{t}-tests on the outcome variables
+reveal that no parameter combinations produce \(P_U\) and \(P_A\) close
+to these values (i.e., the empirical rate falls within the 95\%
+confidence intervals of \(P_U\) and \(P_A\) produced by the model)
+simultaneously at the final time step. Some parameter combinations do
+give rise to \(P_U\) close to 0.8, but the rates of WWOH actions are
+significantly different from 0.05 (most are over 0.5, see Appendix Table
+C1). Some parameter combinations give rise to \(P_A\) close to 0.05.
+Although the rates of underestimation under these conditions are also
+significantly different from 0.8, most of them lie within a reasonable
+proximity to the empirical level (see Appendix Table C1). Therefore, the
+parameter combinations that give rise to \(P_A\) close to 0.05 are used
+for further analyses.
+
+Linear regressions are run on the rate of underestimation, the rate of
+inconsistency, and the rate of WWOH actions using the following model
+\footnote{Subscripts are omitted for readability. $c_{mean}$ and $r_{mean}$ are not included as predictors since the former is perfectly correlated with $p_c$ and the latter lacks variation in the data.}:
+
+\begin{equation}
+  \begin{aligned}
+  y &= a + b_1I + b_2p_r + b_3p_c + b_4\epsilon_{mean} + b_5\alpha + b_6s_{mean} +\\
+  &+ b_7I \cdot p_r + b_{8}I \cdot p_c + b_{9}I \cdot \epsilon_{mean} + b_{10}I \cdot \alpha + b_{11}I \cdot s_{mean} + \gamma,
+  \end{aligned}
+\end{equation}
+
+where \(\gamma\) denotes random errors. Interaction terms are included
+to detect potential dependency of the intervention effect on other
+parameter values.
+
+The results reveal that all else equal, the intervention does not have a
+statistically significant effect on the rate of underestimation, be it
+implemented once, twice, or three times. The intervention does have a
+significant effect on the rate of inconsistency regardless of the times
+for which it is implemented, and its effect depends on \(p_c\),
+\(\epsilon_{mean}\), \(\alpha\), and \(s_{mean}\). The intervention has
+a significant effect on the rate of WWOH actions only when it is
+implemented twice or three times, and this effect also depends on
+\(p_c\), \(\epsilon_{mean}\), \(\alpha\), and \(s_{mean}\) (see Appendix
+Table C2 for the full model results).
+
+To show the above results more clearly, the effects of the intervention
+under different combinations of parameter values are plotted (Figure
+\ref{fig:3} and \ref{fig:4}). As Figure \ref{fig:3} shows, the
+decreasing effect of the intervention on the rate of inconsistency
+increases with the the probability of communication (\(p_c\)), mean
+perceived credibility (\(s_{mean}\)), convergence parameter
+(\(\alpha\)), and mean bounded confidence threshold
+(\(\epsilon_{mean}\)). The decreasing effect also increases with the
+number of times the intervention is implemented, and the increase is
+especially pronounced when the times increase from twice to three times.
+When the intervention is implemented once, its effect remains close to 0
+under all parameter combinations.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/intervention_effect_p_inconsistency.png}
+  \caption{\textbf{Estimated effects of the intervention on the rate of inconsistency at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. The blue dashed line indicates 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
+  \label{fig:3}
+\end{figure}
+
+Likewise, the increasing effect of the intervention on the rate of WWOH
+actions increases with the the probability of communication (\(p_c\)),
+mean perceived credibility (\(s_{mean}\)), convergence parameter
+(\(\alpha\)), and mean bounded confidence threshold
+(\(\epsilon_{mean}\)) (Figure \ref{fig:4}). The increasing effect also
+increases with the number of times the intervention is implemented. When
+the intervention is implemented once, its effect remains close to 0
+under all parameter combinations.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/intervention_effect_p_wwoh.png}
+  \caption{\textbf{Estimated effects of the intervention on the rate of WWOH actions at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. The blue dashed line indicates 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
+  \label{fig:4}
+\end{figure}
 
 \hypertarget{discussion-and-conclusion-1000-1500}{%
 \section{Discussion and Conclusion
@@ -1013,10 +1081,10 @@ PI}\label{appendix-b-supplementary-results-on-the-factors-associated-with-persis
 
 \begin{landscape}
 
-\hypertarget{appendix-c-parameter-combinations-that-sustain-pi-at-the-empirical-level}{%
-\subsection{Appendix C: Parameter Combinations That Sustain PI at the
-Empirical
-Level}\label{appendix-c-parameter-combinations-that-sustain-pi-at-the-empirical-level}}
+\hypertarget{appendix-c-effects-of-interventions-on-pluralistic-ignorance-and-wwoh-action}{%
+\subsection{Appendix C: Effects of Interventions on Pluralistic
+Ignorance and WWOH
+Action}\label{appendix-c-effects-of-interventions-on-pluralistic-ignorance-and-wwoh-action}}
 
 \renewcommand{\thetable}{C1}
 
@@ -1205,5 +1273,65 @@ Level}\label{appendix-c-parameter-combinations-that-sustain-pi-at-the-empirical-
 \end{ThreePartTable}
 
 \end{landscape}
+
+\renewcommand{\thetable}{C2}
+
+\begin{spacing}{1.1}
+
+\begin{ThreePartTable}
+\begin{TableNotes}
+\small
+\item \textit{Note.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. $I_1$, $I_2$, and $I_3$ denote whether the intervention is implemented once, twice, or three times (vs. no intervention), respectively. Standard errors are in parentheses. $^*p < 0.1, \,^{**} p < 0.05, \, ^{***} p < 0.01$.
+\end{TableNotes}
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{0.7in}ccccccccc}
+\caption{\textbf{Effects of interventions on pluralistic ignorance and WWOH action at the final time step}}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{$P_U$} & \multicolumn{3}{c}{$P_I$} & \multicolumn{3}{c}{$P_A$} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7} \cmidrule(l{3pt}r{3pt}){8-10}
+\multicolumn{1}{c}{\em{ }} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}}\\
+\midrule
+\endfirsthead
+\caption[]{\textbf{Effects of interventions on pluralistic ignorance and WWOH action at the final time step} \textit{(continued)}}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{$P_U$} & \multicolumn{3}{c}{$P_I$} & \multicolumn{3}{c}{$P_A$} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7} \cmidrule(l{3pt}r{3pt}){8-10}
+\multicolumn{1}{c}{\em{ }} & \multicolumn{1}{c}{\em{beta}} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{\em{beta}} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{\em{beta}} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\insertTableNotes
+\endlastfoot
+
+(Intercept) & \makecell[c]{1.08***\\(0.02)} & 52.87 & <.001 & \makecell[c]{0.83***\\(0.02)} & 36.40 & <.001 & \makecell[c]{0.07***\\(0.01)} & 4.86 & <.001\\
+$I_1$ & \makecell[c]{0.04\\(0.03)} & 1.37 & .172 & \makecell[c]{0.07**\\(0.03)} & 2.24 & .025 & \makecell[c]{–0.03\\(0.02)} & –1.19 & .234\\
+$I_2$ & \makecell[c]{0.002\\(0.03)} & 0.05 & .957 & \makecell[c]{0.18***\\(0.03)} & 5.48 & <.001 & \makecell[c]{–0.16***\\(0.02)} & –7.75 & <.001\\
+$I_3$ & \makecell[c]{–0.01\\(0.03)} & –0.28 & .778 & \makecell[c]{0.27***\\(0.03)} & 8.33 & <.001 & \makecell[c]{–0.28***\\(0.02)} & –13.39 & <.001 \\
+$p_r$ & \makecell[c]{–0.03\\(0.02)} & –1.12 & 0.261 & \makecell[c]{0.05**\\(0.02)} & 2.04 & .041 & \makecell[c]{–0.04***\\(0.02)} & –2.63 & .009\\
+$p_c$ & \makecell[c]{–0.16***\\(0.03)} & –5.34 & <.001 & \makecell[c]{–0.04\\(0.03)} & –1.27 & .204 & \makecell[c]{–0.05**\\(0.02)} & –2.42 & .015\\
+$\epsilon_{mean}$ & \makecell[c]{–0.06***\\(0.02)} & –3.47 & <.001 & \makecell[c]{0.03\\(0.02)} & 1.35 & .178 & \makecell[c]{0.003\\(0.01)} & 0.29 & .774\\
+$\alpha$ & \makecell[c]{–0.09***\\(0.02)} & –5.78 & <.001 & \makecell[c]{–0.03\\(0.02)} & –1.58 & .115 & \makecell[c]{0.002\\(0.01)} & 0.13 & .893\\
+$s_{mean}$ & \makecell[c]{0.01\\(0.02)} & 0.29 & .773 & \makecell[c]{<.001\\(0.02)} & <.001 & .999 & \makecell[c]{0.02\\(0.01)} & 1.38 & .169\\
+\addlinespace
+$p_r \times I_1$ & \makecell[c]{–0.03\\(0.03)} & –0.97 & .330 & \makecell[c]{–0.02\\(0.04)} & –0.57 & .570 & \makecell[c]{–0.01\\(0.02)} & –0.25 & .805 \\
+$p_r \times I_2$ & \makecell[c]{0.01\\(0.03)} & 0.21 & .833 & \makecell[c]{–0.05\\(0.04)} & –1.55 & .122 & \makecell[c]{0.03\\(0.02)} & 1.50 & .133 \\
+$p_r \times I_3$ & \makecell[c]{0.03\\(0.03)} & 0.84 & .400 & \makecell[c]{–0.01\\(0.04)} & –0.16 & .873 & \makecell[c]{–0.01\\(0.02)} & –0.21 & .835 \\
+$p_c \times I_1$ & \makecell[c]{–0.05\\(0.04)} & –1.26 & .207 & \makecell[c]{–0.12**\\(0.05)} & –2.54 & .011 & \makecell[c]{0.03\\(0.03)} & 1.05 & .292 \\
+$p_c \times I_2$ & \makecell[c]{0.02\\(0.04)} & 0.47 & .636 & \makecell[c]{–0.16***\\(0.05)} & –3.37 & <.001 & \makecell[c]{0.13***\\(0.03)} & 4.34 & <.001\\
+$p_c \times I_3$ & \makecell[c]{0.01\\(0.04)} & 0.19 & .850 & \makecell[c]{–0.21***\\(0.05)} & –4.60 & <.001 & \makecell[c]{0.20***\\(0.03)} & 6.67 & <.001\\
+$\epsilon_{mean} \times I_1$ & \makecell[c]{–0.004\\(0.02)} & –0.15 & .879 & \makecell[c]{–0.04\\(0.03)} & –1.33 & .185 & \makecell[c]{0.02\\(0.02)} & 1.34 & .181 \\
+$\epsilon_{mean} \times I_2$ & \makecell[c]{–0.01\\(0.02)} & –0.32 & .748 & \makecell[c]{–0.11***\\(0.03)} & –3.98 & <.001 & \makecell[c]{0.11***\\(0.02)} & 6.15 & <.001\\
+$\epsilon_{mean} \times I_3$ & \makecell[c]{–0.01\\(0.02)} & –0.54 & .586 & \makecell[c]{–0.20***\\(0.03)} & –7.62 & <.001 & \makecell[c]{0.21***\\(0.02)} & 12.09 & <.001 \\
+$\alpha \times I_1$ & \makecell[c]{–0.01\\(0.02)} & –0.57 & .569 & \makecell[c]{–0.04\\(0.03)} & –1.57 & .116 & \makecell[c]{0.03*\\(0.02)} & 1.95 & .052 \\
+$\alpha \times I_2$ & \makecell[c]{0.03\\(0.02)} & 1.48 & .139 & \makecell[c]{–0.11***\\(0.03)} & –4.18 & <.001 & \makecell[c]{0.15***\\(0.02)} & 9.02 & <.001\\
+$\alpha \times I_3$ & \makecell[c]{–0.01\\(0.02)} & –0.36 & .722 & \makecell[c]{–0.28***\\(0.03)} & –11.04 & <.001 & \makecell[c]{0.32***\\(0.02)} & 19.43 & <.001 \\
+$s_{mean} \times I_1$ & \makecell[c]{–0.02\\(0.02)} & –0.77 & .443 & \makecell[c]{–0.04\\(0.03)} & –1.56 & .118 & \makecell[c]{0.02\\(0.02)} & 0.99 & .321 \\
+$s_{mean} \times I_2$ & \makecell[c]{–0.02\\(0.02)} & –0.98 & .329 & \makecell[c]{–0.11***\\(0.03)} & –4.27 & <.001 & \makecell[c]{0.10***\\(0.02)} & 5.85 & <.001 \\
+$s_{mean} \times I_3$ & \makecell[c]{0.001\\(0.02)} & 0.05 & .960 & \makecell[c]{–0.18***\\(0.03)} & –6.96 & <.001 & \makecell[c]{0.20***\\(0.02)} & 12.00 & <.001 \\*
+\end{longtable}
+\end{ThreePartTable}
+\label{tab:3}
+\end{spacing}
 
 \end{document}
