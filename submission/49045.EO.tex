@@ -960,13 +960,20 @@ parameter values.
 The results reveal that all else equal, the intervention does not have a
 statistically significant effect on the rate of underestimation, be it
 implemented once, twice, or three times. The intervention does have a
-significant effect on the rate of inconsistency regardless of the times
-for which it is implemented, and its effect depends on \(p_c\),
-\(\epsilon_{mean}\), \(\alpha\), and \(s_{mean}\). The intervention has
-a significant effect on the rate of WWOH actions only when it is
-implemented twice or three times, and this effect also depends on
-\(p_c\), \(\epsilon_{mean}\), \(\alpha\), and \(s_{mean}\) (see Appendix
-Table C2 for the full model results).
+significant effect on the rate of inconsistency regardless of the number
+of times it is implemented, and its effect significantly depends on
+\(p_c\), \(\epsilon_{mean}\), \(\alpha\), and \(s_{mean}\). The
+intervention has a significant effect on the rate of WWOH actions only
+when it is implemented twice or three times, and this effect also
+significantly depends on \(p_c\), \(\epsilon_{mean}\), \(\alpha\), and
+\(s_{mean}\) (see Appendix Table C2 for the full model results).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/intervention_effect_p_inconsistency.png}
+  \caption{\textbf{Estimated effects of the intervention on the rate of inconsistency at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. Blue dashed lines indicate 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
+  \label{fig:3}
+\end{figure}
 
 To show the above results more clearly, the effects of the intervention
 under different combinations of parameter values are plotted (Figure
@@ -978,16 +985,6 @@ perceived credibility (\(s_{mean}\)), convergence parameter
 (\(\epsilon_{mean}\)). The decreasing effect also increases with the
 number of times the intervention is implemented, and the increase is
 especially pronounced when the times increase from twice to three times.
-When the intervention is implemented once, its effect remains close to 0
-under all parameter combinations.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\columnwidth]{./figures/intervention_effect_p_inconsistency.png}
-  \caption{\textbf{Estimated effects of the intervention on the rate of inconsistency at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. The blue dashed line indicates 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
-  \label{fig:3}
-\end{figure}
-
 Likewise, the increasing effect of the intervention on the rate of WWOH
 actions increases with the the probability of communication (\(p_c\)),
 mean perceived credibility (\(s_{mean}\)), convergence parameter
@@ -1000,8 +997,33 @@ under all parameter combinations.
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\columnwidth]{./figures/intervention_effect_p_wwoh.png}
-  \caption{\textbf{Estimated effects of the intervention on the rate of WWOH actions at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. The blue dashed line indicates 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
+  \caption{\textbf{Estimated effects of the intervention on the rate of WWOH actions at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. Blue dashed lines indicate 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
   \label{fig:4}
+\end{figure}
+
+For the sake of illustrating the details of how the intervention affects
+the outcomes, one set of parameter combination that sustains PI and WWOH
+at the empirical level (\(p_r = 0.5\), \(p_c = 0.3\),
+\(\epsilon_{mean} = 0.5\), \(\alpha = 0.3\), \(c_{mean} = 0.1\),
+\(r_{mean} = 0.1\)) is selected and the change of PI and WWOH actions
+are plotted over time. As Figure \ref{fig:5} shows, the intervention
+primarily changes the rate of inconsistency and WWOH actions, which is
+aligned with the results from the regression analysis. The rate of
+inconsistency surges and the rate of WWOH actions drops immediately
+after the intervention is implemented, but this effect is gradually
+``washed out'' over time as the simulation continues. This leads to a
+virtual lack of effect when the intervention is implemented only once.
+When the intervention is implemented more than once, however, the effect
+is enhanced every time the summary information is communicated. Overall,
+the intervention effect is more pronounced when mean perceived
+credibility increases, especially when the intervention is implemented
+twice or three times.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/intervention_process.pdf}
+  \caption{\textbf{Effects of the intervention on pluralistic ignorance and WWOH action over time.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. Central lines are average values of simulations with the same parameter setting, and shaded areas are the 95\% confidence intervals. Blue dashed lines indicate the time step when the intervention is implemented. Mean perceived credibility of the information source $s_{mean}$ is shown on facet columns, and the intervention type is shown on facet rows. Parameters not shown on the plot are set at the following values: $p_r = 0.5$, $p_c = 0.3$, $\epsilon_{mean} = 0.5$, $\alpha = 0.3$, $c_{mean} = 0.1$, $r_{mean} = 0.1$.}
+  \label{fig:5}
 \end{figure}
 
 \hypertarget{discussion-and-conclusion-1000-1500}{%

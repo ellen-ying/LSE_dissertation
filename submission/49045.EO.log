@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.19)  4 AUG 2023 13:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.19)  5 AUG 2023 23:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -636,44 +636,52 @@ Overfull \hbox (33.48653pt too wide) in paragraph at lines 870--891
 ] [19]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <9> on input line 947.
-[20]
-<./figures/intervention_effect_p_inconsistency.png, id=265, 3011.25pt x 2409.0pt>
+<./figures/intervention_effect_p_inconsistency.png, id=253, 3011.25pt x 2409.0pt>
 File: ./figures/intervention_effect_p_inconsistency.png Graphic file (type png)
 <use ./figures/intervention_effect_p_inconsistency.png>
-Package pdftex.def Info: ./figures/intervention_effect_p_inconsistency.png  used on input line 986.
+Package pdftex.def Info: ./figures/intervention_effect_p_inconsistency.png  used on input line 973.
 (pdftex.def)             Requested size: 469.72556pt x 375.78044pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+[20]
 <./figures/intervention_effect_p_wwoh.png, id=268, 3011.25pt x 2409.0pt>
 File: ./figures/intervention_effect_p_wwoh.png Graphic file (type png)
 <use ./figures/intervention_effect_p_wwoh.png>
-Package pdftex.def Info: ./figures/intervention_effect_p_wwoh.png  used on input line 1002.
+Package pdftex.def Info: ./figures/intervention_effect_p_wwoh.png  used on input line 999.
 (pdftex.def)             Requested size: 469.72556pt x 375.78044pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[21] [22] [23] [24] [25 <./figures/factor_for_pi.pdf>] [26 <./figures/intervention_effect_p_inconsistency.png>] [27 <./figures/intervention_effect_p_wwoh.png>] [28
+<./figures/intervention_process.pdf, id=270, 722.7pt x 794.97pt>
+File: ./figures/intervention_process.pdf Graphic file (type pdf)
+<use ./figures/intervention_process.pdf>
+Package pdftex.def Info: ./figures/intervention_process.pdf  used on input line 1024.
+(pdftex.def)             Requested size: 469.76045pt x 516.73651pt.
 
-] [29] [30] [31] [32] [33] [34] [35] [36] [37
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-] [38] (./49045.EO.aux)
+[21] [22] [23] [24] [25 <./figures/factor_for_pi.pdf>] [26 <./figures/intervention_effect_p_inconsistency.png>] [27 <./figures/intervention_effect_p_wwoh.png>] [28 <./figures/intervention_process.pdf>] [29
+
+] [30] [31] [32] [33] [34] [35] [36] [37] [38
+
+] [39] (./49045.EO.aux)
 Package rerunfilecheck Info: File `49045.EO.out' has not changed.
-(rerunfilecheck)             Checksum: 7DA1EFBF3EB5A8392562520C08EC753D;4977.
+(rerunfilecheck)             Checksum: 4F669461E629020FE96B53CF852FE116;4977.
  ) 
 Here is how much of TeX's memory you used:
- 14512 strings out of 478051
- 235339 string characters out of 5839757
+ 14522 strings out of 478051
+ 235653 string characters out of 5839757
  2045330 words of memory out of 5000000
- 34262 multiletter control sequences out of 15000+600000
+ 34269 multiletter control sequences out of 15000+600000
  580594 words of font info for 96 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 66i,17n,67p,802b,648s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 66i,17n,67p,904b,648s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on 49045.EO.pdf (39 pages, 873870 bytes).
+Output written on 49045.EO.pdf (40 pages, 948051 bytes).
 PDF statistics:
- 467 PDF objects out of 1000 (max. 8388607)
- 377 compressed objects within 4 object streams
- 104 named destinations out of 1000 (max. 500000)
- 205 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 483 PDF objects out of 1000 (max. 8388607)
+ 390 compressed objects within 4 object streams
+ 106 named destinations out of 1000 (max. 500000)
+ 210 words of extra memory for PDF output out of 10000 (max. 10000000)
 
