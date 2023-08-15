@@ -130,6 +130,12 @@ The London School of Economics and Political Science
 
 \newpage
 
+\tableofcontents
+\listoffigures
+\listoftables
+
+\newpage
+
 Total word limit: 10000
 
 \hypertarget{abstract-100-150}{%
@@ -213,16 +219,16 @@ epidemiology \textbf{(de Mooij et al., 2022)}, fishery policy in
 sustainable management \textbf{(Bailey et al., 2018)}, and interventions
 to the spread of misinformation \textbf{(Pilditch et al., 2022)}.
 
-By building an ABM, the present research seeks to answer two broad
-questions: under what conditions PI regarding WWOH in Saudi Arabia are
-sustained and under what conditions social norm interventions can reduce
-PI and encourage WWOH behaviours? The paper proceeds as follows. Section
-1 reviews literature that is relevant to model-building in the present
+By building an ABM, the present study investigates the factors
+associated with the persistence of PI regarding WWOH in Saudi Arabia and
+the conditions under which social norm interventions can reduce PI and
+encourage WWOH behaviours. The paper proceeds as follows. Section 1
+reviews literature that is relevant to model-building in the present
 research, including mathematical and computational models of belief and
 action dynamics, ABMs of pluralistic ignorance, and empirical research
 of existing social norm intervention strategies. Section 2 introduces
 the details of the model and the simulation. Section 3 presents the
-results. Section 4 discusses the implications of the findings and
+results. Section 4 discusses the implications of the findings. Section 5
 concludes.
 
 \hypertarget{literature-review-2000}{%
@@ -506,14 +512,16 @@ this is an area of policy interventions have been rarely explored by
 simulation studies despite its widespread application in other policy
 contexts.
 
-The present study investigates the conditions under which PI regarding
-WWOH in Saudi Arabia are sustained and those under which social norm
-interventions can reduce PI and encourage WWOH behaviours. No explicit
-hypotheses are formed concerning the first question because it is
-exploratory in nature. Regarding the second question, I expect that more
-times the intervention is implemented and higher perceived credibility
-of the information source will lead to reduced PI and more WWOH
-behaviours.
+The present study asks two questions: 1) what factors represented by the
+model are associated with the persistence of PI regarding WWOH in Saudi
+Arabia, and 2) when PI regarding WWOH persists at the empirical level,
+whether social norm interventions can reduce PI and encourage WWOH
+behaviours, and if so, under what conditions. No explicit hypotheses are
+formed concerning the first question because it is exploratory in
+nature. Regarding the second question, I expect that social norm
+interventions can reduce PI and encourage WWOH behaviours if the
+intervention is implemented is implemented multiple times or if the
+perceived credibility of the information source is high.
 
 \hypertarget{methodology-2000-3000}{%
 \section{Methodology (2000-3000)}\label{methodology-2000-3000}}
@@ -832,16 +840,16 @@ pluralistic ignorance regarding WWOH that was found in the empirical
 study, the present study investigates the three outcome variables when
 no intervention is implemented. Linear regressions with full
 interactions are run including all varied parameters as predictors
-(except for \(s_{mean}\)). Table \ref{tab:2} shows the effects of each
-parameter at the final time step on the rate of underestimation, the
-rate of inconsistency, and the rate of WWOH actions when controlled for
-other parameters. All else equal, no parameters or interaction terms
-have statistically significant effects on the rate of underestimation.
-The probability of communication with neighbours (\(p_c\)) and mean
-resistance to norm (\(r_{mean}\)) have negative effects on the rate of
-inconsistency and positive effects on the rate of WWOH actions. No
-interaction term has a significant effect on either the rate of
-inconsistency or the rate of WWOH actions.
+(except for \(s_{mean}\) which is only relevant to the intervention).
+Table \ref{tab:2} shows the effects of each parameter at the final time
+step on the rate of underestimation, the rate of inconsistency, and the
+rate of WWOH actions when controlled for other parameters. All else
+equal, no parameters or interaction terms have statistically significant
+effects on the rate of underestimation. The probability of communication
+with neighbours (\(p_c\)) and mean resistance to norm (\(r_{mean}\))
+have negative effects on the rate of inconsistency and positive effects
+on the rate of WWOH actions. No interaction term has a significant
+effect on either the rate of inconsistency or the rate of WWOH actions.
 
 \begin{figure}[h]
   \centering
@@ -867,24 +875,24 @@ communication is held equal.
 \caption{\textbf{Effects of parameters on pluralistic ignorance and WWOH action at the final time step when no intervention is implemented}}
 \centering
 \begin{threeparttable}
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{0.5in}cccccccccccc}
+
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{0.5in}ccccccccc}
 \toprule
-\multicolumn{1}{c}{ } & \multicolumn{4}{c}{$P_U$} & \multicolumn{4}{c}{$P_I$} & \multicolumn{4}{c}{$P_A$} \\
-\cmidrule(l{3pt}r{3pt}){2-5} \cmidrule(l{3pt}r{3pt}){6-9} \cmidrule(l{3pt}r{3pt}){10-13}
-\multicolumn{1}{c}{\em{ }} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{se}} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{se}} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{se}} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}}\\
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{$P_U$} & \multicolumn{3}{c}{$P_I$} & \multicolumn{3}{c}{$P_A$} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7} \cmidrule(l{3pt}r{3pt}){8-10}
+\multicolumn{1}{c}{\em{ }} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{$\beta$} & \multicolumn{1}{c}{\em{t}} & \multicolumn{1}{c}{\em{p}}\\
 \midrule
-$p_r$ & 0.03 & 0.32 & 0.10 & .919 & 0.21 & 0.27 & 0.76 & .447 & –0.23 & 0.27 & –0.84 & .402\\
-$p_c$ & 0.34 & 0.49 & 0.69 & 0.492 & \textbf{–1.65} & 0.42 & –3.97 & <.001 & \textbf{1.93} & 0.42 & 4.59 & <.001\\
-$\epsilon_{mean}$ & 0.16 & 0.32 & 0.50 & 0.616 & 0.31 & 0.27 & 1.13 & .259 & –0.13 & 0.27 & –0.47 & .638\\
-$\alpha$ & 0.30 & 0.49 & 0.60 & 0.546 & 0.28 & 0.42 & 0.68 & .495 & –0.13 & 0.42 & –0.32 & .749\\
-$c_{mean}$ & 0.09 & 0.49 & 0.17 & 0.861 & –0.23 & 0.42 & –0.54 & .588 & 0.32 & 0.42 & 0.77 & .441\\
-$r_{mean}$ & –0.17 & 0.49 & –0.34 & 0.736 & \textbf{–1.58} & 0.42 & –3.80 & <.001 & \textbf{1.88} & 0.42 & 4.48 & <.001\\
+$p_r$ & \makecell[c]{0.03\\(0.32)} & 0.10 & .919 & \makecell[c]{0.21\\(0.27)} & 0.76 & .447 & \makecell[c]{–0.23\\(0.27)} & –0.84 & .402\\
+$p_c$ & \makecell[c]{0.34\\(0.49)} & 0.69 & .492 & \makecell[c]{–1.65***\\(0.42)} & –3.97 & <.001 & \makecell[c]{1.93***\\(0.42)} & 4.59 & <.001\\
+$\epsilon_{mean}$ & \makecell[c]{0.16\\(0.32)} & 0.50 & .616 & \makecell[c]{0.31\\(0.27)} & 1.13 & .259 & \makecell[c]{–0.13\\(0.27)} & –0.47 & .638\\
+$\alpha$ & \makecell[c]{0.30\\(0.49)} & 0.60 & .546 & \makecell[c]{0.28\\(0.42)} & 0.68 & .495 & \makecell[c]{–0.13\\(0.42)} & –0.32 & .749\\
+$c_{mean}$ & \makecell[c]{0.09\\(0.49)} & 0.17 & .861 & \makecell[c]{–0.23\\(0.42)} & –0.54 & .588 & \makecell[c]{0.32\\(0.42)} & 0.77 & .441\\
+$r_{mean}$ & \makecell[c]{–0.17\\(0.49)} & –0.34 & .736 & \makecell[c]{–1.58***\\(0.42)} & –3.80 & <.001 & \makecell[c]{1.88***\\(0.42)} & 4.48 & <.001\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \begin{tablenotes}
 \small
-\item \textit{Note.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH \\actions, respectively. Linear regressions are run with full interaction. Intercepts and interaction terms \\are omitted for brevity (see the Appendices for the full table). Statistically significant coefficients are in \\ bold.
+\item \textit{Note.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. Linear regressions are run with full interaction. Intercepts and interaction terms are omitted for brevity (see Supplementary Table S1 for the full table). $^*p < 0.1, \,^{**} p < 0.05, \, ^{***} p < 0.01$.
 \end{tablenotes}
 \end{threeparttable}
 \label{tab:2}
@@ -913,11 +921,17 @@ conditions, although the rate of underestimation remains high, the rate
 of inconsistency drops under \(0.5\) and the rate of WWOH increases
 quickly at the very beginning of the simulations.
 
-Sensitivity analyses were conducted on other combinations of rewiring
-probability (\(p_r\)), bounded confidence threshold
-(\(\epsilon_{mean}\)), convergence parameter (\(\alpha\)), and mean lack
-of confidence (\(c_{mean}\)), and no qualitative difference in the
-results is found (see the Appendices).
+In sum, whenever the probability of communication with neighbours is low
+or medium (\(p_c = 0.1\) or \(p_c = 0.3\)) and the mean resistance to
+norm is low (\(r_{mean} = 0.1\)), pluralistic ignorance (PI) exists by
+both definitions mentioned in the main text (\(P_U > 0.5\) or
+\(P_I > 0.5\)). Sensitivity analyses indicate that this conclusion holds
+true in all combinations of \(p_r\), \(\epsilon_{mean}\), \(\alpha\),
+\(c_{mean}\) (see Table S1 in Supplementary Materials). Moreover, when
+the probability of communication with neighbours is low (\(p_c = 0.1\))
+and the mean resistance to norm is medium (\(r_{mean} = 0.3\)), whether
+PI exists as defined through the rate of inconsistency (\(P_I > 0.5\))
+depends on the values of other parameters (Table S1).
 
 \hypertarget{intervention-effects-on-pluralistic-ignorance-and-wwoh-action}{%
 \subsection{Intervention Effects on Pluralistic Ignorance and WWOH
@@ -959,344 +973,14 @@ parameter values.
 
 The results reveal that all else equal, the intervention does not have a
 statistically significant effect on the rate of underestimation, be it
-implemented once, twice, or three times. The intervention does have a
-significant effect on the rate of inconsistency regardless of the number
-of times it is implemented, and its effect significantly depends on
-\(p_c\), \(\epsilon_{mean}\), \(\alpha\), and \(s_{mean}\). The
-intervention has a significant effect on the rate of WWOH actions only
-when it is implemented twice or three times, and this effect also
+implemented once, twice, or three times (Table \ref{tab:3}). The
+intervention does have a significant effect on the rate of inconsistency
+regardless of the number of times it is implemented, and its effect
 significantly depends on \(p_c\), \(\epsilon_{mean}\), \(\alpha\), and
-\(s_{mean}\) (see Appendix Table C2 for the full model results).
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\columnwidth]{./figures/intervention_effect_p_inconsistency.png}
-  \caption{\textbf{Estimated effects of the intervention on the rate of inconsistency at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. Blue dashed lines indicate 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
-  \label{fig:3}
-\end{figure}
-
-To show the above results more clearly, the effects of the intervention
-under different combinations of parameter values are plotted (Figure
-\ref{fig:3} and \ref{fig:4}). As Figure \ref{fig:3} shows, the
-decreasing effect of the intervention on the rate of inconsistency
-increases with the the probability of communication (\(p_c\)), mean
-perceived credibility (\(s_{mean}\)), convergence parameter
-(\(\alpha\)), and mean bounded confidence threshold
-(\(\epsilon_{mean}\)). The decreasing effect also increases with the
-number of times the intervention is implemented, and the increase is
-especially pronounced when the times increase from twice to three times.
-Likewise, the increasing effect of the intervention on the rate of WWOH
-actions increases with the the probability of communication (\(p_c\)),
-mean perceived credibility (\(s_{mean}\)), convergence parameter
-(\(\alpha\)), and mean bounded confidence threshold
-(\(\epsilon_{mean}\)) (Figure \ref{fig:4}). The increasing effect also
-increases with the number of times the intervention is implemented. When
-the intervention is implemented once, its effect remains close to 0
-under all parameter combinations.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\columnwidth]{./figures/intervention_effect_p_wwoh.png}
-  \caption{\textbf{Estimated effects of the intervention on the rate of WWOH actions at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. Blue dashed lines indicate 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
-  \label{fig:4}
-\end{figure}
-
-For the sake of illustrating the details of how the intervention affects
-the outcomes, one set of parameter combination that sustains PI and WWOH
-at the empirical level (\(p_r = 0.5\), \(p_c = 0.3\),
-\(\epsilon_{mean} = 0.5\), \(\alpha = 0.3\), \(c_{mean} = 0.1\),
-\(r_{mean} = 0.1\)) is selected and the change of PI and WWOH actions
-are plotted over time. As Figure \ref{fig:5} shows, the intervention
-primarily changes the rate of inconsistency and WWOH actions, which is
-aligned with the results from the regression analysis. The rate of
-inconsistency surges and the rate of WWOH actions drops immediately
-after the intervention is implemented, but this effect is gradually
-``washed out'' over time as the simulation continues. This leads to a
-virtual lack of effect when the intervention is implemented only once.
-When the intervention is implemented more than once, however, the effect
-is enhanced every time the summary information is communicated. Overall,
-the intervention effect is more pronounced when mean perceived
-credibility increases, especially when the intervention is implemented
-twice or three times.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\columnwidth]{./figures/intervention_process.pdf}
-  \caption{\textbf{Effects of the intervention on pluralistic ignorance and WWOH action over time.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. Central lines are average values of simulations with the same parameter setting, and shaded areas are the 95\% confidence intervals. Blue dashed lines indicate the time step when the intervention is implemented. Mean perceived credibility of the information source $s_{mean}$ is shown on facet columns, and the intervention type is shown on facet rows. Parameters not shown on the plot are set at the following values: $p_r = 0.5$, $p_c = 0.3$, $\epsilon_{mean} = 0.5$, $\alpha = 0.3$, $c_{mean} = 0.1$, $r_{mean} = 0.1$.}
-  \label{fig:5}
-\end{figure}
-
-\hypertarget{discussion-and-conclusion-1000-1500}{%
-\section{Discussion and Conclusion
-(1000-1500)}\label{discussion-and-conclusion-1000-1500}}
-
-\newpage
-
-\hypertarget{reference}{%
-\section*{Reference}\label{reference}}
-\addcontentsline{toc}{section}{Reference}
-
-\newpage
-
-\hypertarget{appendices}{%
-\section*{Appendices}\label{appendices}}
-\addcontentsline{toc}{section}{Appendices}
-
-\hypertarget{appendix-a-the-derivation-of-equation-3-and-4}{%
-\subsection*{Appendix A: The Derivation of Equation 3 and
-4}\label{appendix-a-the-derivation-of-equation-3-and-4}}
-\addcontentsline{toc}{subsection}{Appendix A: The Derivation of Equation
-3 and 4}
-
-Since agents' norm perception \(N_i\) is a random variable with a normal
-distribution with the mean \(\mu_{N_i}\) and standard deviation
-\(\sigma_{N_i}\), we have the probability density function (PDF) of
-\(N_i\) as:
-
-\begin{equation*}
-f(N_i) \propto \text{exp}(-\frac{(N_i - \mu_{N_i})^2}{2\sigma_{N_i}^2}).
-\end{equation*}
-
-The conditional PDF of the evidence given agent \(i\)'s prior norm
-perception in Equation \ref{eq:2} is given by
-
-\begin{equation*}
-f(E_i \mid N_i) \propto \text{exp}(-\frac{(E_i - N_i)^2}{2c_i^2}).
-\end{equation*}
-
-Following the Equation \ref{eq:2}, we have the posterior PDF of agent
-\(i\)'s norm perception as
-
-\begin{equation*}
-  \begin{aligned}
-    f(N_i \mid E_i) &= C \cdot \text{exp}(-\frac{(N_i - \mu_{N_i})^2}{2\sigma_{N_i}^2}) \text{exp}(- \frac{(E_i - N_i)^2}{2c_i^2})\\
-      &= C \cdot \text{exp}(-\frac{(N_i - \mu_{N_i})^2}{2\sigma_{N_i}^2} - \frac{(E_i - N_i)^2}{2c_i^2})\\
-      &= C \cdot \text{exp}(- \frac{(N_i - \mu_{N_i}^{\prime})^2}{2\sigma_{N_i}^{\prime2}} - \frac{(E_i - \mu_{N_i})^2}{2(\sigma_{N_i}^2 + c_i^2)}),
-  \end{aligned}
-\end{equation*}
-
-where \(C\) is a normalising constant. Since the second term in the
-exponent does not involve the random variable \(N_i\), we can
-incorporate it into the constant and rewrite the expression as
-
-\begin{equation*}
-  f(N_i \mid E_i) \propto \text{exp}(- \frac{(N_i - \mu_{N_i}^{\prime})^2}{2\sigma_{N_i}^{\prime2}}),
-\end{equation*}
-
-where
-
-\begin{equation*}
-  \mu_{N_i}^{\prime} = \frac{E_i \sigma_{N_i}^2 + \mu_{N_i} c_i^2}{\sigma_{N_i}^2 + c_i^2} \;\; \text{and} \;\; \sigma_{N_i}^{\prime2} = \frac{\sigma_{N_i}^2 c_i^2}{\sigma_{N_i}^2 + c_i^2}.
-\end{equation*}
-
-Substituting \(\frac{c_i^2}{c_i^2 + \sigma_{N_i}^2}\) with \(\lambda\)
-gives the equations in the main text.
-
-\hypertarget{appendix-b-supplementary-results-on-the-factors-associated-with-persistent-pi}{%
-\subsection{Appendix B: Supplementary Results on the Factors Associated
-with Persistent
-PI}\label{appendix-b-supplementary-results-on-the-factors-associated-with-persistent-pi}}
-
-\textbf{table: full regression model}
-
-\textbf{sensitivity analysis on the effect of p\_com and r\_mean}
-
-\begin{landscape}
-
-\hypertarget{appendix-c-effects-of-interventions-on-pluralistic-ignorance-and-wwoh-action}{%
-\subsection{Appendix C: Effects of Interventions on Pluralistic
-Ignorance and WWOH
-Action}\label{appendix-c-effects-of-interventions-on-pluralistic-ignorance-and-wwoh-action}}
-
-\renewcommand{\thetable}{C1}
-
-\begin{ThreePartTable}
-\begin{TableNotes}
-\small
-\item \textit{Note.} $P_U$ and $P_A$ denote the rate of underestimation and the rate of WWOH actions, respectively. The values of $P_U$ are tested against the null hypothesis $P_U = 0.8$, and the values of $P_A$ are tested against the null hypothesis $P_A = 0.05$. The \textit{p} values are adjusted for multiple comparison using the methods of Benjamini, Hochberg, and Yekutieli.
-\end{TableNotes}
-\begin{longtable}[t]{cccccccccccccc}
-\caption{\textbf{Parameter combinations that sustain PI at the empirical level}}\\
-\toprule
-\multicolumn{6}{c}{ } & \multicolumn{4}{c}{$P_U$} & \multicolumn{4}{c}{$P_A$} \\
-\cmidrule(l{3pt}r{3pt}){7-10} \cmidrule(l{3pt}r{3pt}){11-14}
-\multicolumn{1}{c}{$p_r$} & \multicolumn{1}{c}{$p_c$} & \multicolumn{1}{c}{$\epsilon_{mean}$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c}{$c_{mean}$} & \multicolumn{1}{c}{$r_{mean}$} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{95\%CI [LL, UL]} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{95\%CI [LL, UL]} & \multicolumn{1}{c}{\em{p}}\\
-\midrule
-\endfirsthead
-\caption[]{\textbf{Parameter combinations that sustain PI at the empirical level} \textit{(continued)}}\\
-\toprule
-\multicolumn{6}{c}{ } & \multicolumn{4}{c}{$P_U$} & \multicolumn{4}{c}{$P_A$} \\
-\cmidrule(l{3pt}r{3pt}){7-10} \cmidrule(l{3pt}r{3pt}){11-14}
-\multicolumn{1}{c}{$p_r$} & \multicolumn{1}{c}{$p_c$} & \multicolumn{1}{c}{$\epsilon_{mean}$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c}{$c_{mean}$} & \multicolumn{1}{c}{$r_{mean}$} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{95\%CI [LL, UL]} & \multicolumn{1}{c}{\em{p}} & \multicolumn{1}{c}{\em{M}} & \multicolumn{1}{c}{\em{SD}} & \multicolumn{1}{c}{95\%CI [LL, UL]} & \multicolumn{1}{c}{\em{p}}\\
-\midrule
-\endhead
-
-\endfoot
-\bottomrule
-\insertTableNotes
-\endlastfoot
-\multicolumn{14}{l}{\textit{The 95\% confidence intervals of $P_U$ contain 0.8}} \\
-0.30 & 0.30 & 0.70 & 0.50 & 0.30 & 0.30 & 0.87 & 0.30 & {}[0.8, 0.94] & .321 & 0.71 & 0.21 & {}[0.66, 0.76] & <.001\\
-0.30 & 0.30 & 0.70 & 0.50 & 0.50 & 0.30 & 0.86 & 0.31 & {}[0.79, 0.94] & .321 & 0.83 & 0.15 & {}[0.79, 0.86] & <.001\\
-0.30 & 0.30 & 0.70 & 0.50 & 0.50 & 0.50 & 0.87 & 0.33 & {}[0.79, 0.94] & .321 & 0.88 & 0.14 & {}[0.85, 0.91] & <.001\\
-0.30 & 0.50 & 0.30 & 0.50 & 0.10 & 0.10 & 0.84 & 0.36 & {}[0.76, 0.93] & .465 & 0.68 & 0.22 & {}[0.63, 0.73] & <.001\\
-0.30 & 0.50 & 0.30 & 0.50 & 0.10 & 0.30 & 0.87 & 0.32 & {}[0.8, 0.94] & .321 & 0.92 & 0.11 & {}[0.89, 0.94] & <.001\\
-\addlinespace
-0.30 & 0.50 & 0.30 & 0.50 & 0.30 & 0.30 & 0.85 & 0.35 & {}[0.77, 0.93] & .402 & 0.90 & 0.13 & {}[0.87, 0.93] & <.001\\
-0.30 & 0.50 & 0.50 & 0.30 & 0.10 & 0.30 & 0.82 & 0.37 & {}[0.74, 0.91] & .706 & 0.90 & 0.12 & {}[0.87, 0.92] & <.001\\
-0.30 & 0.50 & 0.50 & 0.30 & 0.10 & 0.50 & 0.86 & 0.34 & {}[0.78, 0.94] & .338 & 0.90 & 0.09 & {}[0.88, 0.92] & <.001\\
-0.30 & 0.50 & 0.50 & 0.50 & 0.10 & 0.10 & 0.85 & 0.35 & {}[0.77, 0.93] & .403 & 0.70 & 0.27 & {}[0.64, 0.76] & <.001\\
-0.30 & 0.50 & 0.50 & 0.50 & 0.10 & 0.30 & 0.84 & 0.35 & {}[0.76, 0.92] & .547 & 0.89 & 0.16 & {}[0.85, 0.92] & <.001\\
-\addlinespace
-0.30 & 0.50 & 0.50 & 0.50 & 0.10 & 0.50 & 0.87 & 0.33 & {}[0.79, 0.95] & .321 & 0.88 & 0.15 & {}[0.85, 0.92] & <.001\\
-0.30 & 0.50 & 0.50 & 0.50 & 0.30 & 0.10 & 0.81 & 0.39 & {}[0.72, 0.9] & .963 & 0.79 & 0.20 & {}[0.74, 0.83] & <.001\\
-0.30 & 0.50 & 0.50 & 0.50 & 0.30 & 0.30 & 0.87 & 0.33 & {}[0.79, 0.94] & .321 & 0.94 & 0.10 & {}[0.92, 0.96] & <.001\\
-0.30 & 0.50 & 0.50 & 0.50 & 0.50 & 0.10 & 0.80 & 0.39 & {}[0.71, 0.89] & .982 & 0.84 & 0.19 & {}[0.79, 0.88] & <.001\\
-0.30 & 0.50 & 0.50 & 0.50 & 0.50 & 0.30 & 0.87 & 0.32 & {}[0.8, 0.95] & .321 & 0.95 & 0.07 & {}[0.93, 0.96] & <.001\\
-\addlinespace
-0.30 & 0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.85 & 0.34 & {}[0.77, 0.93] & .383 & 0.88 & 0.14 & {}[0.85, 0.92] & <.001\\
-0.30 & 0.50 & 0.70 & 0.30 & 0.10 & 0.10 & 0.85 & 0.35 & {}[0.77, 0.93] & .383 & 0.71 & 0.22 & {}[0.66, 0.76] & <.001\\
-0.30 & 0.50 & 0.70 & 0.30 & 0.10 & 0.30 & 0.79 & 0.39 & {}[0.7, 0.88] & .913 & 0.90 & 0.11 & {}[0.88, 0.93] & <.001\\
-0.30 & 0.50 & 0.70 & 0.30 & 0.30 & 0.30 & 0.85 & 0.34 & {}[0.77, 0.93] & .383 & 0.92 & 0.11 & {}[0.9, 0.94] & <.001\\
-0.30 & 0.50 & 0.70 & 0.30 & 0.50 & 0.10 & 0.86 & 0.33 & {}[0.78, 0.93] & .343 & 0.86 & 0.16 & {}[0.82, 0.9] & <.001\\
-\addlinespace
-0.30 & 0.50 & 0.70 & 0.30 & 0.50 & 0.30 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.94 & 0.08 & {}[0.92, 0.95] & <.001\\
-0.30 & 0.50 & 0.70 & 0.30 & 0.50 & 0.50 & 0.84 & 0.36 & {}[0.76, 0.93] & .469 & 0.89 & 0.13 & {}[0.86, 0.92] & <.001\\
-0.30 & 0.50 & 0.70 & 0.50 & 0.10 & 0.30 & 0.87 & 0.32 & {}[0.8, 0.95] & .321 & 0.92 & 0.11 & {}[0.9, 0.95] & <.001\\
-0.30 & 0.50 & 0.70 & 0.50 & 0.10 & 0.50 & 0.84 & 0.36 & {}[0.76, 0.93] & .459 & 0.90 & 0.15 & {}[0.86, 0.93] & <.001\\
-0.30 & 0.50 & 0.70 & 0.50 & 0.30 & 0.30 & 0.81 & 0.38 & {}[0.72, 0.9] & .908 & 0.89 & 0.13 & {}[0.86, 0.92] & <.001\\
-\addlinespace
-0.30 & 0.50 & 0.70 & 0.50 & 0.30 & 0.50 & 0.77 & 0.42 & {}[0.68, 0.87] & .710 & 0.89 & 0.16 & {}[0.85, 0.92] & <.001\\
-0.30 & 0.50 & 0.70 & 0.50 & 0.50 & 0.10 & 0.86 & 0.33 & {}[0.78, 0.93] & .343 & 0.86 & 0.18 & {}[0.82, 0.9] & <.001\\
-0.30 & 0.50 & 0.70 & 0.50 & 0.50 & 0.50 & 0.86 & 0.34 & {}[0.78, 0.94] & .350 & 0.89 & 0.14 & {}[0.86, 0.93] & <.001\\
-0.50 & 0.30 & 0.50 & 0.30 & 0.30 & 0.50 & 0.87 & 0.32 & {}[0.79, 0.94] & .321 & 0.87 & 0.12 & {}[0.84, 0.9] & <.001\\
-0.50 & 0.30 & 0.50 & 0.50 & 0.30 & 0.50 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.87 & 0.15 & {}[0.83, 0.9] & <.001\\
-\addlinespace
-0.50 & 0.30 & 0.70 & 0.30 & 0.50 & 0.30 & 0.84 & 0.34 & {}[0.76, 0.92] & .459 & 0.84 & 0.16 & {}[0.8, 0.88] & <.001\\
-0.50 & 0.30 & 0.70 & 0.30 & 0.50 & 0.50 & 0.87 & 0.31 & {}[0.8, 0.94] & .321 & 0.88 & 0.10 & {}[0.86, 0.91] & <.001\\
-0.50 & 0.30 & 0.70 & 0.50 & 0.10 & 0.50 & 0.86 & 0.34 & {}[0.78, 0.94] & .344 & 0.86 & 0.18 & {}[0.81, 0.9] & <.001\\
-0.50 & 0.30 & 0.70 & 0.50 & 0.50 & 0.10 & 0.87 & 0.33 & {}[0.79, 0.94] & .321 & 0.30 & 0.20 & {}[0.25, 0.34] & <.001\\
-0.50 & 0.30 & 0.70 & 0.50 & 0.50 & 0.30 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.85 & 0.19 & {}[0.81, 0.89] & <.001\\
-\addlinespace
-0.50 & 0.30 & 0.70 & 0.50 & 0.50 & 0.50 & 0.85 & 0.35 & {}[0.77, 0.93] & .396 & 0.87 & 0.16 & {}[0.83, 0.91] & <.001\\
-0.50 & 0.50 & 0.30 & 0.50 & 0.30 & 0.30 & 0.85 & 0.35 & {}[0.77, 0.93] & .393 & 0.95 & 0.08 & {}[0.93, 0.97] & <.001\\
-0.50 & 0.50 & 0.30 & 0.50 & 0.50 & 0.30 & 0.86 & 0.34 & {}[0.78, 0.94] & .355 & 0.94 & 0.08 & {}[0.92, 0.96] & <.001\\
-0.50 & 0.50 & 0.50 & 0.30 & 0.10 & 0.30 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.93 & 0.12 & {}[0.91, 0.96] & <.001\\
-0.50 & 0.50 & 0.50 & 0.30 & 0.30 & 0.30 & 0.80 & 0.39 & {}[0.71, 0.89] & .995 & 0.92 & 0.14 & {}[0.89, 0.95] & <.001\\
-\addlinespace
-0.50 & 0.50 & 0.50 & 0.50 & 0.10 & 0.10 & 0.87 & 0.34 & {}[0.79, 0.94] & .321 & 0.77 & 0.27 & {}[0.7, 0.83] & <.001\\
-0.50 & 0.50 & 0.50 & 0.50 & 0.10 & 0.50 & 0.85 & 0.36 & {}[0.76, 0.93] & .447 & 0.91 & 0.11 & {}[0.89, 0.94] & <.001\\
-0.50 & 0.50 & 0.50 & 0.50 & 0.30 & 0.30 & 0.85 & 0.36 & {}[0.76, 0.93] & .447 & 0.94 & 0.10 & {}[0.92, 0.96] & <.001\\
-0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.10 & 0.87 & 0.33 & {}[0.8, 0.95] & .321 & 0.88 & 0.16 & {}[0.84, 0.92] & <.001\\
-0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.30 & 0.87 & 0.32 & {}[0.8, 0.94] & .321 & 0.94 & 0.13 & {}[0.91, 0.97] & <.001\\
-\addlinespace
-0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.83 & 0.35 & {}[0.75, 0.91] & .582 & 0.91 & 0.12 & {}[0.88, 0.93] & <.001\\
-0.50 & 0.50 & 0.70 & 0.30 & 0.10 & 0.10 & 0.81 & 0.39 & {}[0.72, 0.9] & .875 & 0.74 & 0.29 & {}[0.67, 0.8] & <.001\\
-0.50 & 0.50 & 0.70 & 0.30 & 0.10 & 0.30 & 0.79 & 0.40 & {}[0.7, 0.89] & .963 & 0.92 & 0.10 & {}[0.9, 0.95] & <.001\\
-0.50 & 0.50 & 0.70 & 0.30 & 0.10 & 0.50 & 0.84 & 0.36 & {}[0.76, 0.92] & .513 & 0.89 & 0.11 & {}[0.87, 0.92] & <.001\\
-0.50 & 0.50 & 0.70 & 0.30 & 0.30 & 0.30 & 0.87 & 0.33 & {}[0.8, 0.95] & .321 & 0.94 & 0.11 & {}[0.91, 0.96] & <.001\\
-\addlinespace
-0.50 & 0.50 & 0.70 & 0.30 & 0.30 & 0.50 & 0.84 & 0.36 & {}[0.76, 0.93] & .459 & 0.90 & 0.13 & {}[0.87, 0.93] & <.001\\
-0.50 & 0.50 & 0.70 & 0.30 & 0.50 & 0.10 & 0.80 & 0.37 & {}[0.72, 0.88] & .995 & 0.84 & 0.19 & {}[0.8, 0.89] & <.001\\
-0.50 & 0.50 & 0.70 & 0.30 & 0.50 & 0.30 & 0.82 & 0.37 & {}[0.74, 0.91] & .715 & 0.94 & 0.10 & {}[0.92, 0.96] & <.001\\
-0.50 & 0.50 & 0.70 & 0.30 & 0.50 & 0.50 & 0.87 & 0.32 & {}[0.79, 0.94] & .321 & 0.90 & 0.12 & {}[0.88, 0.93] & <.001\\
-0.50 & 0.50 & 0.70 & 0.50 & 0.10 & 0.10 & 0.82 & 0.37 & {}[0.74, 0.91] & .710 & 0.70 & 0.28 & {}[0.63, 0.76] & <.001\\
-\addlinespace
-0.50 & 0.50 & 0.70 & 0.50 & 0.10 & 0.30 & 0.81 & 0.39 & {}[0.72, 0.89] & .963 & 0.91 & 0.19 & {}[0.86, 0.95] & <.001\\
-0.50 & 0.50 & 0.70 & 0.50 & 0.10 & 0.50 & 0.79 & 0.40 & {}[0.7, 0.89] & .963 & 0.88 & 0.16 & {}[0.84, 0.92] & <.001\\
-0.50 & 0.50 & 0.70 & 0.50 & 0.30 & 0.10 & 0.83 & 0.37 & {}[0.74, 0.91] & .703 & 0.79 & 0.26 & {}[0.73, 0.85] & <.001\\
-0.50 & 0.50 & 0.70 & 0.50 & 0.30 & 0.50 & 0.78 & 0.41 & {}[0.68, 0.87] & .782 & 0.89 & 0.15 & {}[0.86, 0.93] & <.001\\
-0.50 & 0.50 & 0.70 & 0.50 & 0.50 & 0.10 & 0.83 & 0.37 & {}[0.74, 0.91] & .706 & 0.89 & 0.17 & {}[0.85, 0.93] & <.001\\
-\addlinespace
-0.50 & 0.50 & 0.70 & 0.50 & 0.50 & 0.30 & 0.81 & 0.39 & {}[0.72, 0.9] & .875 & 0.96 & 0.09 & {}[0.94, 0.98] & <.001\\
-0.50 & 0.50 & 0.70 & 0.50 & 0.50 & 0.50 & 0.77 & 0.42 & {}[0.68, 0.87] & .706 & 0.88 & 0.17 & {}[0.84, 0.92] & <.001\\
-0.70 & 0.30 & 0.30 & 0.50 & 0.50 & 0.50 & 0.86 & 0.32 & {}[0.79, 0.93] & .321 & 0.89 & 0.11 & {}[0.87, 0.92] & <.001\\
-0.70 & 0.30 & 0.50 & 0.50 & 0.30 & 0.30 & 0.85 & 0.34 & {}[0.78, 0.93] & .383 & 0.79 & 0.22 & {}[0.74, 0.84] & <.001\\
-0.70 & 0.30 & 0.50 & 0.50 & 0.30 & 0.50 & 0.86 & 0.33 & {}[0.78, 0.93] & .355 & 0.91 & 0.11 & {}[0.88, 0.93] & <.001\\
-\addlinespace
-0.70 & 0.30 & 0.50 & 0.50 & 0.50 & 0.30 & 0.86 & 0.34 & {}[0.78, 0.93] & .366 & 0.87 & 0.17 & {}[0.83, 0.91] & <.001\\
-0.70 & 0.30 & 0.70 & 0.30 & 0.30 & 0.30 & 0.85 & 0.33 & {}[0.78, 0.93] & .383 & 0.78 & 0.21 & {}[0.73, 0.83] & <.001\\
-0.70 & 0.30 & 0.70 & 0.30 & 0.30 & 0.50 & 0.86 & 0.33 & {}[0.79, 0.94] & .332 & 0.87 & 0.15 & {}[0.84, 0.91] & <.001\\
-0.70 & 0.30 & 0.70 & 0.50 & 0.30 & 0.30 & 0.87 & 0.33 & {}[0.79, 0.95] & .321 & 0.78 & 0.26 & {}[0.72, 0.84] & <.001\\
-0.70 & 0.30 & 0.70 & 0.50 & 0.30 & 0.50 & 0.86 & 0.33 & {}[0.79, 0.94] & .321 & 0.89 & 0.12 & {}[0.87, 0.92] & <.001\\
-\addlinespace
-0.70 & 0.30 & 0.70 & 0.50 & 0.50 & 0.30 & 0.84 & 0.36 & {}[0.75, 0.92] & .554 & 0.87 & 0.16 & {}[0.83, 0.91] & <.001\\
-0.70 & 0.30 & 0.70 & 0.50 & 0.50 & 0.50 & 0.87 & 0.34 & {}[0.79, 0.95] & .321 & 0.90 & 0.15 & {}[0.87, 0.94] & <.001\\
-0.70 & 0.50 & 0.30 & 0.30 & 0.10 & 0.30 & 0.87 & 0.32 & {}[0.79, 0.94] & .321 & 0.94 & 0.08 & {}[0.92, 0.96] & <.001\\
-0.70 & 0.50 & 0.30 & 0.50 & 0.10 & 0.10 & 0.87 & 0.33 & {}[0.79, 0.94] & .321 & 0.73 & 0.27 & {}[0.67, 0.79] & <.001\\
-0.70 & 0.50 & 0.50 & 0.30 & 0.10 & 0.30 & 0.80 & 0.40 & {}[0.71, 0.89] & .982 & 0.93 & 0.09 & {}[0.91, 0.95] & <.001\\
-\addlinespace
-0.70 & 0.50 & 0.50 & 0.30 & 0.30 & 0.50 & 0.87 & 0.33 & {}[0.79, 0.95] & .321 & 0.91 & 0.08 & {}[0.89, 0.93] & <.001\\
-0.70 & 0.50 & 0.50 & 0.30 & 0.50 & 0.10 & 0.86 & 0.33 & {}[0.78, 0.94] & .338 & 0.85 & 0.20 & {}[0.81, 0.9] & <.001\\
-0.70 & 0.50 & 0.50 & 0.50 & 0.10 & 0.10 & 0.87 & 0.34 & {}[0.79, 0.94] & .321 & 0.73 & 0.28 & {}[0.66, 0.79] & <.001\\
-0.70 & 0.50 & 0.50 & 0.50 & 0.10 & 0.30 & 0.87 & 0.33 & {}[0.8, 0.95] & .321 & 0.92 & 0.14 & {}[0.89, 0.95] & <.001\\
-0.70 & 0.50 & 0.50 & 0.50 & 0.10 & 0.50 & 0.83 & 0.37 & {}[0.74, 0.91] & .706 & 0.90 & 0.13 & {}[0.87, 0.93] & <.001\\
-\addlinespace
-0.70 & 0.50 & 0.50 & 0.50 & 0.30 & 0.30 & 0.85 & 0.36 & {}[0.77, 0.93] & .383 & 0.96 & 0.08 & {}[0.94, 0.98] & <.001\\
-0.70 & 0.50 & 0.50 & 0.50 & 0.30 & 0.50 & 0.83 & 0.37 & {}[0.75, 0.92] & .604 & 0.90 & 0.15 & {}[0.86, 0.93] & <.001\\
-0.70 & 0.50 & 0.50 & 0.50 & 0.50 & 0.30 & 0.84 & 0.36 & {}[0.75, 0.92] & .553 & 0.95 & 0.08 & {}[0.94, 0.97] & <.001\\
-0.70 & 0.50 & 0.50 & 0.50 & 0.50 & 0.50 & 0.85 & 0.36 & {}[0.77, 0.94] & .383 & 0.89 & 0.16 & {}[0.85, 0.92] & <.001\\
-0.70 & 0.50 & 0.70 & 0.30 & 0.10 & 0.50 & 0.85 & 0.34 & {}[0.77, 0.92] & .439 & 0.90 & 0.12 & {}[0.88, 0.93] & <.001\\
-\addlinespace
-0.70 & 0.50 & 0.70 & 0.30 & 0.30 & 0.10 & 0.86 & 0.35 & {}[0.78, 0.94] & .383 & 0.84 & 0.20 & {}[0.79, 0.88] & <.001\\
-0.70 & 0.50 & 0.70 & 0.30 & 0.30 & 0.50 & 0.87 & 0.33 & {}[0.8, 0.95] & .321 & 0.92 & 0.09 & {}[0.9, 0.94] & <.001\\
-0.70 & 0.50 & 0.70 & 0.30 & 0.50 & 0.10 & 0.80 & 0.39 & {}[0.71, 0.89] & .982 & 0.90 & 0.17 & {}[0.86, 0.94] & <.001\\
-0.70 & 0.50 & 0.70 & 0.30 & 0.50 & 0.30 & 0.87 & 0.34 & {}[0.79, 0.95] & .321 & 0.95 & 0.12 & {}[0.92, 0.98] & <.001\\
-0.70 & 0.50 & 0.70 & 0.30 & 0.50 & 0.50 & 0.86 & 0.34 & {}[0.78, 0.94] & .343 & 0.91 & 0.09 & {}[0.89, 0.93] & <.001\\
-\addlinespace
-0.70 & 0.50 & 0.70 & 0.50 & 0.10 & 0.10 & 0.80 & 0.39 & {}[0.71, 0.89] & .982 & 0.69 & 0.33 & {}[0.61, 0.76] & <.001\\
-0.70 & 0.50 & 0.70 & 0.50 & 0.10 & 0.30 & 0.76 & 0.42 & {}[0.66, 0.86] & .554 & 0.92 & 0.12 & {}[0.89, 0.95] & <.001\\
-0.70 & 0.50 & 0.70 & 0.50 & 0.10 & 0.50 & 0.86 & 0.35 & {}[0.77, 0.94] & .383 & 0.91 & 0.15 & {}[0.87, 0.94] & <.001\\
-0.70 & 0.50 & 0.70 & 0.50 & 0.30 & 0.30 & 0.85 & 0.35 & {}[0.77, 0.94] & .383 & 0.95 & 0.11 & {}[0.92, 0.97] & <.001\\
-0.70 & 0.50 & 0.70 & 0.50 & 0.50 & 0.10 & 0.82 & 0.37 & {}[0.73, 0.91] & .756 & 0.88 & 0.20 & {}[0.83, 0.92] & <.001\\
-\addlinespace
-0.70 & 0.50 & 0.70 & 0.50 & 0.50 & 0.30 & 0.75 & 0.44 & {}[0.65, 0.85] & .459 & 0.92 & 0.15 & {}[0.89, 0.96] & <.001\\
-0.70 & 0.50 & 0.70 & 0.50 & 0.50 & 0.50 & 0.83 & 0.38 & {}[0.74, 0.92] & .696 & 0.90 & 0.15 & {}[0.87, 0.94] & <.001\\
-\multicolumn{14}{l}{\textit{The 95\% confidence intervals of $P_A$ contain 0.05}} \\
-0.30 & 0.30 & 0.50 & 0.10 & 0.10 & 0.10 & 1.00 & 0.010 & {}[1, 1] & <.001 & 0.06 & 0.07 & {}[0.05, 0.08] & <.001\\
-0.30 & 0.30 & 0.50 & 0.30 & 0.10 & 0.10 & 0.96 & 0.184 & {}[0.92, 1] & <.001 & 0.05 & 0.06 & {}[0.04, 0.06] & <.001\\
-0.30 & 0.30 & 0.70 & 0.10 & 0.10 & 0.10 & 1.00 & 0.005 & {}[1, 1] & <.001 & 0.06 & 0.06 & {}[0.04, 0.07] & <.001\\
-0.30 & 0.30 & 0.70 & 0.30 & 0.10 & 0.10 & 0.97 & 0.163 & {}[0.93, 1.01] & <.001 & 0.06 & 0.07 & {}[0.04, 0.08] & <.001\\
-0.30 & 0.30 & 0.70 & 0.50 & 0.10 & 0.10 & 0.89 & 0.307 & {}[0.82, 0.96] & <.001 & 0.07 & 0.08 & {}[0.05, 0.08] & <.001\\
-\addlinespace
-0.50 & 0.10 & 0.30 & 0.10 & 0.50 & 0.10 & 1.00 & 0.009 & {}[1, 1] & <.001 & 0.06 & 0.07 & {}[0.05, 0.08] & <.001\\
-0.50 & 0.10 & 0.30 & 0.30 & 0.50 & 0.10 & 1.00 & 0.003 & {}[1, 1] & <.001 & 0.05 & 0.06 & {}[0.03, 0.06] & <.001\\
-0.50 & 0.10 & 0.30 & 0.50 & 0.50 & 0.10 & 1.00 & 0.004 & {}[1, 1] & <.001 & 0.06 & 0.09 & {}[0.04, 0.08] & <.001\\
-0.50 & 0.10 & 0.50 & 0.10 & 0.50 & 0.10 & 1.00 & 0.003 & {}[1, 1] & <.001 & 0.05 & 0.07 & {}[0.04, 0.07] & <.001\\
-0.50 & 0.10 & 0.50 & 0.30 & 0.50 & 0.10 & 1 & 0.000 & {} – & – & 0.06 & 0.09 & {}[0.04, 0.08] & <.001\\
-\addlinespace
-0.50 & 0.10 & 0.50 & 0.50 & 0.50 & 0.10 & 1.00 & 0.006 & {}[1, 1] & <.001 & 0.05 & 0.06 & {}[0.03, 0.06] & <.001\\
-0.50 & 0.10 & 0.70 & 0.10 & 0.50 & 0.10 & 1.00 & 0.005 & {}[1, 1] & <.001 & 0.06 & 0.07 & {}[0.04, 0.08] & <.001\\
-0.50 & 0.10 & 0.70 & 0.50 & 0.50 & 0.10 & 0.97 & 0.162 & {}[0.93, 1.01] & <.001 & 0.05 & 0.07 & {}[0.03, 0.06] & <.001\\
-0.50 & 0.30 & 0.30 & 0.10 & 0.10 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.06 & {}[0.02, 0.05] & <.001\\
-0.50 & 0.30 & 0.30 & 0.30 & 0.10 & 0.10 & 1.00 & 0.003 & {}[1, 1] & <.001 & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
-\addlinespace
-0.50 & 0.30 & 0.30 & 0.50 & 0.10 & 0.10 & 1.00 & 0.005 & {}[1, 1] & <.001 & 0.04 & 0.07 & {}[0.03, 0.06] & <.001\\
-0.50 & 0.30 & 0.50 & 0.10 & 0.10 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
-0.50 & 0.30 & 0.50 & 0.30 & 0.10 & 0.10 & 0.95 & 0.225 & {}[0.89, 1] & <.001 & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
-0.50 & 0.30 & 0.50 & 0.50 & 0.10 & 0.10 & 0.94 & 0.226 & {}[0.89, 1] & <.001 & 0.04 & 0.07 & {}[0.03, 0.06] & <.001\\
-0.50 & 0.30 & 0.70 & 0.10 & 0.10 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
-\addlinespace
-0.50 & 0.30 & 0.70 & 0.30 & 0.10 & 0.10 & 0.97 & 0.164 & {}[0.93, 1.01] & <.001 & 0.04 & 0.06 & {}[0.03, 0.05] & <.001\\
-0.50 & 0.30 & 0.70 & 0.50 & 0.10 & 0.10 & 0.92 & 0.273 & {}[0.86, 0.98] & <.001 & 0.04 & 0.06 & {}[0.03, 0.05] & <.001\\
-0.70 & 0.10 & 0.30 & 0.10 & 0.50 & 0.10 & 1.00 & 0.004 & {}[1, 1] & <.001 & 0.04 & 0.05 & {}[0.03, 0.05] & <.001\\
-0.70 & 0.10 & 0.30 & 0.50 & 0.50 & 0.10 & 1.00 & 0.002 & {}[1, 1] & <.001 & 0.06 & 0.08 & {}[0.04, 0.07] & <.001\\
-0.70 & 0.10 & 0.50 & 0.10 & 0.50 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.07 & {}[0.03, 0.06] & <.001\\
-\addlinespace
-0.70 & 0.10 & 0.70 & 0.10 & 0.50 & 0.10 & 1.00 & 0.001 & {}[1, 1] & <.001 & 0.05 & 0.08 & {}[0.03, 0.07] & <.001\\
-0.70 & 0.10 & 0.70 & 0.30 & 0.50 & 0.10 & 1.00 & 0.017 & {}[0.99, 1] & <.001 & 0.04 & 0.07 & {}[0.03, 0.06] & <.001\\
-0.70 & 0.10 & 0.70 & 0.50 & 0.50 & 0.10 & 1.00 & 0.001 & {}[1, 1] & <.001 & 0.06 & 0.08 & {}[0.04, 0.08] & <.001\\
-0.70 & 0.30 & 0.30 & 0.10 & 0.10 & 0.10 & 1 & 0.000 & {} – & – & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
-0.70 & 0.30 & 0.30 & 0.30 & 0.10 & 0.10 & 0.97 & 0.162 & {}[0.93, 1.01] & <.001 & 0.04 & 0.06 & {}[0.02, 0.05] & <.001\\
-\addlinespace
-0.70 & 0.30 & 0.50 & 0.50 & 0.10 & 0.10 & 0.91 & 0.285 & {}[0.84, 0.97] & <.001 & 0.04 & 0.06 & {}[0.03, 0.06] & <.001\\
-0.70 & 0.30 & 0.70 & 0.50 & 0.10 & 0.10 & 0.91 & 0.292 & {}[0.84, 0.97] & <.001 & 0.04 & 0.07 & {}[0.02, 0.05] & <.001\\*
-\end{longtable}
-\end{ThreePartTable}
-
-\end{landscape}
-
-\renewcommand{\thetable}{C2}
+\(s_{mean}\). The intervention has a significant effect on the rate of
+WWOH actions only when it is implemented twice or three times, and this
+effect also significantly depends on \(p_c\), \(\epsilon_{mean}\),
+\(\alpha\), and \(s_{mean}\).
 
 \begin{spacing}{1.1}
 
@@ -1355,5 +1039,311 @@ $s_{mean} \times I_3$ & \makecell[c]{0.001\\(0.02)} & 0.05 & .960 & \makecell[c]
 \end{ThreePartTable}
 \label{tab:3}
 \end{spacing}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/intervention_effect_p_inconsistency.png}
+  \caption{\textbf{Estimated effects of the intervention on the rate of inconsistency at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. Blue dashed lines indicate 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
+  \label{fig:3}
+\end{figure}
+
+To show the above results more clearly, the effects of the intervention
+under different combinations of parameter values are plotted (Figure
+\ref{fig:3} and \ref{fig:4}). As Figure \ref{fig:3} shows, the
+intervention has an estimated effect decreasing the rate of
+inconsistency under most parameter combinations. The magnitude of the
+decreasing effect increases with the the probability of communication
+(\(p_c\)), mean perceived credibility (\(s_{mean}\)), convergence
+parameter (\(\alpha\)), and mean bounded confidence threshold
+(\(\epsilon_{mean}\)). The magnitude also increases with the number of
+times the intervention is implemented, and the increase is especially
+pronounced when the times increase from twice to three times. Likewise,
+the intervention has an estimated effect increasing the rate of WWOH
+actions under most parameter combinations. The magnitude of the
+increasing effect increases with the probability of communication
+(\(p_c\)), mean perceived credibility (\(s_{mean}\)), convergence
+parameter (\(\alpha\)), and mean bounded confidence threshold
+(\(\epsilon_{mean}\)) (Figure \ref{fig:4}). The magnitude increases with
+the number of times the intervention is implemented. When the
+intervention is implemented once, its effect remains close to 0 under
+all parameter combinations.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/intervention_effect_p_wwoh.png}
+  \caption{\textbf{Estimated effects of the intervention on the rate of WWOH actions at the final time step.} Point estimates of the effects of the intervention are plotted under different combinations of parameter values. Blue dashed lines indicate 0 effect. Convergence parameter $\alpha$ is shown on facet columns, and the mean bounded confidence threshold $\epsilon_{mean}$ is shown on facet rows. Parameters not shown on the plot are set at the following value: $p_r = 0.5$.}
+  \label{fig:4}
+\end{figure}
+
+For the sake of illustrating the process of how the intervention affects
+the outcomes, one set of parameter combination that sustains PI and WWOH
+at the empirical level (\(p_r = 0.5\), \(p_c = 0.3\),
+\(\epsilon_{mean} = 0.5\), \(\alpha = 0.3\), \(c_{mean} = 0.1\),
+\(r_{mean} = 0.1\)) is selected and the changes of PI and WWOH actions
+are plotted over time. As Figure \ref{fig:5} shows, the intervention
+primarily changes the rate of inconsistency and WWOH actions instead of
+the rate of underestimation, which is aligned with the results from the
+regression analysis. In generally, the rate of inconsistency drops and
+the rate of WWOH actions surges immediately after the intervention is
+implemented. However, this effect is gradually dampened over time, that
+is, the rate of inconsistency tends to increase and the rate WWOH
+actions tend to decrease, as the simulation continues after the
+intervention. When the mean perceived credibility is held equal, the
+intervention effect seems to be enhanced every time it is implemented
+(see the facet columns). When the implementation number is held equal,
+the intervention effect seems to get more pronounced when the mean
+perceived credibility increases, especially when the intervention is
+implemented twice or three times (see the facet rows).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\columnwidth]{./figures/intervention_process.pdf}
+  \caption{\textbf{Effects of the intervention on pluralistic ignorance and WWOH action over time.} $P_U$, $P_I$, $P_A$ denote the rate of underestimation, the rate of inconsistency, and the rate of WWOH actions, respectively. Central lines are average values of simulations with the same parameter setting, and shaded areas are the 95\% confidence intervals. Blue dashed lines indicate the time step when the intervention is implemented. Mean perceived credibility of the information source $s_{mean}$ is shown on facet columns, and the intervention type is shown on facet rows. Parameters not shown on the plot are set at the following values: $p_r = 0.5$, $p_c = 0.3$, $\epsilon_{mean} = 0.5$, $\alpha = 0.3$, $c_{mean} = 0.1$, $r_{mean} = 0.1$.}
+  \label{fig:5}
+\end{figure}
+
+\hypertarget{discussion-1000-1500}{%
+\section{Discussion (1000-1500)}\label{discussion-1000-1500}}
+
+By building an agent-based model (ABM) of pluralistic ignorance (PI)
+regarding women working outside the home (WWOH) among men in Saudi
+Arabia, the present study seeks to explore the factors associated with
+the persistence of PI regarding WWOH. It also aims to investigate
+whether social norm interventions can reduce PI and encourage WWOH
+behaviours when PI regarding WWOH persists at the empirical level, and
+if so, under what conditions. The results reveal that among all
+parameters included in the model, the probability of communication with
+neighbours (\(p_c\)) and mean resistance to norm (\(r_{mean}\))
+significantly affect PI and WWOH actions. Higher probability of
+communication with neighbours and higher mean resistance to norm
+decreases PI (defined as the rate of inconsistency) and increases the
+rate of WWOH actions. PI (defined as the rate of inconsistency) persists
+if the probability of communication with neighbours is low or medium
+(\(p_c = 0.1\) or \(p_c = 0.3\)) and the mean resistance to norm is low
+(\(r_{mean} = 0.1\)). When PI regarding WWOH persists at the level
+identified by the empirical study \textbf{(Bursztyn et al., 2020)}, a
+social norm intervention does not significantly change the rate of
+underestimation but decreases the rate of inconsistency and increases
+the rate of WWOH actions under most parameter combinations. The
+magnitude of the intervention effects positively depend on the
+probability of communication (\(p_c\)), mean bounded confidence
+threshold (\(\epsilon_{mean}\)), convergence parameter (\(\alpha\)),
+mean perceived credibility (\(s_{mean}\)), and the number of times the
+intervention is implemented.
+
+The results regarding the factors associated with persistent PI does not
+support a conjecture proposed by the empirical study about PI among men
+in Saudi Arabia. Bursztyn and colleagues \textbf{(2020)} proposes that a
+lack of communication may be the reason why a misperception of social
+norms can become an equilibrium in a population, which explains the PI
+they observed among Saudi men. The present study finds that all else
+equal, the probability of communication is not significantly associated
+with the rate of underestimation, which suggests that communication may
+not be the primary factor contributing to the persistence of norm
+misperception. However, it is negatively associated with the rate of
+inconsistency and positively associated with the rate of WWOH actions.
+This suggests that promoting communication can reduce the proportion of
+individuals with inconsistent beliefs ans actions as well as encouraging
+WWOH actions in the population. This further suggests that even though
+the literature has used PI to refer to both the rate of underestimation
+and the rate of inconsistency, these two definitions may not coincide in
+terms of what they refer to. If they did, what affects one would also
+affects the other in a highly similar manner, but this is not what the
+present study finds
+\footnote{The finding that the social norm intervention does not significantly affect the rate of underestimation but decreases the rate of inconsistency further speaks to this point.}.
+Therefore, future studies should pay close attention to the operational
+definition of the broad concept of PI since different ones cannot be
+used interchangeably.
+
+The mean resistance to norm (\(r_{mean}\)) being significantly
+associated with two of the outcomes suggests that aspects of individuals
+can influence group-level phenomena. The extent to which each individual
+is influenced by social norms on average in making decisions about WWOH
+actions can influence the overall the rate of inconsistency and the rate
+of WWOH actions. This is not surprising given the decision making rules
+programmed in the model: agents' WWOH action depends on their
+preference, which is a weighted average of their belief and norm
+perception. When an agent's belief is high (representing higher support
+for WWOH), the higher the weight given to its belief (resistance to norm
+\(r_i\)), the greater extent to which its supporting belief will be
+reflected in preference and therefore action. It is important to notice
+that the above conclusion may not generalise when the weighted average
+assumption no longer applies. Past research has also adopted an
+exponential function to model the relation between norm perception and
+action \textbf{(e.g., de Mooij, 2022)} or more complex functions the
+solutions to which (and therefore the updating ``rule'' for belief, norm
+perception, and action) require mathematical optimisation
+\textbf{(Gavrilets, 2021; Tverskoi et al., 2023)}. Further
+investigations assuming different functional relations are needed to
+corroborate the finding of the present study.
+
+If individuals' resistance to norm does affect the overall rate of
+inconsistent belief and action and WWOH actions regardless of the
+functional assumptions, this conclusion can be taken as generally true
+and may be used to guide empirical research. For example, the concept of
+resistance to norm coincides with the concept of susceptibility to
+social norms that has been discussed in existing studies of cultural
+differences in human behaviours \textbf{(e.g., Savani et al., 2015;
+Muthukrishna \& Schaller, 2020)}. Findings of the present research
+suggests that lower resistance to norm, that is, higher susceptibility
+to norm, are more likely to lead to PI (defined as the rate of
+inconsistency). If, as suggested by the findings of existing research,
+there are cultural differences in individuals' susceptibility to social
+norms \textbf{(Savani et al., 2015)}, we would also expect to see
+cultural differences in PI regarding a certain issue. This hypothesis
+has not, to my best knowledge, been tested by existing study and can be
+a possible direction to future research.
+
+As for the effects of social norm intervention, the intervention
+decreases the rate of inconsistency and increases the rate of WWOH
+actions, the magnitude of which depends on the implementation times as
+well as other parameter values. First of all, as expected, the more
+times the intervention is implemented, the more pronounced the
+intervention effect is. Based on the process through which the
+intervention impacts the outcome variables, this may be because the
+intervention at a later time enhances the effect of a previous
+implementation before its effect is completely ``washed out''. Due to
+this enhancement, even though the effect is still gradually dampened
+over time after the final implementation, the multiple times of
+interventions together lead to statistically significant effects on the
+two outcome variables.
+
+Second, credibility of the information source also has a positive effect
+on the intervention effects. This is not surprising given that the
+magnitude of the influence of the intervention on agents' norm
+perception is programmed to be proportional to its perceived
+credibility. All else equal, the higher the mean perceived credibility
+is in the population, the more influence the intervention has on agents
+(if any), and the closer agents' norm perception is to the true norm on
+average. If the true norm is that most agents support WWOH, this norm
+will be more likely to be reflected in WWOH actions when the credibility
+of the intervention is high.
+
+Moreover, the intervention effect also depends on the two parameters
+that control the updating of agents' belief about WWOH, the mean bounded
+confidence threshold (\(\epsilon_{mean}\)) and the convergence parameter
+(\(\alpha\)). This is because the intervention via summary information
+is conceptualised as a persuasive message and is programmed to impact
+the norm perception in a way similar to how agents update their belief
+about WWOH based on those of others. For each agent, the higher the
+bounded confidence thresholds, the less stringent the requirement on the
+closeness between its norm perception and the true norm so that the
+agent will modify its own perception. The higher the convergence
+parameter, the closer the agent's modified norm perception will be to
+the true norm, given it does modify its perception (i.e., when the
+absolute difference between its own perception and true norm does not
+exceed the bounded confidence threshold).
+
+An acute reader might have already realised that the explanations of the
+model results have been largely confined to the particular assumptions
+adopted by the model, especially those on how the updating depends on
+the parameters. This points to an important limitation of the present
+study, that is, the conclusions drawn from the model hold true if the
+model assumptions hold true. This is a limitation in two senses. First,
+the findings of the current model alone are not sufficient to support
+any general claim regarding PI about WWOH. They need to rely on models
+with different assumptions for corroboration. The previous discussion on
+the finding about the relation between individuals' resistance to norm
+and PI is written out of this consideration. Second, the findings are
+also not sufficient to explain the PI regarding WWOH in Saudi Arabia or
+predict the effect of social norm intervention that utilises summary
+information. This is because the present model is an extremely
+simplified one with model assumptions mostly drawn from existing
+modelling studies. Further improvements can be made to adjust the
+assumptions using empirical studies on how people in Saudi Arabia reason
+about beliefs and norm perceptions as well as how they make decisions on
+actions. Additional processes can also be added to make the model more
+realistic, the most important of which, in my opinion, is the process
+for a job market. This is because actual decisions on WWOH actions
+presumably not only depend on people's preferences but also on whether
+jobs outside the home are available to women in Saudi Arabia.
+
+In addition to tackling the previously mentioned limitations, future
+studies can also explore the following directions. First, further
+development of the model can calibrate the parameter setting using
+empirical data on WWOH in Saudi Arabia such as Arab Barometer
+\textbf{(Carrella et al., 2020; Grazzini \& Richiardi, 2015)}. In
+choosing parameter combinations that give rise to PI and WWOH actions
+close to the empirical data, the present study investigates a coarse set
+of parameter settings and can only provide a rough approximation to the
+summary statistics. Systematic calibration techniques can help find
+parameter settings that minimise the distance between the empirical data
+and simulated data, which, together with better model assumptions, may
+provide more realistic simulation environment to test policy
+interventions. Second, due to time limit, the present study is only able
+to test one type of social norm intervention and vary the number of
+times it is implemented. Future studies can benefit from exploring and
+modelling a diverse kit of existing social norm interventions. For
+example, an intervention technique that is increasingly being explored
+is to change the public actions of salient individuals in order to
+create large-scale norm change \textbf{(Paluck et al., 2012; Paluck et
+al., 2016)}. This method has been shown to be effective in reducing
+harassment and conflict behaviours in schools \textbf{(Paluck et al.,
+2012; Paluck et al., 2016)} and can be easily programmed in an ABM so
+that its effect on PI regarding WWOH can be tested. Different social
+norm interventions can be compared and the most effective intervention
+strategy can be selected to guide policy making \textbf{(Bailey et al.,
+2019)}.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+\newpage
+
+\hypertarget{reference}{%
+\section*{Reference}\label{reference}}
+\addcontentsline{toc}{section}{Reference}
+
+\newpage
+
+\hypertarget{appendix-the-derivation-of-equation-3-and-4}{%
+\section*{Appendix: The Derivation of Equation 3 and
+4}\label{appendix-the-derivation-of-equation-3-and-4}}
+\addcontentsline{toc}{section}{Appendix: The Derivation of Equation 3
+and 4}
+
+Since agents' norm perception \(N_i\) is a random variable with a normal
+distribution with the mean \(\mu_{N_i}\) and standard deviation
+\(\sigma_{N_i}\), we have the probability density function (PDF) of
+\(N_i\) as:
+
+\begin{equation*}
+f(N_i) \propto \text{exp}(-\frac{(N_i - \mu_{N_i})^2}{2\sigma_{N_i}^2}).
+\end{equation*}
+
+The conditional PDF of the evidence given agent \(i\)'s prior norm
+perception in Equation \ref{eq:2} is given by
+
+\begin{equation*}
+f(E_i \mid N_i) \propto \text{exp}(-\frac{(E_i - N_i)^2}{2c_i^2}).
+\end{equation*}
+
+Following the Equation \ref{eq:2}, we have the posterior PDF of agent
+\(i\)'s norm perception as
+
+\begin{equation*}
+  \begin{aligned}
+    f(N_i \mid E_i) &= C \cdot \text{exp}(-\frac{(N_i - \mu_{N_i})^2}{2\sigma_{N_i}^2}) \text{exp}(- \frac{(E_i - N_i)^2}{2c_i^2})\\
+      &= C \cdot \text{exp}(-\frac{(N_i - \mu_{N_i})^2}{2\sigma_{N_i}^2} - \frac{(E_i - N_i)^2}{2c_i^2})\\
+      &= C \cdot \text{exp}(- \frac{(N_i - \mu_{N_i}^{\prime})^2}{2\sigma_{N_i}^{\prime2}} - \frac{(E_i - \mu_{N_i})^2}{2(\sigma_{N_i}^2 + c_i^2)}),
+  \end{aligned}
+\end{equation*}
+
+where \(C\) is a normalising constant. Since the second term in the
+exponent does not involve the random variable \(N_i\), we can
+incorporate it into the constant and rewrite the expression as
+
+\begin{equation*}
+  f(N_i \mid E_i) \propto \text{exp}(- \frac{(N_i - \mu_{N_i}^{\prime})^2}{2\sigma_{N_i}^{\prime2}}),
+\end{equation*}
+
+where
+
+\begin{equation*}
+  \mu_{N_i}^{\prime} = \frac{E_i \sigma_{N_i}^2 + \mu_{N_i} c_i^2}{\sigma_{N_i}^2 + c_i^2} \;\; \text{and} \;\; \sigma_{N_i}^{\prime2} = \frac{\sigma_{N_i}^2 c_i^2}{\sigma_{N_i}^2 + c_i^2}.
+\end{equation*}
+
+Substituting \(\frac{c_i^2}{c_i^2 + \sigma_{N_i}^2}\) with \(\lambda\)
+gives the equations in the main text.
 
 \end{document}

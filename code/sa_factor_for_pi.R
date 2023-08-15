@@ -37,18 +37,41 @@ bind_cols(p_underestimate_coef, select(p_inconsistent_coef, -term), select(p_wwo
 
 # in all combinations of the four parameters 
 # the final effects of p_com and r_mean are the same
+# dat %>% 
+#   select(-c(intervention, credibility_mean)) %>% 
+#   group_by(p_rewire, bc_threshold_mean, alpha, conf_mean) %>% 
+#   nest() %>% 
+#   mutate(
+#     lm1 = map(data, ~ lm(.x$p_underestimate ~ .x$p_com*.x$r_mean)),
+#     p_underestimate = map(lm1, tidy),
+#     lm2 = map(data, ~ lm(.x$p_inconsistent ~ .x$p_com*.x$r_mean)),
+#     p_inconsistent = map(lm2, tidy),
+#     lm3 = map(data, ~ lm(.x$p_wwoh ~ .x$p_com*.x$r_mean)),
+#     p_wwoh = map(lm3, tidy)
+#   ) %>% 
+#   unnest(c(p_underestimate, p_inconsistent, p_wwoh), names_sep = "_") %>% 
+#   select(-c(data,lm1,lm2,lm3)) %>% 
+#   write_csv("data/processed/sa_factor_for_pi.csv")
+
+
 dat %>% 
   select(-c(intervention, credibility_mean)) %>% 
-  group_by(p_rewire, bc_threshold_mean, alpha, conf_mean) %>% 
-  nest() %>% 
-  mutate(
-    lm1 = map(data, ~ lm(.x$p_underestimate ~ .x$p_com*.x$r_mean)),
-    p_underestimate = map(lm1, tidy),
-    lm2 = map(data, ~ lm(.x$p_inconsistent ~ .x$p_com*.x$r_mean)),
-    p_inconsistent = map(lm2, tidy),
-    lm3 = map(data, ~ lm(.x$p_wwoh ~ .x$p_com*.x$r_mean)),
-    p_wwoh = map(lm3, tidy)
+  group_by(p_com, r_mean, p_rewire, bc_threshold_mean, alpha, conf_mean) %>% 
+  summarise(
+    p_underestimate_mean = mean(p_underestimate),
+    p_underestimate_se = sd(p_underestimate)/sqrt(n()),
+    p_inconsistent_mean = mean(p_inconsistent),
+    p_inconsistent_se = sd(p_inconsistent)/sqrt(n()),
+    p_wwoh_mean = mean(p_wwoh),
+    p_wwoh_se = sd(p_wwoh)/sqrt(n()),
+    .groups = "drop"
   ) %>% 
-  unnest(c(p_underestimate, p_inconsistent, p_wwoh), names_sep = "_") %>% 
-  select(-c(data,lm1,lm2,lm3)) %>% 
+  mutate(
+    p_underestimate_ll = p_underestimate_mean - 1.96*p_underestimate_se,
+    p_underestimate_ul = p_underestimate_mean + 1.96*p_underestimate_se,
+    p_inconsistent_ll = p_inconsistent_mean - 1.96*p_inconsistent_se,
+    p_inconsistent_ul = p_inconsistent_mean + 1.96*p_inconsistent_se,
+    p_wwoh_ll = p_wwoh_mean - 1.96*p_wwoh_se,
+    p_wwoh_ul = p_wwoh_mean + 1.96*p_wwoh_se
+  ) %>% 
   write_csv("data/processed/sa_factor_for_pi.csv")

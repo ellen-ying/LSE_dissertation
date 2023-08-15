@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.19)  5 AUG 2023 23:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.19)  15 AUG 2023 11:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -560,128 +560,129 @@ Package hyperref Info: Link coloring OFF on input line 95.
 
 [1
 
-{/Users/ellenying/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.139 \newpage
-               [1] [2] [3]
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 260.
+{/Users/ellenying/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./49045.EO.toc
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 5.
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 260.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 5.
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 260.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 5.
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 260.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 5.
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 260.
+(Font)              <10.95> on input line 5.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 260.
+(Font)              <8> on input line 5.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 260.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 260.
+(Font)              <6> on input line 5.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 5.
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 260.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 5.
 (/Users/ellenying/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [4] [5] [6] [7] [8] [9] [10]
-<./figures/diss_flow_chart.pdf, id=161, 722.0011pt x 813.0375pt>
+))
+\tf@toc=\write4
+\openout4 = `49045.EO.toc'.
+
+(./49045.EO.lof
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 ...ean} = 0.3$.\relax }}{33}{figure.caption.9}
+                                                  % [1])
+\tf@lof=\write5
+\openout5 = `49045.EO.lof'.
+
+[2] (./49045.EO.lot)
+\tf@lot=\write6
+\openout6 = `49045.EO.lot'.
+
+[3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13]
+<./figures/diss_flow_chart.pdf, id=233, 722.0011pt x 813.0375pt>
 File: ./figures/diss_flow_chart.pdf Graphic file (type pdf)
 <use ./figures/diss_flow_chart.pdf>
-Package pdftex.def Info: ./figures/diss_flow_chart.pdf  used on input line 587.
+Package pdftex.def Info: ./figures/diss_flow_chart.pdf  used on input line 595.
 (pdftex.def)             Requested size: 375.8173pt x 423.20374pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[11] [12 <./figures/diss_flow_chart.pdf>] [13] [14] [15] [16]
+[14] [15 <./figures/diss_flow_chart.pdf>] [16] [17] [18] [19]
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 807.
-[17
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 815.
+[20
 
 ]
-<./figures/factor_for_pi.pdf, id=234, 722.7pt x 578.16pt>
+<./figures/factor_for_pi.pdf, id=306, 722.7pt x 578.16pt>
 File: ./figures/factor_for_pi.pdf Graphic file (type pdf)
 <use ./figures/factor_for_pi.pdf>
-Package pdftex.def Info: ./figures/factor_for_pi.pdf  used on input line 848.
+Package pdftex.def Info: ./figures/factor_for_pi.pdf  used on input line 856.
 (pdftex.def)             Requested size: 469.76045pt x 375.80836pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 849.
+(Font)              <10> on input line 857.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 849.
+(Font)              <7> on input line 857.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 849.
+(Font)              <5> on input line 857.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 887.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 895.
+[21
 
-Overfull \hbox (33.48653pt too wide) in paragraph at lines 870--891
- [] 
- []
-
-[18
-
-] [19]
+] [22]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 947.
-<./figures/intervention_effect_p_inconsistency.png, id=253, 3011.25pt x 2409.0pt>
+(Font)              <9> on input line 961.
+[23] [24]
+<./figures/intervention_effect_p_inconsistency.png, id=336, 3011.25pt x 2409.0pt>
 File: ./figures/intervention_effect_p_inconsistency.png Graphic file (type png)
 <use ./figures/intervention_effect_p_inconsistency.png>
-Package pdftex.def Info: ./figures/intervention_effect_p_inconsistency.png  used on input line 973.
+Package pdftex.def Info: ./figures/intervention_effect_p_inconsistency.png  used on input line 1045.
 (pdftex.def)             Requested size: 469.72556pt x 375.78044pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[20]
-<./figures/intervention_effect_p_wwoh.png, id=268, 3011.25pt x 2409.0pt>
+<./figures/intervention_effect_p_wwoh.png, id=342, 3011.25pt x 2409.0pt>
 File: ./figures/intervention_effect_p_wwoh.png Graphic file (type png)
 <use ./figures/intervention_effect_p_wwoh.png>
-Package pdftex.def Info: ./figures/intervention_effect_p_wwoh.png  used on input line 999.
+Package pdftex.def Info: ./figures/intervention_effect_p_wwoh.png  used on input line 1073.
 (pdftex.def)             Requested size: 469.72556pt x 375.78044pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./figures/intervention_process.pdf, id=270, 722.7pt x 794.97pt>
+[25]
+<./figures/intervention_process.pdf, id=349, 722.7pt x 794.97pt>
 File: ./figures/intervention_process.pdf Graphic file (type pdf)
 <use ./figures/intervention_process.pdf>
-Package pdftex.def Info: ./figures/intervention_process.pdf  used on input line 1024.
+Package pdftex.def Info: ./figures/intervention_process.pdf  used on input line 1100.
 (pdftex.def)             Requested size: 469.76045pt x 516.73651pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[21] [22] [23] [24] [25 <./figures/factor_for_pi.pdf>] [26 <./figures/intervention_effect_p_inconsistency.png>] [27 <./figures/intervention_effect_p_wwoh.png>] [28 <./figures/intervention_process.pdf>] [29
-
-] [30] [31] [32] [33] [34] [35] [36] [37] [38
-
-] [39] (./49045.EO.aux)
+[26] [27] [28] [29] [30] [31] [32] [33 <./figures/factor_for_pi.pdf>] [34 <./figures/intervention_effect_p_inconsistency.png>] [35 <./figures/intervention_effect_p_wwoh.png>] [36 <./figures/intervention_process.pdf>] (./49045.EO.aux)
 Package rerunfilecheck Info: File `49045.EO.out' has not changed.
-(rerunfilecheck)             Checksum: 4F669461E629020FE96B53CF852FE116;4977.
+(rerunfilecheck)             Checksum: 491EC357BC18C2472059459CDA84EDA1;3915.
  ) 
 Here is how much of TeX's memory you used:
- 14522 strings out of 478051
- 235653 string characters out of 5839757
- 2045330 words of memory out of 5000000
- 34269 multiletter control sequences out of 15000+600000
+ 14531 strings out of 478051
+ 235472 string characters out of 5839757
+ 1914330 words of memory out of 5000000
+ 34273 multiletter control sequences out of 15000+600000
  580594 words of font info for 96 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 66i,17n,67p,904b,648s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on 49045.EO.pdf (40 pages, 948051 bytes).
+ 66i,19n,67p,904b,606s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/Users/ellenying/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></Users/ellenying/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on 49045.EO.pdf (37 pages, 951920 bytes).
 PDF statistics:
- 483 PDF objects out of 1000 (max. 8388607)
- 390 compressed objects within 4 object streams
- 106 named destinations out of 1000 (max. 500000)
- 210 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 523 PDF objects out of 1000 (max. 8388607)
+ 432 compressed objects within 5 object streams
+ 102 named destinations out of 1000 (max. 500000)
+ 194 words of extra memory for PDF output out of 10000 (max. 10000000)
 
